@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Catharsium.Calendar.Google
 {
-    public class GoogleCalendarServiceFactory
+    public class GoogleCalendarServiceFactory : IGoogleCalendarServiceFactory
     {
         private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
         private static string ApplicationName = "Catharsium.Calendar.Google";

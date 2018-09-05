@@ -8,7 +8,8 @@ namespace CalendarQuickstart
         static void Main(string[] args)
         {
             var client = new GoogleCalendarClient(new GoogleCalendarServiceFactory());
-            client.CreateEvent();
+            client.CreateEvent("Automatically generated event", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1));
+
             var events = client.GetEvents();
 
             Console.WriteLine("Upcoming events:");

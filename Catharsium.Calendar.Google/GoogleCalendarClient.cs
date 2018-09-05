@@ -4,26 +4,25 @@ using System;
 
 namespace Catharsium.Calendar.Google
 {
-    public class GoogleCalendarClient
+    public class GoogleCalendarClient : IGoogleCalendarClient
     {
         private CalendarService CalendarService { get; }
 
 
-        public GoogleCalendarClient(GoogleCalendarServiceFactory serviceFactory)
+        public GoogleCalendarClient(IGoogleCalendarServiceFactory serviceFactory)
         {
             CalendarService = serviceFactory.CreateService();
         }
 
 
-        public Event CreateEvent()
+        public Event CreateEvent(string summary, DateTime start, DateTime end)
         {
             var events = new Event {
-                Start = new EventDateTime { DateTime = DateTime.Now.AddDays(1) },
-                End = new EventDateTime { DateTime = DateTime.Now.AddDays(1).AddHours(1) },
-                Summary = "Automatically generated event", 
+                Summary = summary,
+                Start = new EventDateTime { DateTime = start },
+                End = new EventDateTime { DateTime = end }
             };
             var request = CalendarService.Events.Insert(events, "primary");
-
             return request.Execute();
         }
 
