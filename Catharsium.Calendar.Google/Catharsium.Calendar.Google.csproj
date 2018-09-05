@@ -8,4 +8,10 @@
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.35.1.1335" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="credentials.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
