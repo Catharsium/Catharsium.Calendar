@@ -5,6 +5,7 @@ namespace Catharsium.Calendar.Google
     public interface IGoogleCalendarClient
     {
         Event CreateEvent();
+
         Events GetEvents();
     }
 }

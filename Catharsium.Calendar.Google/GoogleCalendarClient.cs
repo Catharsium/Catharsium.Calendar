@@ -26,8 +26,7 @@ namespace Catharsium.Calendar.Google
             return request.Execute();
         }
 
-
-
+        
         public Events GetEvents()
         {
             var request = CalendarService.Events.List("primary");
