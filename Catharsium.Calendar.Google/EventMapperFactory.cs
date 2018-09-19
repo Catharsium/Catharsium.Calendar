@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Catharsium.Calendar.Google
+﻿namespace Catharsium.Calendar.Google
 {
     public class EventMapperFactory
     {
