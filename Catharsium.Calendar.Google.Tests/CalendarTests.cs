@@ -3,7 +3,7 @@
 namespace Catharsium.Calendar.Google.Tests
 {
     [TestClass]
-    class CalendarTests
+    public class CalendarTests
     {
         [TestMethod]
         public void CreateEvent()
