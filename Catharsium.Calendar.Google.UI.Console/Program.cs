@@ -1,35 +1,64 @@
-﻿using Catharsium.Calendar.Google;
-using System;
+﻿using System.IO;
+using Catharsium.Calendar.Google.Core.Entities.Interfaces;
+using Catharsium.Calendar.Google.UI.Console.Configuration;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CalendarQuickstart
+namespace Catharsium.Calendar.Google.UI.Console
 {
     public class Program
     {
         static void Main(string[] args)
         {
-            var client = new GoogleCalendarClient(new GoogleCalendarServiceFactory());
-            client.CreateEvent("Automatically generated event", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1));
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", false, false);
+            var configuration = builder.Build();
 
-            var events = client.GetEvents();
+            var serviceProvider = new ServiceCollection()
+                // .AddLogging(configure => configure.AddConsole())
+                .AddGoogleCalendarConsoleUi(configuration)
+                .BuildServiceProvider();
 
-            Console.WriteLine("Upcoming events:");
-            if (events.Items != null && events.Items.Count > 0)
+            var factory = serviceProvider.GetService<IGoogleCalendarServiceFactory>();
+            var client = new GoogleCalendarClient(factory, "primary");
+            // client.CreateEvent("Automatically generated event", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1));
+
+            System.Console.WriteLine("Available calendars:");
+            var calendars = client.GetCalendars();
+            for (var i = 0; i < calendars.Items.Count; i++)
             {
-                foreach (var eventItem in events.Items)
+                System.Console.WriteLine($"[ {i + 1} ] {calendars.Items[i].Summary}");
+            }
+            System.Console.WriteLine("Enter the index of the calendar:");
+
+            var requestedIndex = System.Console.ReadLine();
+            if (int.TryParse(requestedIndex, out var calendarIndex))
+            {
+                client = new GoogleCalendarClient(factory, calendars.Items[calendarIndex - 1].Id);
+                                
+                System.Console.WriteLine();
+                System.Console.WriteLine("Upcoming events:");
+                var events = client.GetEvents();
+                if (events.Items != null && events.Items.Count > 0)
                 {
-                    var when = eventItem.Start.DateTime.ToString();
-                    if (string.IsNullOrEmpty(when))
+                    foreach (var eventItem in events.Items)
                     {
-                        when = eventItem.Start.Date;
+                        var when = eventItem.Start.DateTime.ToString();
+                        if (string.IsNullOrEmpty(when))
+                        {
+                            when = eventItem.Start.Date;
+                        }
+                        System.Console.WriteLine("{0} ({1})", eventItem.Summary, when);
                     }
-                    Console.WriteLine("{0} ({1})", eventItem.Summary, when);
+                }
+                else
+                {
+                    System.Console.WriteLine("No upcoming events found.");
                 }
             }
-            else
-            {
-                Console.WriteLine("No upcoming events found.");
-            }
-            Console.Read();
+
+            System.Console.Read();
         }
     }
 }

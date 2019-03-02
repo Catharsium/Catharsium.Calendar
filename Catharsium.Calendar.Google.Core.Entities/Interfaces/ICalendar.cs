@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Catharsium.Calendar.Google.Core.Entities.Models;
 
-namespace Catharsium.Calendar.Google.Core.Entities
+namespace Catharsium.Calendar.Google.Core.Entities.Interfaces
 {
     public interface ICalendar
     {

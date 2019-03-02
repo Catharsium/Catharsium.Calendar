@@ -1,7 +1,7 @@
 ﻿using Google.Apis.Calendar.v3.Data;
 using System;
 
-namespace Catharsium.Calendar.Google
+namespace Catharsium.Calendar.Google.Entities.Interfaces
 {
     public interface IGoogleCalendarClient
     {
