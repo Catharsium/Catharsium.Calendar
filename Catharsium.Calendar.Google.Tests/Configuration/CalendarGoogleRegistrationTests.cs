@@ -1,5 +1,6 @@
 ﻿using Catharsium.Calendar.Google.Configuration;
 using Catharsium.Calendar.Google.Core.Entities.Interfaces;
+using Catharsium.Calendar.Google.Entities.Interfaces;
 using Catharsium.Util.Testing.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,13 +13,14 @@ namespace Catharsium.Calendar.Google.Tests.Configuration
     public class CalendarGoogleRegistrationTests
     {
         [TestMethod]
-        public void AddGoogleCalendarConsoleUi_RegistersDependencies()
+        public void AddGoogleCalendar_RegistersDependencies()
         {
             var serviceCollection = Substitute.For<IServiceCollection>();
             var configuration = Substitute.For<IConfiguration>();
 
             serviceCollection.AddGoogleCalendar(configuration);
             serviceCollection.ReceivedRegistration<IGoogleCalendarServiceFactory>();
+            serviceCollection.ReceivedRegistration<IGoogleCalendarClient, GoogleCalendarClient>();
         }
     }
 }

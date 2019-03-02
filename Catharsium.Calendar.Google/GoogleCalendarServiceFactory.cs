@@ -15,6 +15,7 @@ namespace Catharsium.Calendar.Google
         private readonly string credentialsPath;
         private readonly string userName;
 
+
         public GoogleCalendarServiceFactory(string credentialsPath, string applicationName, string userName)
         {
             this.credentialsPath = credentialsPath;

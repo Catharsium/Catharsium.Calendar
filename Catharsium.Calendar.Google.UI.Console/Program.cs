@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Catharsium.Calendar.Google.Core.Entities.Interfaces;
+using Catharsium.Calendar.Google.Entities.Interfaces;
 using Catharsium.Calendar.Google.UI.Console.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +22,7 @@ namespace Catharsium.Calendar.Google.UI.Console
                 .BuildServiceProvider();
 
             var factory = serviceProvider.GetService<IGoogleCalendarServiceFactory>();
-            var client = new GoogleCalendarClient(factory);
-            // client.CreateEvent("Automatically generated event", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1));
+            var client = serviceProvider.GetService<IGoogleCalendarClient>();
 
             System.Console.WriteLine("Available calendars:");
             var calendars = client.GetCalendars();
@@ -34,9 +34,7 @@ namespace Catharsium.Calendar.Google.UI.Console
 
             var requestedIndex = System.Console.ReadLine();
             if (int.TryParse(requestedIndex, out var calendarIndex))
-            {
-                client = new GoogleCalendarClient(factory);
-                                
+            {                                
                 System.Console.WriteLine();
                 System.Console.WriteLine("Upcoming events:");
                 var events = client.GetEvents(calendars.Items[calendarIndex - 1].Id);
