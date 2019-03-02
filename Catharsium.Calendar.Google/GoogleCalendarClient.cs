@@ -9,13 +9,11 @@ namespace Catharsium.Calendar.Google
     public class GoogleCalendarClient : IGoogleCalendarClient
     {
         private CalendarService CalendarService { get; }
-        private readonly string calendarId;
 
 
-        public GoogleCalendarClient(IGoogleCalendarServiceFactory serviceFactory, string calendarId)
+        public GoogleCalendarClient(IGoogleCalendarServiceFactory serviceFactory)
         {
             this.CalendarService = serviceFactory.CreateService();
-            this.calendarId = calendarId;
         }
 
 
@@ -26,21 +24,21 @@ namespace Catharsium.Calendar.Google
         }
 
 
-        public Event CreateEvent(string summary, DateTime start, DateTime end)
+        public Event CreateEvent(string calendarId, string summary, DateTime start, DateTime end)
         {
             var events = new Event {
                 Summary = summary,
                 Start = new EventDateTime { DateTime = start },
                 End = new EventDateTime { DateTime = end }
             };
-            var request = this.CalendarService.Events.Insert(events, this.calendarId);
+            var request = this.CalendarService.Events.Insert(events, calendarId);
             return request.Execute();
         }
 
 
-        public Events GetEvents()
+        public Events GetEvents(string calendarId)
         {
-            var request = this.CalendarService.Events.List(this.calendarId);
+            var request = this.CalendarService.Events.List(calendarId);
             request.TimeMin = DateTime.Now;
             request.ShowDeleted = false;
             request.SingleEvents = true;

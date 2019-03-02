@@ -12,11 +12,14 @@ namespace Catharsium.Calendar.Google
     {
         private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
         private readonly string applicationName;
+        private readonly string credentialsPath;
+        private readonly string userName;
 
-
-        public GoogleCalendarServiceFactory(string applicationName)
+        public GoogleCalendarServiceFactory(string credentialsPath, string applicationName, string userName)
         {
+            this.credentialsPath = credentialsPath;
             this.applicationName = applicationName;
+            this.userName = userName;
         }
 
 
@@ -24,13 +27,13 @@ namespace Catharsium.Calendar.Google
         {
             UserCredential credential;
 
-            using (var stream = new FileStream(@"E:\OneDrive\Code\Security\Google Calendar\Credentials Catharsium.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(this.credentialsPath, FileMode.Open, FileAccess.Read))
             {
                 var credPath = "token.json";
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                                 Scopes,
-                                "Catharsium",
+                                this.userName,
                                 CancellationToken.None,
                                 new FileDataStore(credPath, true)).Result;
             }

@@ -11,7 +11,7 @@ namespace Catharsium.Calendar.Google.Configuration
         {
             var configuration = config.Load<CalendarGoogleConfiguration>();
 
-            services.AddScoped<IGoogleCalendarServiceFactory>(s => new GoogleCalendarServiceFactory(configuration.ApplicationName));
+            services.AddScoped<IGoogleCalendarServiceFactory>(s => new GoogleCalendarServiceFactory(configuration.CredentialsPath, configuration.ApplicationName, configuration.UserName));
 
             return services;
         }

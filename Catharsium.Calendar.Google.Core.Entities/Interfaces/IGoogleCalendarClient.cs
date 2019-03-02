@@ -5,8 +5,10 @@ namespace Catharsium.Calendar.Google.Entities.Interfaces
 {
     public interface IGoogleCalendarClient
     {
-        Event CreateEvent(string summary, DateTime start, DateTime end);
+        CalendarList GetCalendars();
 
-        Events GetEvents();
+        Event CreateEvent(string calendarId, string summary, DateTime start, DateTime end);
+
+        Events GetEvents(string calendarId);
     }
 }
