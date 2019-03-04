@@ -1,9 +1,9 @@
-﻿using Google.Apis.Calendar.v3.Data;
-using System;
+﻿using System;
+using Google.Apis.Calendar.v3.Data;
 
-namespace Catharsium.Calendar.Google.Entities.Interfaces
+namespace Catharsium.Calendar.Google.Core.Entities.Interfaces
 {
-    public interface IGoogleCalendarClient
+    public interface ICalendarClient
     {
         CalendarList GetCalendars();
 

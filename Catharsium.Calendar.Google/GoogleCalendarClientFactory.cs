@@ -8,7 +8,7 @@ using Google.Apis.Util.Store;
 
 namespace Catharsium.Calendar.Google
 {
-    public class GoogleCalendarServiceFactory : IGoogleCalendarServiceFactory
+    public class GoogleCalendarClientFactory : ICalendarClientFactory
     {
         private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
         private readonly string applicationName;
@@ -16,7 +16,7 @@ namespace Catharsium.Calendar.Google
         private readonly string userName;
 
 
-        public GoogleCalendarServiceFactory(string credentialsPath, string applicationName, string userName)
+        public GoogleCalendarClientFactory(string credentialsPath, string applicationName, string userName)
         {
             this.credentialsPath = credentialsPath;
             this.applicationName = applicationName;
@@ -24,7 +24,7 @@ namespace Catharsium.Calendar.Google
         }
 
 
-        public CalendarService CreateService()
+        public CalendarService CreateClient()
         {
             UserCredential credential;
 
@@ -38,7 +38,7 @@ namespace Catharsium.Calendar.Google
                                 CancellationToken.None,
                                 new FileDataStore(credPath, true)).Result;
             }
-            return new CalendarService(new BaseClientService.Initializer() {
+            return new CalendarService(new BaseClientService.Initializer {
                 HttpClientInitializer = credential,
                 ApplicationName = applicationName
             });

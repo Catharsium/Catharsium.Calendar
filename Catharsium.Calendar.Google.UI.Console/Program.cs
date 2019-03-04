@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Catharsium.Calendar.Google.Core.Entities.Interfaces;
-using Catharsium.Calendar.Google.Entities.Interfaces;
 using Catharsium.Calendar.Google.UI.Console.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +20,8 @@ namespace Catharsium.Calendar.Google.UI.Console
                 .AddGoogleCalendarConsoleUi(configuration)
                 .BuildServiceProvider();
 
-            var factory = serviceProvider.GetService<IGoogleCalendarServiceFactory>();
-            var client = serviceProvider.GetService<IGoogleCalendarClient>();
+            var factory = serviceProvider.GetService<ICalendarClientFactory>();
+            var client = serviceProvider.GetService<ICalendarClient>();
 
             System.Console.WriteLine("Available calendars:");
             var calendars = client.GetCalendars();

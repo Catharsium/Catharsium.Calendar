@@ -1,19 +1,18 @@
-﻿using Catharsium.Calendar.Google.Core.Entities.Interfaces;
-using Catharsium.Calendar.Google.Entities.Interfaces;
+﻿using System;
+using Catharsium.Calendar.Google.Core.Entities.Interfaces;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
-using System;
 
 namespace Catharsium.Calendar.Google
 {
-    public class GoogleCalendarClient : IGoogleCalendarClient
+    public class CalendarClient : ICalendarClient
     {
         private CalendarService CalendarService { get; }
 
 
-        public GoogleCalendarClient(IGoogleCalendarServiceFactory serviceFactory)
+        public CalendarClient(ICalendarClientFactory clientFactory)
         {
-            this.CalendarService = serviceFactory.CreateService();
+            this.CalendarService = clientFactory.CreateClient();
         }
 
 
@@ -40,8 +39,6 @@ namespace Catharsium.Calendar.Google
         {
             var request = this.CalendarService.Events.List(calendarId);
             request.TimeMin = DateTime.Now;
-            request.ShowDeleted = false;
-            request.SingleEvents = true;
             request.MaxResults = 10;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 

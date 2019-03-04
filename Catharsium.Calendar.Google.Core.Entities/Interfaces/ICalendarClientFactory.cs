@@ -2,8 +2,8 @@
 
 namespace Catharsium.Calendar.Google.Core.Entities.Interfaces
 {
-    public interface IGoogleCalendarServiceFactory
+    public interface ICalendarClientFactory
     {
-        CalendarService CreateService();
+        CalendarService CreateClient();
     }
 }
