@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Threading;
-using Catharsium.Calendar.Google.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Interfaces;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 
-namespace Catharsium.Calendar.Google
+namespace Catharsium.Calendar.Google.Client
 {
     public class GoogleCalendarClientFactory : ICalendarClientFactory
     {
@@ -40,7 +40,7 @@ namespace Catharsium.Calendar.Google
             }
             return new CalendarService(new BaseClientService.Initializer {
                 HttpClientInitializer = credential,
-                ApplicationName = applicationName
+                ApplicationName = this.applicationName
             });
         }
     }

@@ -7,19 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Google"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Google.Tests", "Catharsium.Calendar.Google.Tests\Catharsium.Calendar.Google.Tests.csproj", "{6D21E93D-C696-4B50-8BDF-D34CA15AFCD9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Google.UI.Console", "Catharsium.Calendar.Google.UI.Console\Catharsium.Calendar.Google.UI.Console.csproj", "{4313F93E-D769-4F55-BC55-C7F432848965}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.UI.Console", "Catharsium.Calendar.UI.Console\Catharsium.Calendar.UI.Console.csproj", "{4313F93E-D769-4F55-BC55-C7F432848965}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Google.Core.Entities", "Catharsium.Calendar.Google.Core.Entities\Catharsium.Calendar.Google.Core.Entities.csproj", "{7CFEC0AD-8AE1-4E97-8FE8-6AFC02074CA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Core.Entities", "Catharsium.Calendar.Core.Entities\Catharsium.Calendar.Core.Entities.csproj", "{7CFEC0AD-8AE1-4E97-8FE8-6AFC02074CA1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{430535B7-7A0C-4699-ACBF-249EE3B81386}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7AA41329-54B0-41BE-8BA1-6B082B4239E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Google.Core.Entities.Tests", "Catharsium.Calendar.Google.Core.Entities.Tests\Catharsium.Calendar.Google.Core.Entities.Tests.csproj", "{C0644963-D272-4241-BEAB-A10F5DD8CC51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Core.Entities.Tests", "Catharsium.Calendar.Core.Entities.Tests\Catharsium.Calendar.Core.Entities.Tests.csproj", "{C0644963-D272-4241-BEAB-A10F5DD8CC51}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ui", "Ui", "{EC8BD8AD-F022-4870-8498-93817304D40C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catharsium.Calendar.Google.UI.Console.Tests", "Catharsium.Calendar.Google.UI.Console.Tests\Catharsium.Calendar.Google.UI.Console.Tests.csproj", "{28545929-15FE-42E6-B374-AED3281FDF78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.UI.Console.Tests", "Catharsium.Calendar.UI.Console.Tests\Catharsium.Calendar.UI.Console.Tests.csproj", "{28545929-15FE-42E6-B374-AED3281FDF78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

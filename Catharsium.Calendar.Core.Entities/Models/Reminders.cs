@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Catharsium.Calendar.Google.Core.Entities.Models.Events
+namespace Catharsium.Calendar.Core.Entities.Models
 {
     public class Reminders
     {

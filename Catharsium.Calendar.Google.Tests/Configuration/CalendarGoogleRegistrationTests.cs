@@ -1,10 +1,11 @@
 ﻿using Catharsium.Calendar.Google.Configuration;
-using Catharsium.Calendar.Google.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Interfaces;
 using Catharsium.Util.Testing.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using Catharsium.Calendar.Google.Client;
 
 namespace Catharsium.Calendar.Google.Tests.Configuration
 {
@@ -19,7 +20,9 @@ namespace Catharsium.Calendar.Google.Tests.Configuration
 
             serviceCollection.AddGoogleCalendar(configuration);
             serviceCollection.ReceivedRegistration<ICalendarClientFactory>();
-            serviceCollection.ReceivedRegistration<ICalendarClient, CalendarClient>();
+            serviceCollection.ReceivedRegistration<ICalendarClient, GoogleCalendarClient>();
+            serviceCollection.ReceivedRegistration<ICalendarService, GoogleCalendarService>();
+            serviceCollection.ReceivedRegistration<IEventService, GoogleEventService>();
         }
     }
 }

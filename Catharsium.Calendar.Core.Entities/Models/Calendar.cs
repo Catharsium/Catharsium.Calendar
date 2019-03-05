@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Catharsium.Calendar.Google.Core.Entities.Models.Events;
 
-namespace Catharsium.Calendar.Google.Core.Entities.Models
+namespace Catharsium.Calendar.Core.Entities.Models
 {
     public class Calendar
     {

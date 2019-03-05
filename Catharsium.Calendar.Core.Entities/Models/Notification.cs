@@ -1,4 +1,4 @@
-﻿namespace Catharsium.Calendar.Google.Core.Entities.Models
+﻿namespace Catharsium.Calendar.Core.Entities.Models
 {
     public class Notification
     {
