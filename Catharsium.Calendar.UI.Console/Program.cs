@@ -20,14 +20,6 @@ namespace Catharsium.Calendar.Google.UI.Console
 
             var serviceCollection = new ServiceCollection();
 
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-            });
-
-            var mapper = mappingConfig.CreateMapper();
-            serviceCollection.AddSingleton(mapper);
-
             var serviceProvider = serviceCollection
                 // .AddLogging(configure => configure.AddConsole())
                 .AddGoogleCalendarConsoleUi(configuration)
@@ -54,11 +46,12 @@ namespace Catharsium.Calendar.Google.UI.Console
                 {
                     foreach (var eventItem in events)
                     {
-                        var when = eventItem.Start.ToString();
-                        if (string.IsNullOrEmpty(when))
+                        var when = eventItem.Start.Value.ToString("yyyy MMMM dd");
+                        if (eventItem.Start.HasTime)
                         {
-                            when = eventItem.Start.Date.ToString();
+                            when += eventItem.Start.Value.ToString(" (HH:mm)");
                         }
+                            
                         System.Console.WriteLine("{0} ({1})", eventItem.Summary, when);
                     }
                 }

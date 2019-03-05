@@ -1,5 +1,7 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using AutoMapper;
+using Catharsium.Calendar.Core.Entities.Interfaces;
 using Catharsium.Calendar.Google.Client;
+using Catharsium.Calendar.Google.Configuration.AutoMapper;
 using Catharsium.Util.Configuration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,14 @@ namespace Catharsium.Calendar.Google.Configuration
             services.AddScoped<ICalendarClient, GoogleCalendarClient>();
             services.AddScoped<ICalendarService, GoogleCalendarService>();
             services.AddScoped<IEventService, GoogleEventService>();
+            
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            var mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             return services;
         }

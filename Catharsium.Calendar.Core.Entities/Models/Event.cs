@@ -15,7 +15,7 @@ namespace Catharsium.Calendar.Core.Entities.Models
         public virtual Reminders Reminders { get; set; }
         public virtual int? Sequence { get; set; }
         public virtual Source Source { get; set; }
-        public virtual DateTime Start { get; set; }
+        public virtual Date Start { get; set; }
         public virtual string Status { get; set; }
         public virtual string Summary { get; set; }
         public virtual string Transparency { get; set; }
@@ -33,7 +33,7 @@ namespace Catharsium.Calendar.Core.Entities.Models
         public virtual string HtmlLink { get; set; }
         public virtual Peron Creator { get; set; }
         public virtual DateTime? Created { get; set; }
-        public virtual DateTime End { get; set; }
+        public virtual Date End { get; set; }
         public virtual bool? EndTimeUnspecified { get; set; }
         public virtual string ETag { get; set; }
         public virtual bool? GuestsCanInviteOthers { get; set; }
