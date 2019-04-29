@@ -1,6 +1,15 @@
-﻿namespace Catharsium.Calendar.Google.Tests
+﻿using Catharsium.Util.Testing;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Catharsium.Calendar.Google.Tests
 {
-    public class GoogleCalendarServiceTests
+    [TestClass]
+    public class GoogleCalendarServiceTests : TestFixture<GoogleCalendarService>
     {
+        [TestMethod]
+        public void GetAll()
+        {
+
+        }
     }
 }

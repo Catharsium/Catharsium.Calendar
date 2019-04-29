@@ -32,5 +32,18 @@ namespace Catharsium.Calendar.Google
             var result = request.Execute();
             return result.Items.Select(e => this.mapper.Map<Event>(e));
         }
+
+
+        public Event CreateEvent(string calendarId, string summary, DateTime start, DateTime end)
+        {
+            var newEvent = new global::Google.Apis.Calendar.v3.Data.Event
+            {
+                Summary = summary,
+                Start = new global::Google.Apis.Calendar.v3.Data.EventDateTime { DateTime = start },
+                End = new global::Google.Apis.Calendar.v3.Data.EventDateTime { DateTime = end }
+            };
+            var request = this.calendarService.Events.Insert(newEvent, calendarId);
+            return this.mapper.Map<Event>(request.Execute());
+        }
     }
 }
