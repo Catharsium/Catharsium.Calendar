@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using System.Linq;
 using Catharsium.Calendar.Core.Entities.Interfaces;
-using Catharsium.Calendar.UI.Console.Configuration;
+using Catharsium.Calendar.UI.Console._Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Catharsium.Calendar.UI.Console
 {
@@ -15,11 +16,9 @@ namespace Catharsium.Calendar.UI.Console
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", false, false);
             var configuration = builder.Build();
-
-            var serviceCollection = new ServiceCollection();
-
-            var serviceProvider = serviceCollection
-                // .AddLogging(configure => configure.AddConsole())
+            
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(configure => configure.AddConsole())
                 .AddGoogleCalendarConsoleUi(configuration)
                 .BuildServiceProvider();
 

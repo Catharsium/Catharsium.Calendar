@@ -3,7 +3,7 @@ using Catharsium.Util.Configuration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catharsium.Calendar.UI.Console.Configuration
+namespace Catharsium.Calendar.UI.Console._Configuration
 {
     public static class CalendarGoogleUiRegistration
     {
