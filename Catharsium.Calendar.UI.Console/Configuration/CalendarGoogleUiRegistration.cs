@@ -1,9 +1,9 @@
-﻿using Catharsium.Calendar.Google.Configuration;
+﻿using Catharsium.Calendar.Google._Configuration;
 using Catharsium.Util.Configuration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catharsium.Calendar.Google.UI.Console.Configuration
+namespace Catharsium.Calendar.UI.Console.Configuration
 {
     public static class CalendarGoogleUiRegistration
     {

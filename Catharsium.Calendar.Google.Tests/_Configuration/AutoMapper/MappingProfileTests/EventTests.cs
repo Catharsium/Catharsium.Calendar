@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GoogleEvent = Google.Apis.Calendar.v3.Data.Event;
 using GoogleEventDateTime = Google.Apis.Calendar.v3.Data.EventDateTime;
 
-namespace Catharsium.Calendar.Google.Tests.Configuration.AutoMapper.MappingProfileTests
+namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
 {
     [TestClass]
     public class EventTests : MappingProfileFixture

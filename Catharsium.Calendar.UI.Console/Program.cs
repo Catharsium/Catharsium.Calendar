@@ -1,17 +1,15 @@
 ﻿using System.IO;
 using System.Linq;
-using AutoMapper;
 using Catharsium.Calendar.Core.Entities.Interfaces;
-using Catharsium.Calendar.Google.Configuration.AutoMapper;
-using Catharsium.Calendar.Google.UI.Console.Configuration;
+using Catharsium.Calendar.UI.Console.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catharsium.Calendar.Google.UI.Console
+namespace Catharsium.Calendar.UI.Console
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -29,7 +27,7 @@ namespace Catharsium.Calendar.Google.UI.Console
             var eventService = serviceProvider.GetService<IEventService>();
 
             System.Console.WriteLine("Available calendars:");
-            var calendars = calendarService.GetCalendars().ToList();
+            var calendars = calendarService.GetList().ToList();
             for (var i = 0; i < calendars.Count; i++)
             {
                 System.Console.WriteLine($"[ {i + 1} ] {calendars[i].Summary}");
@@ -41,8 +39,8 @@ namespace Catharsium.Calendar.Google.UI.Console
             {                                
                 System.Console.WriteLine();
                 System.Console.WriteLine("Upcoming events:");
-                var events = eventService.GetEvents(calendars[calendarIndex - 1].Id).ToList();
-                if (events != null && events.Count > 0)
+                var events = eventService.GetList(calendars[calendarIndex - 1].Id).ToList();
+                if (events.Count > 0)
                 {
                     foreach (var eventItem in events)
                     {

@@ -1,10 +1,10 @@
-using Catharsium.Calendar.Google.UI.Console.Configuration;
+using Catharsium.Calendar.UI.Console.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace Catharsium.Calendar.Google.UI.Console.Tests
+namespace Catharsium.Calendar.UI.Console.Tests
 {
     [TestClass]
     public class CalendarGoogleUiRegistrationTests

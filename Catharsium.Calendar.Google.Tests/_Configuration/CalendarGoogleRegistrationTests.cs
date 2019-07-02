@@ -1,12 +1,13 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces;
-using Catharsium.Calendar.Google.Configuration;
+using Catharsium.Calendar.Google._Configuration;
+using Catharsium.Calendar.Google.Client.Services;
 using Catharsium.Util.Testing.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace Catharsium.Calendar.Google.Tests.Configuration
+namespace Catharsium.Calendar.Google.Tests._Configuration
 {
     [TestClass]
     public class CalendarGoogleRegistrationTests

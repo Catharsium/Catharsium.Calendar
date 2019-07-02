@@ -1,4 +1,4 @@
-﻿namespace Catharsium.Calendar.Google.UI.Console.Configuration
+﻿namespace Catharsium.Calendar.UI.Console.Configuration
 {
     public class CalendarGoogleUiConfiguration
     {

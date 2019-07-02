@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Google._Configuration.AutoMapper;
 using Catharsium.Calendar.Google.Client;
-using Catharsium.Calendar.Google.Configuration.AutoMapper;
+using Catharsium.Calendar.Google.Client.Services;
 using Catharsium.Util.Configuration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catharsium.Calendar.Google.Configuration
+namespace Catharsium.Calendar.Google._Configuration
 {
     public static class CalendarGoogleRegistration
     {
