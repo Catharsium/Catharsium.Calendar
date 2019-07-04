@@ -1,8 +1,11 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Catharsium.Calendar.Core.Entities.Models;
-using Google.Apis.Calendar.v3.Data;
+using Catharsium.Calendar.Google._Configuration.AutoMapper.Mappers;
+using GoogleCalendarList = Google.Apis.Calendar.v3.Data.CalendarListEntry;
+using GoogleDateTime = Google.Apis.Calendar.v3.Data.EventDateTime;
 using GoogleEvent = Google.Apis.Calendar.v3.Data.Event;
+using GoogleOrganizer = Google.Apis.Calendar.v3.Data.Event.OrganizerData;
+using GoogleReminder = Google.Apis.Calendar.v3.Data.EventReminder;
 
 namespace Catharsium.Calendar.Google._Configuration.AutoMapper
 {
@@ -10,13 +13,15 @@ namespace Catharsium.Calendar.Google._Configuration.AutoMapper
     {
         public MappingProfile()
         {
-            this.CreateMap<CalendarListEntry, Core.Entities.Models.Calendar>();
+            this.CreateMap<GoogleCalendarList, Core.Entities.Models.Calendar>();
 
-            this.CreateMap<GoogleEvent, Core.Entities.Models.Event>();
+            this.CreateMap<GoogleEvent, Event>();
 
-            this.CreateMap<EventDateTime, Date>()
-                .ForMember(d => d.HasTime, opt => opt.MapFrom(o => o.DateTime.HasValue))
-                .ForMember(d => d.Value, opt => opt.MapFrom(o => o.DateTime ?? DateTime.Parse(o.Date)));
+            this.CreateMap<GoogleDateTime, Date>()
+                .ForMember(d => d.Value, opt => opt.MapFrom<DateMapper>());
+
+            this.CreateMap<GoogleReminder, Reminder>();
+            this.CreateMap<GoogleOrganizer, Person>();
         }
     }
 }

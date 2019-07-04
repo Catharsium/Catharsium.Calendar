@@ -7,8 +7,8 @@ namespace Catharsium.Calendar.Core.Entities.Models
     {
         public virtual string Location { get; set; }
         public virtual bool? Locked { get; set; }
-        public virtual Peron Organizer { get; set; }
-        public virtual DateTime OriginalStartTime { get; set; }
+        public virtual Person Organizer { get; set; }
+        public virtual Date OriginalStartTime { get; set; }
         public virtual bool? PrivateCopy { get; set; }
         public virtual IList<string> Recurrence { get; set; }
         public virtual string RecurringEventId { get; set; }
@@ -31,7 +31,7 @@ namespace Catharsium.Calendar.Core.Entities.Models
         public virtual string ColorId { get; set; }
         public virtual string CreatedRaw { get; set; }
         public virtual string HtmlLink { get; set; }
-        public virtual Peron Creator { get; set; }
+        public virtual Person Creator { get; set; }
         public virtual DateTime? Created { get; set; }
         public virtual Date End { get; set; }
         public virtual bool? EndTimeUnspecified { get; set; }
