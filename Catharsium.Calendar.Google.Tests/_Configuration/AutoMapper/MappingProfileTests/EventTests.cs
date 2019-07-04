@@ -88,8 +88,22 @@ namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProf
             var actual = this.Mapper.Map<Event>(calendar);
             Assert.IsNotNull(actual);
             Assert.IsNotNull(actual.Reminders);
-            Assert.AreEqual(calendar.Reminders.Overrides.Count, actual.Reminders.Overrides.Count);
-            Assert.AreEqual(calendar.Reminders.UseDefault, actual.Reminders.UseDefault);
+        }
+
+
+
+
+        [TestMethod]
+        public void Map_CanMapGoogleEventWithCreator_ToEvent()
+        {
+            var calendar = new GoogleEvent
+            {
+                Creator = new GoogleEvent.CreatorData()
+            };
+
+            var actual = this.Mapper.Map<Event>(calendar);
+            Assert.IsNotNull(actual);
+            Assert.IsNotNull(actual.Creator);
         }
     }
 }

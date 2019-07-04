@@ -7,6 +7,7 @@ using GoogleEvent = Google.Apis.Calendar.v3.Data.Event;
 using GoogleOrganizer = Google.Apis.Calendar.v3.Data.Event.OrganizerData;
 using GoogleRemindersList = Google.Apis.Calendar.v3.Data.Event.RemindersData;
 using GoogleReminder = Google.Apis.Calendar.v3.Data.EventReminder;
+using GoogleCreatorData = Google.Apis.Calendar.v3.Data.Event.CreatorData;
 
 namespace Catharsium.Calendar.Google._Configuration.AutoMapper
 {
@@ -24,6 +25,7 @@ namespace Catharsium.Calendar.Google._Configuration.AutoMapper
             this.CreateMap<GoogleRemindersList, Reminders>();
             this.CreateMap<GoogleReminder, Reminder>();
 
+            this.CreateMap<GoogleCreatorData, Person>();
             this.CreateMap<GoogleOrganizer, Person>();
         }
     }
