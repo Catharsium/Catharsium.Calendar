@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
+using Google.Apis.Calendar.v3.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Event = Catharsium.Calendar.Core.Entities.Models.Event;
 using GoogleEvent = Google.Apis.Calendar.v3.Data.Event;
@@ -67,6 +69,27 @@ namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProf
             var actual = this.Mapper.Map<Event>(calendar);
             Assert.IsNotNull(actual);
             Assert.AreEqual(calendar.OriginalStartTime.DateTime, actual.OriginalStartTime.Value);
+        }
+
+
+        [TestMethod]
+        public void Map_CanMapGoogleEventWithReminders_ToEvent()
+        {
+            var calendar = new GoogleEvent
+            {
+                Reminders = new GoogleEvent.RemindersData {
+                    Overrides = new List<EventReminder> {
+                        new EventReminder()
+                    },
+                    UseDefault = true
+                }
+            };
+
+            var actual = this.Mapper.Map<Event>(calendar);
+            Assert.IsNotNull(actual);
+            Assert.IsNotNull(actual.Reminders);
+            Assert.AreEqual(calendar.Reminders.Overrides.Count, actual.Reminders.Overrides.Count);
+            Assert.AreEqual(calendar.Reminders.UseDefault, actual.Reminders.UseDefault);
         }
     }
 }
