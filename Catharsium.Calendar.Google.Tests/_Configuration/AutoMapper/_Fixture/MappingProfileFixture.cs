@@ -3,9 +3,9 @@ using Catharsium.Calendar.Google._Configuration.AutoMapper;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
+namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture
 {
-    public abstract class MappingProfileFixture: TestFixture<MappingProfile>
+    public abstract class MappingProfileFixture : TestFixture<MappingProfile>
     {
         #region Fixture
 
@@ -15,8 +15,7 @@ namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProf
         [TestInitialize]
         public void SetupAutoMapperConfiguration()
         {
-            var mapperConfiguration = new MapperConfiguration(cfg =>
-            {
+            var mapperConfiguration = new MapperConfiguration(cfg => {
                 cfg.AddProfile(this.Target);
             });
             this.Mapper = mapperConfiguration.CreateMapper();

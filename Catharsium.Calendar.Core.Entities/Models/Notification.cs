@@ -2,8 +2,8 @@
 {
     public class Notification
     {
-        public virtual string Method { get; set; }
-        public virtual string Type { get; set; }
         public virtual string ETag { get; set; }
+        public virtual string Type { get; set; }
+        public virtual string Method { get; set; }
     }
 }

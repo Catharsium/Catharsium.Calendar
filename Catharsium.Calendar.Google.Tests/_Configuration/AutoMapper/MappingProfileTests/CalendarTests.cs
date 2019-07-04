@@ -1,4 +1,5 @@
-﻿using Google.Apis.Calendar.v3.Data;
+﻿using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
+using Google.Apis.Calendar.v3.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests

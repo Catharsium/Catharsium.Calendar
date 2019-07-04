@@ -1,4 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
+using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Event = Google.Apis.Calendar.v3.Data.Event;
 
