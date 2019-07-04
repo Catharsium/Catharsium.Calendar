@@ -10,7 +10,7 @@ using GoogleEventDateTime = Google.Apis.Calendar.v3.Data.EventDateTime;
 namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
 {
     [TestClass]
-    public class EventTests : MappingProfileFixture
+    public class EventMappingTests : MappingProfileFixture
     {
         [TestMethod]
         public void Map_CanMapGoogleEvent_ToEvent()
@@ -87,11 +87,9 @@ namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProf
 
             var actual = this.Mapper.Map<Event>(calendar);
             Assert.IsNotNull(actual);
-            Assert.IsNotNull(actual.Reminders);
+            Assert.IsNotNull(actual.RemindersList);
         }
-
-
-
+        
 
         [TestMethod]
         public void Map_CanMapGoogleEventWithCreator_ToEvent()

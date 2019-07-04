@@ -23,7 +23,7 @@ namespace Catharsium.Calendar.Core.Entities.Models
         public virtual Person Organizer { get; set; }
         public virtual IList<Attendee> Attendees { get; set; }
         public virtual IList<Attachment> Attachments { get; set; }
-        public virtual Reminders Reminders { get; set; }
+        public virtual RemindersList RemindersList { get; set; }
 
         public virtual Person Creator { get; set; }
         public virtual DateTime? Created { get; set; }

@@ -17,12 +17,13 @@ namespace Catharsium.Calendar.Google._Configuration.AutoMapper
         {
             this.CreateMap<GoogleCalendarList, Core.Entities.Models.Calendar>();
 
-            this.CreateMap<GoogleEvent, Event>();
+            this.CreateMap<GoogleEvent, Event>()
+                .ForMember(d => d.RemindersList, opt => opt.MapFrom(o => o.Reminders));
 
             this.CreateMap<GoogleDateTime, Date>()
                 .ForMember(d => d.Value, opt => opt.MapFrom<DateMapper>());
 
-            this.CreateMap<GoogleRemindersList, Reminders>();
+            this.CreateMap<GoogleRemindersList, RemindersList>();
             this.CreateMap<GoogleReminder, Reminder>();
 
             this.CreateMap<GoogleCreatorData, Person>();

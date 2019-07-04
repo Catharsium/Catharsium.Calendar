@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
 {
     [TestClass]
-    public class CalendarTests : MappingProfileFixture
+    public class CalendarMappingTests : MappingProfileFixture
     {
         [TestMethod]
         public void Map_CanMapGoogleCalendarListEntry_ToCalendar()

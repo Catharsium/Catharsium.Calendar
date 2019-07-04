@@ -6,18 +6,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
 {
     [TestClass]
-    public class ReminderTests : MappingProfileFixture
+    public class ReminderMappingTests : MappingProfileFixture
     {
         [TestMethod]
-        public void Map_CanMapGoogleCalendarEventReminder_ToReminder()
+        public void Map_CanMapEventReminder_ToReminder()
         {
             var eventReminder = new EventReminder {
-                Minutes = 99
+                ETag = "My etag",
+                Minutes = 99,
+                Method = "My method"
             };
 
             var actual = this.Mapper.Map<Reminder>(eventReminder);
             Assert.IsNotNull(actual);
+            Assert.AreEqual(eventReminder.ETag, actual.ETag);
             Assert.AreEqual(eventReminder.Minutes, actual.Minutes);
+            Assert.AreEqual(eventReminder.Method, actual.Method);
         }
     }
 }
