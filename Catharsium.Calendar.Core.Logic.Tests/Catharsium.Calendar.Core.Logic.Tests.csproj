@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Catharsium.Calendar.Core.Logic\Catharsium.Calendar.Core.Logic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Storage\JsonEventRepositoryTests\" />
+  </ItemGroup>
+
 </Project>

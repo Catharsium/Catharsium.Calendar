@@ -1,19 +1,19 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using System.Collections.Generic;
+using System.IO;
+using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic._Configuration;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
 
-namespace Catharsium.Calendar.Core.Logic.Output
+namespace Catharsium.Calendar.Core.Logic.Storage
 {
-    public class EventRepository : IEventRepository
+    public class JsonEventRepository : IEventRepository
     {
         private readonly JsonSerializer jsonSerializer;
         private readonly CalendarCoreLogicConfiguration options;
 
 
-        public EventRepository(JsonSerializer jsonSerializer, CalendarCoreLogicConfiguration options)
+        public JsonEventRepository(JsonSerializer jsonSerializer, CalendarCoreLogicConfiguration options)
         {
             this.jsonSerializer = jsonSerializer;
             this.options = options;
@@ -28,7 +28,7 @@ namespace Catharsium.Calendar.Core.Logic.Output
 
         public void Store(IEnumerable<Event> events)
         {
-            using (var file = File.CreateText($"{this.options.SerializationFolder}\\\\test.json")) {
+            using (var file = File.CreateText($@"{this.options.SerializationFolder}\test.json")) {
                 this.jsonSerializer.Serialize(file, events);
             }
         }
