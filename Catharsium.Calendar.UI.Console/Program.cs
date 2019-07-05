@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Catharsium.Calendar.Core.Entities.Interfaces;
 using Catharsium.Calendar.UI.Console._Configuration;
@@ -38,7 +39,7 @@ namespace Catharsium.Calendar.UI.Console
             {                                
                 System.Console.WriteLine();
                 System.Console.WriteLine("Upcoming events:");
-                var events = eventService.GetList(calendars[calendarIndex - 1].Id).ToList();
+                var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2019, 1, 1), new DateTime(2019, 2, 1)).ToList();
                 if (events.Count > 0)
                 {
                     foreach (var eventItem in events)

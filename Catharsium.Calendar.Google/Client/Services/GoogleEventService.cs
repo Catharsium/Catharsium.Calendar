@@ -23,13 +23,14 @@ namespace Catharsium.Calendar.Google.Client.Services
         }
 
 
-        public IEnumerable<Event> GetList(string calendarId)
+        public IEnumerable<Event> GetList(string calendarId, DateTime from, DateTime to)
         {
             var request = this.calendarService.Events.List(calendarId);
-            request.TimeMin = DateTime.Now;
+            request.TimeMin = from;
+            request.TimeMax = to;
             request.ShowDeleted = false;
             request.SingleEvents = true;
-            request.MaxResults = 10;
+            request.MaxResults = 2500;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
             var result = request.Execute();
             return result.Items.Select(e => this.mapper.Map<Event>(e));
