@@ -18,7 +18,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
             var configuration = Substitute.For<IConfiguration>();
 
             serviceCollection.AddCalendarCoreLogic(configuration);
-            serviceCollection.ReceivedRegistration<IEventJsonSerializer>();
+            serviceCollection.ReceivedRegistration<IEventRepository>();
         }
     }
 }

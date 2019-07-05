@@ -1,6 +1,7 @@
 ﻿namespace Catharsium.Calendar.Core.Logic._Configuration
 {
-    public class CalendarGoogleConfiguration
+    public class CalendarCoreLogicConfiguration
     {
+        public string SerializationFolder { get; set; }
     }
 }

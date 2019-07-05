@@ -3,8 +3,9 @@ using Catharsium.Calendar.Core.Entities.Models;
 
 namespace Catharsium.Calendar.Core.Logic.Interfaces
 {
-    public interface IEventJsonSerializer
+    public interface IEventRepository
     {
-        void Serialize(IEnumerable<Event> events);
+        IEnumerable<Event> Load();
+        void Store(IEnumerable<Event> events);
     }
 }

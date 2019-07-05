@@ -3,6 +3,7 @@ using Catharsium.Calendar.Core.Logic.Output;
 using Catharsium.Util.Configuration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace Catharsium.Calendar.Core.Logic._Configuration
@@ -11,9 +12,8 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
     {
         public static IServiceCollection AddCalendarCoreLogic(this IServiceCollection services, IConfiguration config)
         {
-            var configuration = config.Load<CalendarGoogleConfiguration>();
-
-            services.AddScoped<IEventJsonSerializer>(s => new EventJsonSerializer(new JsonSerializer {Formatting = Formatting.Indented}));
+            var configuration = config.Load<CalendarCoreLogicConfiguration>();
+            services.AddScoped<IEventRepository>(s => new EventRepository(new JsonSerializer {Formatting = Formatting.Indented}, configuration));
 
             return services;
         }

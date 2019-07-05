@@ -26,7 +26,7 @@ namespace Catharsium.Calendar.UI.Console
 
             var calendarService = serviceProvider.GetService<ICalendarService>();
             var eventService = serviceProvider.GetService<IEventService>();
-            var serializer = serviceProvider.GetService<IEventJsonSerializer>();
+            var eventRepository = serviceProvider.GetService<IEventRepository>();
 
             System.Console.WriteLine("Available calendars:");
             var calendars = calendarService.GetList().ToList();
@@ -42,7 +42,7 @@ namespace Catharsium.Calendar.UI.Console
                 System.Console.WriteLine();
                 System.Console.WriteLine("Upcoming events:");
                 var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2019, 1, 1), new DateTime(2019, 2, 1)).ToList();
-                serializer.Serialize(events);
+                eventRepository.Store(events);
                 if (events.Count > 0)
                 {
                     foreach (var eventItem in events)
@@ -61,8 +61,6 @@ namespace Catharsium.Calendar.UI.Console
                     System.Console.WriteLine("No upcoming events found.");
                 }
             }
-
-            System.Console.Read();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Catharsium.Calendar.UI.Console.Tests._Configuration
             var configuration = Substitute.For<IConfiguration>();
 
             serviceCollection.AddGoogleCalendarConsoleUi(configuration);
-            serviceCollection.ReceivedRegistration<IEventJsonSerializer>();
+            serviceCollection.ReceivedRegistration<IEventRepository>();
         }
     }
 }
