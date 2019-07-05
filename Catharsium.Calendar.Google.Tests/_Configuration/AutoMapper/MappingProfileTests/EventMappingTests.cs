@@ -75,8 +75,7 @@ namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProf
         [TestMethod]
         public void Map_CanMapGoogleEventWithReminders_ToEvent()
         {
-            var calendar = new GoogleEvent
-            {
+            var calendar = new GoogleEvent {
                 Reminders = new GoogleEvent.RemindersData {
                     Overrides = new List<EventReminder> {
                         new EventReminder()
@@ -89,13 +88,12 @@ namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProf
             Assert.IsNotNull(actual);
             Assert.IsNotNull(actual.RemindersList);
         }
-        
+
 
         [TestMethod]
         public void Map_CanMapGoogleEventWithCreator_ToEvent()
         {
-            var calendar = new GoogleEvent
-            {
+            var calendar = new GoogleEvent {
                 Creator = new GoogleEvent.CreatorData()
             };
 

@@ -1,11 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console._Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace Catharsium.Calendar.UI.Console
 {
@@ -25,6 +26,7 @@ namespace Catharsium.Calendar.UI.Console
 
             var calendarService = serviceProvider.GetService<ICalendarService>();
             var eventService = serviceProvider.GetService<IEventService>();
+            var serializer = serviceProvider.GetService<IEventJsonSerializer>();
 
             System.Console.WriteLine("Available calendars:");
             var calendars = calendarService.GetList().ToList();
@@ -40,6 +42,7 @@ namespace Catharsium.Calendar.UI.Console
                 System.Console.WriteLine();
                 System.Console.WriteLine("Upcoming events:");
                 var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2019, 1, 1), new DateTime(2019, 2, 1)).ToList();
+                serializer.Serialize(events);
                 if (events.Count > 0)
                 {
                     foreach (var eventItem in events)
