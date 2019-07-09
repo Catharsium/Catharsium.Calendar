@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic._Configuration;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Catharsium.Calendar.Core.Logic.Storage
 {
@@ -22,7 +22,9 @@ namespace Catharsium.Calendar.Core.Logic.Storage
 
         public IEnumerable<Event> Load()
         {
-            throw new System.NotImplementedException();
+            using (var file = File.OpenText($@"{this.options.SerializationFolder}\test.json")) {
+                return (IEnumerable<Event>)this.jsonSerializer.Deserialize(file, typeof(IEnumerable<Event>));
+            }
         }
 
 

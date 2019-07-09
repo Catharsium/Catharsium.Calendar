@@ -61,6 +61,8 @@ namespace Catharsium.Calendar.UI.Console
                     System.Console.WriteLine("No upcoming events found.");
                 }
             }
+
+            var x = eventRepository.Load();
         }
     }
 }
