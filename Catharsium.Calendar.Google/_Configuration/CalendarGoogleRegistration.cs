@@ -18,9 +18,8 @@ namespace Catharsium.Calendar.Google._Configuration
             services.AddScoped<ICalendarClientFactory>(s => new GoogleCalendarClientFactory(configuration.CredentialsPath, configuration.ApplicationName, configuration.UserName));
             services.AddScoped<ICalendarService, GoogleCalendarService>();
             services.AddScoped<IEventService, GoogleEventService>();
-            
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
+
+            var mappingConfig = new MapperConfiguration(mc => {
                 mc.AddProfile(new MappingProfile());
             });
 

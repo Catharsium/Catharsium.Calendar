@@ -5,7 +5,7 @@ namespace Catharsium.Calendar.Core.Logic.Interfaces
 {
     public interface IEventRepository
     {
-        IEnumerable<Event> Load();
-        void Store(IEnumerable<Event> events);
+        IEnumerable<Event> Load(string fileName);
+        void Store(IEnumerable<Event> events, string fileName);
     }
 }

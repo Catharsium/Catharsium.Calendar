@@ -1,5 +1,6 @@
 ﻿using Catharsium.Calendar.Core.Logic._Configuration;
 using Catharsium.Calendar.Core.Logic.Interfaces;
+using Catharsium.Calendar.Core.Logic.Storage;
 using Catharsium.Util.Testing.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
             var configuration = Substitute.For<IConfiguration>();
 
             serviceCollection.AddCalendarCoreLogic(configuration);
+            serviceCollection.ReceivedRegistration<ICalendarExporter, JsonCalendarExporter>();
             serviceCollection.ReceivedRegistration<IEventRepository>();
         }
     }

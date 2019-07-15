@@ -37,15 +37,17 @@ namespace Catharsium.Calendar.UI.Console
             System.Console.WriteLine("Enter the index of the calendar:");
 
             var requestedIndex = System.Console.ReadLine();
+
             if (int.TryParse(requestedIndex, out var calendarIndex))
-            {                                
+            {
                 System.Console.WriteLine();
                 System.Console.WriteLine("Upcoming events:");
-                var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2017, 1, 1), new DateTime(2019, 7, 15)).ToList();
-                events = events.Where(e => e.Summary != null && e.Summary.ToLower().Contains("workbench")).ToList();
+                var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2017, 1, 1), new DateTime(2017, 2, 1)).ToList();
+
+                events = events.Where(e => (e.Summary != null && e.Summary.ToLower().Contains("shop")) || e.Location != null && e.Location.ToLower().Contains("shop")).ToList();
+                eventRepository.Store(events, "test");
                 var time = events.Sum(e => (e.End.Value - e.Start.Value).TotalMinutes);
 
-                eventRepository.Store(events);
                 if (events.Count > 0)
                 {
                     foreach (var eventItem in events)
@@ -55,7 +57,7 @@ namespace Catharsium.Calendar.UI.Console
                         {
                             when += eventItem.Start.Value.ToString(" (HH:mm - ") + eventItem.End.Value.ToString("HH:mm)");
                         }
-                            
+
                         System.Console.WriteLine("{0} ({1})", eventItem.Summary, when);
                     }
                 }
@@ -65,7 +67,7 @@ namespace Catharsium.Calendar.UI.Console
                 }
             }
 
-            var x = eventRepository.Load();
+            var x = eventRepository.Load("test");
         }
     }
 }

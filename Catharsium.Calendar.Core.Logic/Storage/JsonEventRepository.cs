@@ -20,17 +20,17 @@ namespace Catharsium.Calendar.Core.Logic.Storage
         }
 
 
-        public IEnumerable<Event> Load()
+        public IEnumerable<Event> Load(string fileName)
         {
-            using (var file = File.OpenText($@"{this.options.SerializationFolder}\test.json")) {
+            using (var file = File.OpenText($@"{this.options.SerializationFolder}\{fileName}.json")) {
                 return (IEnumerable<Event>)this.jsonSerializer.Deserialize(file, typeof(IEnumerable<Event>));
             }
         }
 
 
-        public void Store(IEnumerable<Event> events)
+        public void Store(IEnumerable<Event> events, string fileName)
         {
-            using (var file = File.CreateText($@"{this.options.SerializationFolder}\test.json")) {
+            using (var file = File.CreateText($@"{this.options.SerializationFolder}\{fileName}.json")) {
                 this.jsonSerializer.Serialize(file, events);
             }
         }
