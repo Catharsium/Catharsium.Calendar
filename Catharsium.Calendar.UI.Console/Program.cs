@@ -41,7 +41,10 @@ namespace Catharsium.Calendar.UI.Console
             {                                
                 System.Console.WriteLine();
                 System.Console.WriteLine("Upcoming events:");
-                var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2019, 1, 1), new DateTime(2019, 2, 1)).ToList();
+                var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2017, 1, 1), new DateTime(2019, 7, 15)).ToList();
+                events = events.Where(e => e.Summary != null && e.Summary.ToLower().Contains("workbench")).ToList();
+                var time = events.Sum(e => (e.End.Value - e.Start.Value).TotalMinutes);
+
                 eventRepository.Store(events);
                 if (events.Count > 0)
                 {
@@ -50,7 +53,7 @@ namespace Catharsium.Calendar.UI.Console
                         var when = eventItem.Start.Value.ToString("yyyy MMMM dd");
                         if (eventItem.Start.HasTime)
                         {
-                            when += eventItem.Start.Value.ToString(" (HH:mm)");
+                            when += eventItem.Start.Value.ToString(" (HH:mm - ") + eventItem.End.Value.ToString("HH:mm)");
                         }
                             
                         System.Console.WriteLine("{0} ({1})", eventItem.Summary, when);
