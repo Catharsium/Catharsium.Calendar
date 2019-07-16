@@ -11,6 +11,7 @@ namespace Catharsium.Calendar.Core.Logic.Storage
         private readonly IEventService eventService;
         private readonly IEventRepository eventRepository;
 
+
         public JsonCalendarExporter(ICalendarService calendarService, IEventService eventService, IEventRepository eventRepository)
         {
             this.calendarService = calendarService;
@@ -27,10 +28,12 @@ namespace Catharsium.Calendar.Core.Logic.Storage
                 var endDate = startDate.AddMonths(1);
                 Console.WriteLine($"Period: {startDate:yyyy-MM-dd} - {endDate:yyyy-MM-dd}");
                 foreach (var calendar in calendars) {
-                    var events = eventService.GetList(calendar.Id, startDate, endDate).ToList();
+                    var events = this.eventService.GetList(calendar.Id, startDate, endDate).ToList();
                     Console.WriteLine($"Found {events.Count} events in {calendar.Summary}");
                     var fileName = $"{calendar.Summary}, {startDate:yyyy-MM-dd} {endDate:yyyy-MM-dd}";
-                    this.eventRepository.Store(events, fileName);
+                    if (events.Any()) {
+                        this.eventRepository.Store(events, fileName);
+                    }
                 }
 
                 Console.WriteLine();

@@ -28,6 +28,9 @@ namespace Catharsium.Calendar.UI.Console
             var eventService = serviceProvider.GetService<IEventService>();
             var eventRepository = serviceProvider.GetService<IEventRepository>();
 
+            //var exporter = serviceProvider.GetService<ICalendarExporter>();
+            //exporter.Export();
+
             System.Console.WriteLine("Available calendars:");
             var calendars = calendarService.GetList().ToList();
             for (var i = 0; i < calendars.Count; i++)
