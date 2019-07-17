@@ -2,13 +2,15 @@
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
-namespace Catharsium.Calendar.Core.Logic.Tests.Filters
+namespace Catharsium.Calendar.Core.Logic.Tests.Filters.TextEventFilterTests
 {
     [TestClass]
-    public class TextEventFilterTests : TestFixture<TextEventFilter>
+    public class ApplyToLocationTests : TestFixture<TextEventFilter>
     {
         #region Fixture
 
@@ -43,39 +45,19 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         #endregion
 
         [TestMethod]
-        public void Apply_FindsEventWithTextInSummary()
+        public void ApplyToLocation_FindsEventWithTextInLocation()
         {
             var expectedEvent = this.Events[0];
-            var actual = this.Target.Apply(this.Events, expectedEvent.Summary).ToList();
+            var actual = this.Target.ApplyToLocation(this.Events, expectedEvent.Location).ToList();
             Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Contains(expectedEvent));
         }
 
 
         [TestMethod]
-        public void Apply_FindsEventWithTextInDescription()
+        public void ApplyToLocation_EmptyText_ReturnsAll()
         {
-            var expectedEvent = this.Events[0];
-            var actual = this.Target.Apply(this.Events, expectedEvent.Description).ToList();
-            Assert.AreEqual(1, actual.Count);
-            Assert.IsTrue(actual.Contains(expectedEvent));
-        }
-
-
-        [TestMethod]
-        public void Apply_FindsEventWithTextInLocation()
-        {
-            var expectedEvent = this.Events[0];
-            var actual = this.Target.Apply(this.Events, expectedEvent.Location).ToList();
-            Assert.AreEqual(1, actual.Count);
-            Assert.IsTrue(actual.Contains(expectedEvent));
-        }
-
-
-        [TestMethod]
-        public void Apply_EmptyText_ReturnsAll()
-        {
-            var actual = this.Target.Apply(this.Events, "").ToList();
+            var actual = this.Target.ApplyToLocation(this.Events, "").ToList();
             Assert.AreEqual(this.Events.Count, actual.Count);
         }
     }

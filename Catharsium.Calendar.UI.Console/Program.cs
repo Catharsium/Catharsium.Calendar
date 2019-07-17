@@ -47,8 +47,6 @@ namespace Catharsium.Calendar.UI.Console
                 System.Console.WriteLine("Upcoming events:");
                 var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2017, 1, 1), new DateTime(2017, 2, 1)).ToList();
 
-                events = events.Where(e => (e.Summary != null && e.Summary.ToLower().Contains("shop")) || e.Location != null && e.Location.ToLower().Contains("shop")).ToList();
-                eventRepository.Store(events, "test");
                 var time = events.Sum(e => (e.End.Value - e.Start.Value).TotalMinutes);
 
                 if (events.Count > 0)

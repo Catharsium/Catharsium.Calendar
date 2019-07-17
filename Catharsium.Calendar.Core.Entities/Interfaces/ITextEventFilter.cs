@@ -5,6 +5,8 @@ namespace Catharsium.Calendar.Core.Entities.Interfaces
 {
     public interface ITextEventFilter
     {
-        IEnumerable<Event> Apply(IEnumerable<Event> events, string text);
+        IEnumerable<Event> ApplyToSummary(IEnumerable<Event> events, string text);
+        IEnumerable<Event> ApplyToDescription(IEnumerable<Event> events, string text);
+        IEnumerable<Event> ApplyToLocation(IEnumerable<Event> events, string text);
     }
 }

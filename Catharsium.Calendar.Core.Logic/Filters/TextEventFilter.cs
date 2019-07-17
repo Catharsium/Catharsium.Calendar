@@ -7,9 +7,21 @@ namespace Catharsium.Calendar.Core.Logic.Filters
 {
     public class TextEventFilter : ITextEventFilter
     {
-        public IEnumerable<Event> Apply(IEnumerable<Event> events, string text)
+        public IEnumerable<Event> ApplyToSummary(IEnumerable<Event> events, string text)
         {
-            return events.Where(e => e.Summary.Contains(text) || e.Description.Contains(text) || e.Location.Contains(text));
+            return events.Where(e => e.Summary.Contains(text));
+        }
+
+
+        public IEnumerable<Event> ApplyToDescription(IEnumerable<Event> events, string text)
+        {
+            return events.Where(e => e.Description.Contains(text));
+        }
+
+
+        public IEnumerable<Event> ApplyToLocation(IEnumerable<Event> events, string text)
+        {
+            return events.Where(e => e.Location.Contains(text));
         }
     }
 }
