@@ -22,7 +22,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
             var configuration = Substitute.For<IConfiguration>();
 
             serviceCollection.AddCalendarCoreLogic(configuration);
-            serviceCollection.ReceivedRegistration<ICalendarExporter, JsonCalendarExporter>();
+            serviceCollection.ReceivedRegistration<ICalendarImporter, CalendarImporter>();
             serviceCollection.ReceivedRegistration<IEventRepository>();
             serviceCollection.ReceivedRegistration<ITextEventFilter, TextEventFilter>();
         }

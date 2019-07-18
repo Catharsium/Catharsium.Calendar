@@ -27,10 +27,7 @@ namespace Catharsium.Calendar.UI.Console
             var calendarService = serviceProvider.GetService<ICalendarService>();
             var eventService = serviceProvider.GetService<IEventService>();
             var eventRepository = serviceProvider.GetService<IEventRepository>();
-
-            //var exporter = serviceProvider.GetService<ICalendarExporter>();
-            //exporter.Export();
-
+            
             System.Console.WriteLine("Available calendars:");
             var calendars = calendarService.GetList().ToList();
             for (var i = 0; i < calendars.Count; i++)
@@ -43,9 +40,11 @@ namespace Catharsium.Calendar.UI.Console
 
             if (int.TryParse(requestedIndex, out var calendarIndex))
             {
+                //var exporter = serviceProvider.GetService<ICalendarImporter>();
+                //exporter.Import(calendars[calendarIndex - 1].Id, new DateTime(2014, 1, 1), DateTime.Now);
                 System.Console.WriteLine();
                 System.Console.WriteLine("Upcoming events:");
-                var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2017, 1, 1), new DateTime(2017, 2, 1)).ToList();
+                var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2019, 7, 1), new DateTime(2019, 8, 1)).ToList();
 
                 var time = events.Sum(e => (e.End.Value - e.Start.Value).TotalMinutes);
 
@@ -68,7 +67,7 @@ namespace Catharsium.Calendar.UI.Console
                 }
             }
 
-            var x = eventRepository.Load("test");
+            //var x = eventRepository.Load("test");
         }
     }
 }

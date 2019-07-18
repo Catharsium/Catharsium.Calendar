@@ -24,7 +24,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
                 new JsonSerializer { Formatting = Formatting.Indented },
                 configuration)
             );
-            services.AddScoped<ICalendarExporter, JsonCalendarExporter>();
+            services.AddScoped<ICalendarImporter, CalendarImporter>();
             services.AddScoped<ITextEventFilter, TextEventFilter>();
 
             return services;

@@ -1,7 +1,7 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Catharsium.Calendar.Core.Entities.Interfaces;
 
 namespace Catharsium.Calendar.Core.Logic.Filters
 {
