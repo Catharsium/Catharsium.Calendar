@@ -53,10 +53,38 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters.TextEventFilterTests
 
 
         [TestMethod]
-        public void Apply_EmptyText_ReturnsAll()
+        public void ApplyToSummary_EmptyText_ReturnsAll()
         {
             var actual = this.Target.ApplyToSummary(this.Events, "").ToList();
             Assert.AreEqual(this.Events.Count, actual.Count);
+        }
+
+
+        [TestMethod]
+        public void ApplyToSummary_EmptyText_DoesNotIncludeEventsWithoutSummary()
+        {
+            var expected = this.Events.Count;
+            this.Events.Add(
+                new Event
+                {
+                    Id = "4"
+                });
+            var actual = this.Target.ApplyToSummary(this.Events, "").ToList();
+            Assert.AreEqual(expected, actual.Count);
+        }
+
+
+        [TestMethod]
+        public void ApplyToSummary_IgnoresCase()
+        {
+            this.Events.Add(
+                new Event
+                {
+                    Id = "4",
+                    Summary = this.Events[0].Summary.ToUpper()
+                });
+            var actual = this.Target.ApplyToSummary(this.Events, this.Events[0].Summary).ToList();
+            Assert.AreEqual(2, actual.Count);
         }
     }
 }

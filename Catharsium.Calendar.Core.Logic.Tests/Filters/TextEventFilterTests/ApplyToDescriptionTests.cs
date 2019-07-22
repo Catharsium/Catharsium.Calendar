@@ -58,5 +58,31 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters.TextEventFilterTests
             var actual = this.Target.ApplyToDescription(this.Events, "").ToList();
             Assert.AreEqual(this.Events.Count, actual.Count);
         }
+
+
+        [TestMethod]
+        public void ApplyToDescription_EmptyText_DoesNotIncludeEventsWithoutDescription()
+        {
+            var expected = this.Events.Count;
+            this.Events.Add(
+                new Event {
+                    Id = "4"
+                });
+            var actual = this.Target.ApplyToDescription(this.Events, "").ToList();
+            Assert.AreEqual(expected, actual.Count);
+        }
+
+
+        [TestMethod]
+        public void ApplyToDescription_IgnoresCase()
+        {
+            this.Events.Add(
+                new Event {
+                    Id = "4",
+                    Description = this.Events[0].Description.ToUpper()
+                });
+            var actual = this.Target.ApplyToDescription(this.Events, this.Events[0].Description).ToList();
+            Assert.AreEqual(2, actual.Count);
+        }
     }
 }

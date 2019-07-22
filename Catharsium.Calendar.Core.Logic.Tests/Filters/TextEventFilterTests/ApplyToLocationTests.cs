@@ -58,5 +58,33 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters.TextEventFilterTests
             var actual = this.Target.ApplyToLocation(this.Events, "").ToList();
             Assert.AreEqual(this.Events.Count, actual.Count);
         }
+
+
+        [TestMethod]
+        public void ApplyToDescription_EmptyText_DoesNotIncludeEventsWithoutLocation()
+        {
+            var expected = this.Events.Count;
+            this.Events.Add(
+                new Event
+                {
+                    Id = "4"
+                });
+            var actual = this.Target.ApplyToLocation(this.Events, "").ToList();
+            Assert.AreEqual(expected, actual.Count);
+        }
+
+
+        [TestMethod]
+        public void ApplyToLocation_IgnoresCase()
+        {
+            this.Events.Add(
+                new Event
+                {
+                    Id = "4",
+                    Location = this.Events[0].Location.ToUpper()
+                });
+            var actual = this.Target.ApplyToLocation(this.Events, this.Events[0].Location).ToList();
+            Assert.AreEqual(2, actual.Count);
+        }
     }
 }

@@ -5,8 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
+using Catharsium.Calendar.Core.Entities.Models;
+using Catharsium.Calendar.UI.Console.Enums;
+using Catharsium.Util.Enums;
 
 namespace Catharsium.Calendar.UI.Console
 {
@@ -18,7 +23,7 @@ namespace Catharsium.Calendar.UI.Console
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", false, false);
             var configuration = builder.Build();
-            
+
             var serviceProvider = new ServiceCollection()
                 .AddLogging(configure => configure.AddConsole())
                 .AddGoogleCalendarConsoleUi(configuration)
@@ -27,47 +32,115 @@ namespace Catharsium.Calendar.UI.Console
             var calendarService = serviceProvider.GetService<ICalendarService>();
             var eventService = serviceProvider.GetService<IEventService>();
             var eventRepository = serviceProvider.GetService<IEventRepository>();
-            
-            System.Console.WriteLine("Available calendars:");
-            var calendars = calendarService.GetList().ToList();
-            for (var i = 0; i < calendars.Count; i++)
-            {
-                System.Console.WriteLine($"[ {i + 1} ] {calendars[i].Summary}");
-            }
-            System.Console.WriteLine("Enter the index of the calendar:");
+            var textFilter = serviceProvider.GetService<ITextEventFilter>();
+            var eventComparer = serviceProvider.GetService<IEqualityComparer<Event>>();
 
-            var requestedIndex = System.Console.ReadLine();
+            while (true) {
+                System.Console.WriteLine("Choose an action:");
 
-            if (int.TryParse(requestedIndex, out var calendarIndex))
-            {
-                //var exporter = serviceProvider.GetService<ICalendarImporter>();
-                //exporter.Import(calendars[calendarIndex - 1].Id, new DateTime(2014, 1, 1), DateTime.Now);
-                System.Console.WriteLine();
-                System.Console.WriteLine("Upcoming events:");
-                var events = eventService.GetList(calendars[calendarIndex - 1].Id, new DateTime(2019, 7, 1), new DateTime(2019, 8, 1)).ToList();
+                var actions = Enum.GetValues(typeof(UserActions));
+                foreach (int action in actions) {
+                    System.Console.WriteLine($"[{action}] {Enum.GetName(typeof(UserActions), action)}");
+                }
 
-                var time = events.Sum(e => (e.End.Value - e.Start.Value).TotalMinutes);
+                var requestedIndex = System.Console.ReadLine();
 
-                if (events.Count > 0)
-                {
-                    foreach (var eventItem in events)
-                    {
-                        var when = eventItem.Start.Value.ToString("yyyy MMMM dd");
-                        if (eventItem.Start.HasTime)
-                        {
-                            when += eventItem.Start.Value.ToString(" (HH:mm - ") + eventItem.End.Value.ToString("HH:mm)");
-                        }
+                if (requestedIndex == null || requestedIndex.ToLower() == "q") {
+                    break;
+                }
 
-                        System.Console.WriteLine("{0} ({1})", eventItem.Summary, when);
+                var requestedAction = requestedIndex.ParseEnum(UserActions.Quit);
+                if (requestedAction == UserActions.Quit) {
+                    break;
+                }
+
+                var calendars = calendarService.GetList().ToList();
+                if (requestedAction == UserActions.Search) {
+                    var calendar = ChooseACalendar(calendars);
+
+                    System.Console.WriteLine("Enter the query:");
+                    var query = System.Console.ReadLine();
+
+                    System.Console.WriteLine();
+                    System.Console.WriteLine("Upcoming events:");
+                    var events = eventService.GetList(calendar.Id, new DateTime(2014, 1, 1), DateTime.Now).ToList();
+                    var filteredEvents = textFilter.ApplyToSummary(events, query).ToList();
+                    filteredEvents.AddRange(textFilter.ApplyToDescription(events, query));
+                    filteredEvents.AddRange(textFilter.ApplyToLocation(events, query));
+                    filteredEvents = filteredEvents.Distinct(eventComparer).ToList();
+                    var duration = CalculateTotalTime(filteredEvents);
+
+                    if (filteredEvents.Count > 0) {
+                        ShowEvents(filteredEvents);
+
+                        System.Console.WriteLine($"{filteredEvents.Count} events found for a total of {duration} duration.");
+                    }
+                    else {
+                        System.Console.WriteLine($"No events found for query '{query}'.");
                     }
                 }
-                else
-                {
-                    System.Console.WriteLine("No upcoming events found.");
+
+                if (requestedAction == UserActions.Import) {
+                    var calendar = ChooseACalendar(calendars);
+                    if (calendar == null) {
+                        continue;
+                    }
+
+                    var exporter = serviceProvider.GetService<ICalendarImporter>();
+                    exporter.Import(calendar.Id, new DateTime(2014, 1, 1), DateTime.Now);
+                }
+
+                if (requestedAction == UserActions.Load) {
+                    var events = eventRepository.LoadAll().ToList();
+                    var duration = CalculateTotalTime(events);
+                    System.Console.WriteLine($"{events.Count} events found for a total of {duration} duration.");
                 }
             }
+        }
 
-            //var x = eventRepository.Load("test");
+
+        private static Core.Entities.Models.Calendar ChooseACalendar(List<Core.Entities.Models.Calendar> calendars)
+        {
+            System.Console.WriteLine("Choose a calendar:");
+            for (var i = 0; i < calendars.Count; i++) {
+                System.Console.WriteLine($"[{i + 1}] {calendars[i].Summary}");
+            }
+
+            var requestedIndex = System.Console.ReadLine();
+            if (int.TryParse(requestedIndex, out var calendarIndex)) {
+                return calendars[calendarIndex - 1];
+            }
+
+            System.Console.WriteLine("No valid calendar chosen.");
+
+            return null;
+        }
+
+
+        private static void ShowEvents(IEnumerable<Event> filteredEvents)
+        {
+            foreach (var eventItem in filteredEvents) {
+                var when = eventItem.Start.Value.ToString("yyyy MMMM dd");
+                if (eventItem.Start.HasTime) {
+                    when += eventItem.Start.Value.ToString(" (HH:mm - ") + eventItem.End.Value.ToString("HH:mm)");
+                }
+
+                System.Console.WriteLine("{0} ({1})", eventItem.Summary, when);
+            }
+        }
+
+
+        private static string CalculateTotalTime(IEnumerable<Event> filteredEvents)
+        {
+            var time = (int)filteredEvents.Sum(e => (e.End.Value - e.Start.Value).TotalMinutes);
+            var hours = time / 60;
+            var minutes = time % 60;
+            var duration = $"{hours} hours";
+            if (minutes != 0) {
+                duration += $", {minutes} minutes";
+            }
+
+            return duration;
         }
     }
 }
