@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
 using Catharsium.Calendar.Core.Entities.Models;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,11 +1,11 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Catharsium.Calendar.Core.Logic.Tests.Filters
+namespace Catharsium.Calendar.Core.Logic.Tests.Filters.TextEventFilterTests
 {
     [TestClass]
     public class ApplyToSummaryTests : TestFixture<TextEventFilter>
@@ -32,7 +32,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
                     Location = "My second location"
                 },
                 new Event {
-                    Id = "1",
+                    Id = "3",
                     Summary = "My third summary",
                     Description = "My third description",
                     Location = "My third location"

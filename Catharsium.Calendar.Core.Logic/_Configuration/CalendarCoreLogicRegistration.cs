@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Storage;
@@ -26,6 +26,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
             );
             services.AddScoped<ICalendarImporter, CalendarImporter>();
             services.AddScoped<ITextEventFilter, TextEventFilter>();
+            services.AddScoped<IDateEventFilter, DateEventFilter>();
 
             return services;
         }

@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
 using Catharsium.Calendar.Core.Logic._Configuration;
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Calendar.Core.Logic.Interfaces;

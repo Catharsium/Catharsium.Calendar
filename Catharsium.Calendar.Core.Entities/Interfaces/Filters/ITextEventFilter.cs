@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Catharsium.Calendar.Core.Entities.Models;
 
-namespace Catharsium.Calendar.Core.Entities.Interfaces
+namespace Catharsium.Calendar.Core.Entities.Interfaces.Filters
 {
     public interface ITextEventFilter
     {
