@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Catharsium.Calendar.Core.Entities.Models.Enums;
+using Catharsium.Util.Enums;
 
 namespace Catharsium.Calendar.Core.Entities.Models
 {
@@ -43,5 +45,14 @@ namespace Catharsium.Calendar.Core.Entities.Models
         public virtual bool? GuestsCanInviteOthers { get; set; }
         public virtual bool? GuestsCanModify { get; set; }
         public virtual bool? GuestsCanSeeOtherGuests { get; set; }
+
+        public Category Category {
+            get {
+                if (this.ColorId == null) { return Category.Unknown; }
+
+                var category = this.ColorId.ParseTo<Category>();
+                return category ?? Category.Unknown;
+            }
+        }
     }
 }

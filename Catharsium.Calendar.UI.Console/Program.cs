@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Catharsium.Calendar.Core.Entities.Models.Enums;
+using Catharsium.Calendar.Google.Client.Services;
 
 namespace Catharsium.Calendar.UI.Console
 {
@@ -79,7 +81,7 @@ namespace Catharsium.Calendar.UI.Console
                 return;
             }
 
-            calendarImporter.Import(calendar.Id, new DateTime(2014, 1, 1), DateTime.Now);
+            calendarImporter.Import(calendar.Id, new DateTime(2001, 1, 1), DateTime.Now);
         }
 
 
@@ -146,7 +148,48 @@ namespace Catharsium.Calendar.UI.Console
                     when += eventItem.Start.Value.ToString(" (HH:mm - ") + eventItem.End.Value.ToString("HH:mm)");
                 }
 
+                if (eventItem.Category == Category.PersonalOption)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.Cyan;
+                }
+                if (eventItem.Category == Category.PersonalAppointment)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.Blue;
+                }
+                if (eventItem.Category == Category.PersonalCommitment)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.DarkBlue;
+                }
+
+                if (eventItem.Category == Category.ProfessionalOption)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.DarkYellow;
+                }
+                if (eventItem.Category == Category.ProfessionalAppointment)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.Red;
+                }
+                if (eventItem.Category == Category.ProfessionalCommitment) {
+                    System.Console.ForegroundColor = ConsoleColor.DarkRed;
+                }
+                
+                if (eventItem.Category == Category.Traveling)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.DarkGray;
+                }
+
+                if (eventItem.Category == Category.Free)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.Green;
+                }
+
+                if (eventItem.Category == Category.PartnerCommitment)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.Magenta;
+                }
+
                 System.Console.WriteLine("{0} ({1})", eventItem.Summary, when);
+                System.Console.ResetColor();
             }
         }
 

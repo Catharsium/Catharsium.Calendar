@@ -34,6 +34,8 @@ namespace Catharsium.Calendar.Core.Entities.Models.Enums
         Free,
 
         [Alias("8")]
-        Traveling
+        Traveling,
+
+        Unknown
     }
 }
