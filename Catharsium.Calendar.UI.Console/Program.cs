@@ -1,6 +1,11 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
+using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console._Configuration;
+using Catharsium.Calendar.UI.Console.Enums;
+using Catharsium.Util.Enums;
+using Catharsium.Util.Time.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,10 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
-using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.UI.Console.Enums;
-using Catharsium.Util.Enums;
 
 namespace Catharsium.Calendar.UI.Console
 {
@@ -72,8 +73,8 @@ namespace Catharsium.Calendar.UI.Console
 
                     if (filteredEvents.Count > 0) {
                         ShowEvents(filteredEvents);
-
                         System.Console.WriteLine($"{filteredEvents.Count} events found for a total of {duration} duration.");
+                        System.Console.WriteLine();
                     }
                     else {
                         System.Console.WriteLine($"No events found for query '{query}'.");
@@ -94,6 +95,7 @@ namespace Catharsium.Calendar.UI.Console
                     var events = eventRepository.LoadAll().ToList();
                     var duration = CalculateTotalTime(events);
                     System.Console.WriteLine($"{events.Count} events found for a total of {duration} duration.");
+                    System.Console.WriteLine();
                 }
             }
         }
@@ -132,15 +134,11 @@ namespace Catharsium.Calendar.UI.Console
 
         private static string CalculateTotalTime(IEnumerable<Event> filteredEvents)
         {
-            var time = (int)filteredEvents.Sum(e => (e.End.Value - e.Start.Value).TotalMinutes);
-            var hours = time / 60;
-            var minutes = time % 60;
-            var duration = $"{hours} hours";
-            if (minutes != 0) {
-                duration += $", {minutes} minutes";
-            }
-
-            return duration;
+            var time = filteredEvents.Sum(e => e.End.Value - e.Start.Value);
+            var days = time.Days != 0 ? $"{time.Days} days, " : "";
+            var hours = $"{time.Hours} hours";
+            var minutes = time.Minutes != 0 ? $", {time.Minutes} minutes" : "";
+            return $"{days}{hours}{minutes}";
         }
     }
 }
