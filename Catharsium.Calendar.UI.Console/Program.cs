@@ -31,10 +31,10 @@ namespace Catharsium.Calendar.UI.Console
                 .BuildServiceProvider();
 
             var calendarService = serviceProvider.GetService<ICalendarService>();
-            var eventService = serviceProvider.GetService<IEventService>();
-            var eventRepository = serviceProvider.GetService<IEventRepository>();
+            var calendarStorage = serviceProvider.GetService<ICalendarStorage>();
             var textFilter = serviceProvider.GetService<ITextEventFilter>();
             var eventComparer = serviceProvider.GetService<IEqualityComparer<Event>>();
+            var calendarImporter = serviceProvider.GetService<ICalendarImporter>();
 
             while (true) {
                 System.Console.WriteLine("Choose an action:");
@@ -56,47 +56,66 @@ namespace Catharsium.Calendar.UI.Console
                 }
 
                 var calendars = calendarService.GetList().ToList();
-                if (requestedAction == UserActions.Search) {
-                    var calendar = ChooseACalendar(calendars);
-
-                    System.Console.WriteLine("Enter the query:");
-                    var query = System.Console.ReadLine();
-
-                    System.Console.WriteLine();
-                    System.Console.WriteLine("Upcoming events:");
-                    var events = eventService.GetList(calendar.Id, new DateTime(2014, 1, 1), DateTime.Now).ToList();
-                    var filteredEvents = textFilter.ApplyToSummary(events, query).ToList();
-                    filteredEvents.AddRange(textFilter.ApplyToDescription(events, query));
-                    filteredEvents.AddRange(textFilter.ApplyToLocation(events, query));
-                    filteredEvents = filteredEvents.Distinct(eventComparer).ToList();
-                    var duration = CalculateTotalTime(filteredEvents);
-
-                    if (filteredEvents.Count > 0) {
-                        ShowEvents(filteredEvents);
-                        System.Console.WriteLine($"{filteredEvents.Count} events found for a total of {duration} duration.");
-                        System.Console.WriteLine();
-                    }
-                    else {
-                        System.Console.WriteLine($"No events found for query '{query}'.");
-                    }
-                }
 
                 if (requestedAction == UserActions.Import) {
-                    var calendar = ChooseACalendar(calendars);
-                    if (calendar == null) {
-                        continue;
-                    }
-
-                    var exporter = serviceProvider.GetService<ICalendarImporter>();
-                    exporter.Import(calendar.Id, new DateTime(2014, 1, 1), DateTime.Now);
+                    ImportAction(calendars, calendarImporter);
                 }
 
                 if (requestedAction == UserActions.Load) {
-                    var events = eventRepository.LoadAll().ToList();
-                    var duration = CalculateTotalTime(events);
-                    System.Console.WriteLine($"{events.Count} events found for a total of {duration} duration.");
-                    System.Console.WriteLine();
+                    LoadAction(calendarStorage);
                 }
+
+                if (requestedAction == UserActions.Search) {
+                    SearchAction(calendarStorage, textFilter, eventComparer);
+                }
+            }
+        }
+
+
+        private static void ImportAction(List<Core.Entities.Models.Calendar> calendars, ICalendarImporter calendarImporter)
+        {
+            var calendar = ChooseACalendar(calendars);
+            if (calendar == null) {
+                return;
+            }
+
+            calendarImporter.Import(calendar.Id, new DateTime(2014, 1, 1), DateTime.Now);
+        }
+
+
+        private static void LoadAction(ICalendarStorage calendarStorage)
+        {
+            var events = calendarStorage.LoadAll().ToList();
+            var duration = CalculateTotalTime(events);
+            System.Console.WriteLine($"{events.Count} events found for a total of {duration} duration.");
+            System.Console.WriteLine();
+        }
+
+
+        private static void SearchAction(ICalendarStorage calendarStorage, ITextEventFilter textFilter, IEqualityComparer<Event> eventComparer)
+        {
+            System.Console.WriteLine("Enter the query:");
+            var query = System.Console.ReadLine();
+
+            System.Console.WriteLine();
+            System.Console.WriteLine("Matching events:");
+            var events = calendarStorage.LoadAll().ToList();
+            var filteredEvents = textFilter.ApplyToSummary(events, query).ToList();
+            filteredEvents.AddRange(textFilter.ApplyToDescription(events, query));
+            filteredEvents.AddRange(textFilter.ApplyToLocation(events, query));
+            filteredEvents = filteredEvents
+                .Distinct(eventComparer)
+                .OrderBy(e => e.End.Value)
+                .ToList();
+            var duration = CalculateTotalTime(filteredEvents);
+
+            if (filteredEvents.Count > 0) {
+                ShowEvents(filteredEvents);
+                System.Console.WriteLine($"{filteredEvents.Count} events found for a total of {duration} duration.");
+                System.Console.WriteLine();
+            }
+            else {
+                System.Console.WriteLine($"No events found for query '{query}'.");
             }
         }
 

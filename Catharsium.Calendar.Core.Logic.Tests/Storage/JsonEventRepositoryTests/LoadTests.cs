@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace Catharsium.Calendar.Core.Logic.Tests.Storage.JsonEventRepositoryTests
 {
     [TestClass]
-    public class LoadTests : TestFixture<JsonEventRepository>
+    public class LoadTests : TestFixture<JsonCalendarStorage>
     {
         //[TestMethod]
         //public void Load_()

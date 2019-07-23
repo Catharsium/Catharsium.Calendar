@@ -3,7 +3,7 @@ using Catharsium.Calendar.Core.Entities.Models;
 
 namespace Catharsium.Calendar.Core.Logic.Interfaces
 {
-    public interface IEventRepository
+    public interface ICalendarStorage
     {
         IEnumerable<Event> LoadAll();
         IEnumerable<Event> Load(string fileName);

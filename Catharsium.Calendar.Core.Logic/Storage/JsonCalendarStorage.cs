@@ -8,14 +8,14 @@ using System.IO;
 
 namespace Catharsium.Calendar.Core.Logic.Storage
 {
-    public class JsonEventRepository : IEventRepository
+    public class JsonCalendarStorage : ICalendarStorage
     {
         private readonly IFileFactory fileFactory;
         private readonly JsonSerializer jsonSerializer;
         private readonly CalendarCoreLogicConfiguration options;
 
 
-        public JsonEventRepository(IFileFactory fileFactory, JsonSerializer jsonSerializer, CalendarCoreLogicConfiguration options)
+        public JsonCalendarStorage(IFileFactory fileFactory, JsonSerializer jsonSerializer, CalendarCoreLogicConfiguration options)
         {
             this.fileFactory = fileFactory;
             this.jsonSerializer = jsonSerializer;

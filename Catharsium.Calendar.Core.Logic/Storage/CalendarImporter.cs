@@ -9,14 +9,14 @@ namespace Catharsium.Calendar.Core.Logic.Storage
     {
         private readonly ICalendarService calendarService;
         private readonly IEventService eventService;
-        private readonly IEventRepository eventRepository;
+        private readonly ICalendarStorage calendarStorage;
 
 
-        public CalendarImporter(ICalendarService calendarService, IEventService eventService, IEventRepository eventRepository)
+        public CalendarImporter(ICalendarService calendarService, IEventService eventService, ICalendarStorage calendarStorage)
         {
             this.calendarService = calendarService;
             this.eventService = eventService;
-            this.eventRepository = eventRepository;
+            this.calendarStorage = calendarStorage;
         }
 
 
@@ -31,7 +31,7 @@ namespace Catharsium.Calendar.Core.Logic.Storage
 
                 var fileName = $"{calendar.Summary}, {startDate:yyyy-MM-dd} {queryEndDate:yyyy-MM-dd}";
                 if (events.Any()) {
-                    this.eventRepository.Store(events, fileName);
+                    this.calendarStorage.Store(events, fileName);
                     Console.WriteLine($"Stored in {fileName}");
                 }
 

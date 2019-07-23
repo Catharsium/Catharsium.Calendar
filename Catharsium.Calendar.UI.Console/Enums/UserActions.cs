@@ -3,8 +3,8 @@
     public enum UserActions
     {
         Quit,
-        Search,
         Import,
-        Load
+        Load,
+        Search
     }
 }

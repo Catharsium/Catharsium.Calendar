@@ -19,8 +19,8 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
 
             services.AddIoUtilities(config);
 
-            services.AddScoped<IEventRepository>(s =>
-                new JsonEventRepository(s.GetService<IFileFactory>(), 
+            services.AddScoped<ICalendarStorage>(s =>
+                new JsonCalendarStorage(s.GetService<IFileFactory>(), 
                 new JsonSerializer { Formatting = Formatting.Indented },
                 configuration)
             );
