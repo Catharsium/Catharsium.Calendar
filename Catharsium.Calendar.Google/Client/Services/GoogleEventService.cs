@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using GoogleEvent = Google.Apis.Calendar.v3.Data.Event;
 
 namespace Catharsium.Calendar.Google.Client.Services
 {
@@ -46,7 +47,7 @@ namespace Catharsium.Calendar.Google.Client.Services
 
         public Event CreateEvent(string calendarId, Event eventData)
         {
-            var googleEvent = this.mapper.Map<global::Google.Apis.Calendar.v3.Data.Event>(eventData);
+            var googleEvent = this.mapper.Map<GoogleEvent>(eventData);
             var request = this.calendarService.Events.Insert(googleEvent, calendarId);
             return this.mapper.Map<Event>(request.Execute());
         }
@@ -54,7 +55,7 @@ namespace Catharsium.Calendar.Google.Client.Services
 
         public void UpdateEvent(string calendarId, Event eventData)
         {
-            var googleEvent = this.mapper.Map<global::Google.Apis.Calendar.v3.Data.Event>(eventData);
+            var googleEvent = this.mapper.Map<GoogleEvent>(eventData);
             var request = this.calendarService.Events.Update(googleEvent, calendarId, eventData.Id);
             request.Execute();
         }

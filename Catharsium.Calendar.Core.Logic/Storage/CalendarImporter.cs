@@ -2,6 +2,7 @@
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace Catharsium.Calendar.Core.Logic.Storage
 {
@@ -33,6 +34,7 @@ namespace Catharsium.Calendar.Core.Logic.Storage
                 if (events.Any()) {
                     this.calendarStorage.Store(events, fileName);
                     Console.WriteLine($"Stored in {fileName}");
+                    Thread.Sleep(100);
                 }
 
                 Console.WriteLine();
