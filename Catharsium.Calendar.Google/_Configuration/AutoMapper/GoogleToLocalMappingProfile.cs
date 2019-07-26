@@ -15,9 +15,9 @@ using GoogleSource = Google.Apis.Calendar.v3.Data.Event.SourceData;
 
 namespace Catharsium.Calendar.Google._Configuration.AutoMapper
 {
-    public class MappingProfile : Profile
+    public class GoogleToLocalMappingProfile : Profile
     {
-        public MappingProfile()
+        public GoogleToLocalMappingProfile()
         {
             this.CreateMap<GoogleCalendarList, Core.Entities.Models.Calendar>();
 

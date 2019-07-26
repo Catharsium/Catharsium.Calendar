@@ -3,15 +3,16 @@ using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GoogleCreatorData = Google.Apis.Calendar.v3.Data.Event.CreatorData;
 
-namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
+namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.GoogleToLocalMappingProfileTests
 {
     [TestClass]
-    public class CreatorMappingTests : MappingProfileFixture
+    public class ToLocalCreatorMappingTests : GoogleToLocalMappingProfileFixture
     {
         [TestMethod]
         public void Map_CanMapEventReminder_ToReminder()
         {
-            var creatorData = new GoogleCreatorData {
+            var creatorData = new GoogleCreatorData
+            {
                 DisplayName = "My display name",
                 Email = "My email",
                 Id = "My id",

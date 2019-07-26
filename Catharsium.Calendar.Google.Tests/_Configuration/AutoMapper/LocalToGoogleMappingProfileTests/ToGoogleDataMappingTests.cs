@@ -1,22 +1,23 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
-using Google.Apis.Calendar.v3.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GoogleDate = Google.Apis.Calendar.v3.Data.EventDateTime;
 
-namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
+namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.GoogleToLocalMappingProfileTests
 {
     [TestClass]
-    public class DataMappingTests : MappingProfileFixture
+    public class ToGoogleDataMappingTests : LocalToGoogleMappingProfileFixture
     {
         [TestMethod]
-        public void Map_CanMapEventDateTime_ToDate()
+        public void Map_CanMapDate_ToEventDateTime()
         {
-            var eventDateTime = new EventDateTime {
+            var eventDateTime = new Date
+            {
                 ETag = "My etag",
                 TimeZone = "My time zone"
             };
 
-            var actual = this.Mapper.Map<Date>(eventDateTime);
+            var actual = this.Mapper.Map<GoogleDate>(eventDateTime);
             Assert.IsNotNull(actual);
             Assert.AreEqual(eventDateTime.ETag, actual.ETag);
             Assert.AreEqual(eventDateTime.TimeZone, actual.TimeZone);

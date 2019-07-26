@@ -1,21 +1,22 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
-using Google.Apis.Calendar.v3.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Event = Google.Apis.Calendar.v3.Data.Event;
+using GoogleReminder = Google.Apis.Calendar.v3.Data.EventReminder;
+using GoogleRemindersList = Google.Apis.Calendar.v3.Data.Event.RemindersData;
 
-namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
+namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.GoogleToLocalMappingProfileTests
 {
     [TestClass]
-    public class RemindersListMappingTests : MappingProfileFixture
+    public class ToLocalRemindersListMappingTests : GoogleToLocalMappingProfileFixture
     {
         [TestMethod]
         public void Map_CanMapEventReminder_ToReminder()
         {
-            var remindersData = new Event.RemindersData {
-                Overrides = new List<EventReminder> {
-                    new EventReminder()
+            var remindersData = new GoogleRemindersList
+            {
+                Overrides = new List<GoogleReminder> {
+                    new GoogleReminder()
                 },
                 UseDefault = true
             };

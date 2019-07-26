@@ -1,16 +1,17 @@
 ﻿using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
-using Google.Apis.Calendar.v3.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GoogleListEntry = Google.Apis.Calendar.v3.Data.CalendarListEntry;
 
-namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
+namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.GoogleToLocalMappingProfileTests
 {
     [TestClass]
-    public class CalendarMappingTests : MappingProfileFixture
+    public class ToLocalCalendarMappingTests : GoogleToLocalMappingProfileFixture
     {
         [TestMethod]
         public void Map_CanMapGoogleCalendarListEntry_ToCalendar()
         {
-            var calendar = new CalendarListEntry {
+            var calendar = new GoogleListEntry
+            {
                 Id = "My id"
             };
 

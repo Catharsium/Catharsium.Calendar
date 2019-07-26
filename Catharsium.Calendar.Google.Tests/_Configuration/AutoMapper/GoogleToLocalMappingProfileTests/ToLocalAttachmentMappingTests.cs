@@ -1,17 +1,18 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
-using Google.Apis.Calendar.v3.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GoogleAttachment = Google.Apis.Calendar.v3.Data.EventAttachment;
 
-namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
+namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.GoogleToLocalMappingProfileTests
 {
     [TestClass]
-    public class AttachmentMappingTests : MappingProfileFixture
+    public class ToLocalAttachmentMappingTests : GoogleToLocalMappingProfileFixture
     {
         [TestMethod]
         public void Map_CanMapEventAttachment_ToAttachment()
         {
-            var sourceData = new EventAttachment {
+            var sourceData = new GoogleAttachment
+            {
                 FileId = "My file id",
                 FileUrl = "My file url",
                 IconLink = "My icon link",

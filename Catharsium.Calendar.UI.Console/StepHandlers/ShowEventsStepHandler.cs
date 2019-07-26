@@ -29,10 +29,12 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
                 }
 
                 var calendars = this.calendarService.GetList();
+                var calendar = calendars.FirstOrDefault(c => c.Id == @event.CalendarId);
+                var calendarName = calendar != null ? calendar.Summary : "";
                 SetColor(@event.Category);
                 System.Console.Write($"[{index + 1}]");
                 SetColor(@event.CalendarId);
-                System.Console.WriteLine($" ({calendars.FirstOrDefault(c => c.Id == @event.CalendarId)})");
+                System.Console.WriteLine($" ({calendarName})");
                 System.Console.ResetColor();
                 System.Console.WriteLine($"{@event.Summary} ({when})");
                 index++;
@@ -87,8 +89,8 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
         private static void SetColor(string calendarId)
         {
             switch (calendarId) {
-                case "":
-                    System.Console.ForegroundColor = ConsoleColor.Red;
+                case "bn1j5jeikkv53v8mg687fk1324@group.calendar.google.com":
+                    System.Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
                 default:
                     System.Console.ForegroundColor = ConsoleColor.White;

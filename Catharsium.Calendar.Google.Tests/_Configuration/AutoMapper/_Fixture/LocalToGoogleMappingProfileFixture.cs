@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture
 {
-    public abstract class MappingProfileFixture : TestFixture<MappingProfile>
+    public abstract class LocalToGoogleMappingProfileFixture : TestFixture<LocalToGoogleMappingProfile>
     {
         #region Fixture
 

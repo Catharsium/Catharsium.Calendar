@@ -1,17 +1,18 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Google.Tests._Configuration.AutoMapper._Fixture;
-using Google.Apis.Calendar.v3.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GoogleAttendee = Google.Apis.Calendar.v3.Data.EventAttendee;
 
-namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.MappingProfileTests
+namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.GoogleToLocalMappingProfileTests
 {
     [TestClass]
-    public class AttendeeMappingTests : MappingProfileFixture
+    public class ToLocalAttendeeMappingTests : GoogleToLocalMappingProfileFixture
     {
         [TestMethod]
         public void Map_CanMapEventAttendee_ToAttendee()
         {
-            var calendar = new EventAttendee {
+            var calendar = new GoogleAttendee
+            {
                 AdditionalGuests = 9,
                 Comment = "My comment",
                 DisplayName = "My display name",

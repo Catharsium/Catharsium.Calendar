@@ -2,6 +2,6 @@
 {
     public class CalendarGoogleConfiguration
     {
-        public Credentials[] Credentials;
+        public Credentials[] Credentials { get; set; }
     }
 }

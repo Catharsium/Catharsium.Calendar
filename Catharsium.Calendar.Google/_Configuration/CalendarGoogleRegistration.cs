@@ -19,8 +19,9 @@ namespace Catharsium.Calendar.Google._Configuration
             services.AddScoped<ICalendarService, GoogleCalendarService>();
             services.AddScoped<IEventService, GoogleEventService>();
 
-            var mappingConfig = new MapperConfiguration(mc => {
-                mc.AddProfile(new MappingProfile());
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new GoogleToLocalMappingProfile());
             });
 
             var mapper = mappingConfig.CreateMapper();
