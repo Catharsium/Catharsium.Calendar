@@ -5,6 +5,6 @@ namespace Catharsium.Calendar.UI.Console.Interfaces
 {
     public interface IShowEventsStepHandler
     {
-        void ShowEvents(IEnumerable<Event> filteredEvents);
+        void ShowEvents(IEnumerable<Event> events);
     }
 }

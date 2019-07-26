@@ -1,59 +1,98 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Entities.Models.Enums;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Catharsium.Calendar.UI.Console.StepHandlers
 {
     public class ShowEventsStepHandler : IShowEventsStepHandler
     {
-        public void ShowEvents(IEnumerable<Event> filteredEvents)
+        private readonly ICalendarService calendarService;
+
+
+        public ShowEventsStepHandler(ICalendarService calendarService)
         {
-            foreach (var eventItem in filteredEvents) {
-                var when = eventItem.Start.Value.ToString("yyyy MMMM dd");
-                if (eventItem.Start.HasTime) {
-                    when += eventItem.Start.Value.ToString(" (HH:mm - ") + eventItem.End.Value.ToString("HH:mm)");
+            this.calendarService = calendarService;
+        }
+
+
+        public void ShowEvents(IEnumerable<Event> events)
+        {
+            var index = 0;
+            foreach (var @event in events) {
+                var when = @event.Start.Value.ToString("yyyy MMMM dd");
+                if (@event.Start.HasTime) {
+                    when += @event.Start.Value.ToString(" (HH:mm - ") + @event.End.Value.ToString("HH:mm)");
                 }
 
-                if (eventItem.Category == Category.PersonalOption) {
-                    System.Console.ForegroundColor = ConsoleColor.Cyan;
-                }
-
-                if (eventItem.Category == Category.PersonalAppointment) {
-                    System.Console.ForegroundColor = ConsoleColor.Blue;
-                }
-
-                if (eventItem.Category == Category.PersonalCommitment) {
-                    System.Console.ForegroundColor = ConsoleColor.DarkBlue;
-                }
-
-                if (eventItem.Category == Category.ProfessionalOption) {
-                    System.Console.ForegroundColor = ConsoleColor.DarkYellow;
-                }
-
-                if (eventItem.Category == Category.ProfessionalAppointment) {
-                    System.Console.ForegroundColor = ConsoleColor.Red;
-                }
-
-                if (eventItem.Category == Category.ProfessionalCommitment) {
-                    System.Console.ForegroundColor = ConsoleColor.DarkRed;
-                }
-
-                if (eventItem.Category == Category.Traveling) {
-                    System.Console.ForegroundColor = ConsoleColor.DarkGray;
-                }
-
-                if (eventItem.Category == Category.Free) {
-                    System.Console.ForegroundColor = ConsoleColor.Green;
-                }
-
-                if (eventItem.Category == Category.PartnerCommitment) {
-                    System.Console.ForegroundColor = ConsoleColor.Magenta;
-                }
-
-                System.Console.WriteLine("{0} ({1})", eventItem.Summary, when);
+                var calendars = this.calendarService.GetList();
+                SetColor(@event.Category);
+                System.Console.Write($"[{index + 1}]");
+                SetColor(@event.CalendarId);
+                System.Console.WriteLine($" ({calendars.FirstOrDefault(c => c.Id == @event.CalendarId)})");
                 System.Console.ResetColor();
+                System.Console.WriteLine($"{@event.Summary} ({when})");
+                index++;
+            }
+        }
+
+
+        private static void SetColor(Category category)
+        {
+            switch (category) {
+                case Category.PersonalOption:
+                    System.Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+                case Category.PersonalAppointment:
+                    System.Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case Category.PersonalCommitment:
+                    System.Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    break;
+                case Category.ProfessionalOption:
+                    System.Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    break;
+                case Category.ProfessionalAppointment:
+                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case Category.ProfessionalCommitment:
+                    System.Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                case Category.Traveling:
+                    System.Console.ForegroundColor = ConsoleColor.DarkGray;
+                    break;
+                case Category.Free:
+                    System.Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                case Category.PartnerCommitment:
+                    System.Console.ForegroundColor = ConsoleColor.Magenta;
+                    break;
+                case Category.Birthday:
+                    break;
+                case Category.Meal:
+                    break;
+                case Category.Special:
+                    break;
+                case Category.Unknown:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+
+        private static void SetColor(string calendarId)
+        {
+            switch (calendarId) {
+                case "":
+                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                default:
+                    System.Console.ForegroundColor = ConsoleColor.White;
+                    break;
             }
         }
     }

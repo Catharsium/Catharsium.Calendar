@@ -1,4 +1,8 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
+using Catharsium.Calendar.Core.Entities.Models;
+using Catharsium.Calendar.Core.Entities.Models.Comparers;
+using Catharsium.Calendar.Core.Logic.Actions;
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Storage;
@@ -8,6 +12,7 @@ using Catharsium.Util.IO.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Catharsium.Calendar.Core.Logic._Configuration
 {
@@ -25,8 +30,11 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
                 configuration)
             );
             services.AddScoped<ICalendarImporter, CalendarImporter>();
+            services.AddScoped<IEventUpdater, EventUpdater>();
             services.AddScoped<ITextEventFilter, TextEventFilter>();
             services.AddScoped<IDateEventFilter, DateEventFilter>();
+
+            services.AddScoped<IEqualityComparer<Event>, EventEqualityComparer>();
 
             return services;
         }

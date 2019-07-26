@@ -1,6 +1,6 @@
 ﻿namespace Catharsium.Calendar.UI.Console.Interfaces
 {
-    public interface IChooseACalendarStepHandler
+    public interface IChooseCalendarStepHandler
     {
         Core.Entities.Models.Calendar ChooseACalendar();
     }

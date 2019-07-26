@@ -22,7 +22,8 @@ namespace Catharsium.Calendar.Google._Configuration.AutoMapper
             this.CreateMap<GoogleCalendarList, Core.Entities.Models.Calendar>();
 
             this.CreateMap<GoogleEvent, Event>()
-                .ForMember(d => d.RemindersList, opt => opt.MapFrom(o => o.Reminders));
+                .ForMember(d => d.RemindersList, opt => opt.MapFrom(o => o.Reminders))
+                .ForMember(d => d.CalendarId, opt => opt.Ignore());
 
             this.CreateMap<GoogleDateTime, Date>()
                 .ForMember(d => d.Value, opt => opt.MapFrom<DateMapper>());

@@ -1,46 +1,72 @@
-﻿using System.IO;
-using System.Threading;
-using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Google._Configuration;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
 
 namespace Catharsium.Calendar.Google.Client
 {
     public class GoogleCalendarClientFactory : ICalendarClientFactory
     {
         private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
-        private readonly string applicationName;
-        private readonly string credentialsPath;
-        private readonly string userName;
+        private readonly Credentials[] credentialsList;
+        private Dictionary<Credentials, CalendarService> CalendarServices { get; set; }
+
+        public string UserName { get; set; }
 
 
-        public GoogleCalendarClientFactory(string credentialsPath, string applicationName, string userName)
+        public GoogleCalendarClientFactory(Credentials[] credentialsList)
         {
-            this.credentialsPath = credentialsPath;
-            this.applicationName = applicationName;
-            this.userName = userName;
+            this.credentialsList = credentialsList;
+            this.CalendarServices = new Dictionary<Credentials, CalendarService>();
+            foreach (var credentials in this.credentialsList)
+            {
+                this.CalendarServices[credentials] = this.CreateFor(credentials);
+            }
         }
 
 
-        public CalendarService CreateClient()
+        public string[] GetUserNames()
         {
+            return this.credentialsList.Select(c => c.UserName).ToArray();
+        }
+
+
+        public CalendarService Get()
+        {
+            return this.CalendarServices.FirstOrDefault(c => c.Key.UserName == this.UserName).Value;
+        }
+
+
+        private CalendarService CreateFor(Credentials credentials)
+        {
+            if (credentials == null)
+            {
+                return null;
+            }
+
             UserCredential credential;
 
-            using (var stream = new FileStream(this.credentialsPath, FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(credentials.Path, FileMode.Open, FileAccess.Read))
             {
                 var credPath = "token.json";
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
-                                Scopes,
-                                this.userName,
-                                CancellationToken.None,
-                                new FileDataStore(credPath, true)).Result;
+                    Scopes,
+                    credentials.UserName,
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
             }
-            return new CalendarService(new BaseClientService.Initializer {
+
+            return new CalendarService(new BaseClientService.Initializer
+            {
                 HttpClientInitializer = credential,
-                ApplicationName = this.applicationName
+                ApplicationName = credentials.ApplicationName
             });
         }
     }

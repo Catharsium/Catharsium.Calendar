@@ -24,14 +24,16 @@ namespace Catharsium.Calendar.Core.Logic.Storage
         public void Import(string calendarId, DateTime startDate, DateTime endDate)
         {
             var calendar = this.calendarService.Get(calendarId);
-            while (startDate < endDate) {
+            while (startDate < endDate)
+            {
                 var queryEndDate = startDate.AddMonths(1);
                 Console.WriteLine($"Period: {startDate:yyyy-MM-dd} - {queryEndDate:yyyy-MM-dd}");
                 var events = this.eventService.GetList(calendar.Id, startDate, queryEndDate).ToList();
                 Console.WriteLine($"Found {events.Count} events in {calendar.Summary}");
 
                 var fileName = $"{calendar.Summary}, {startDate:yyyy-MM-dd} {queryEndDate:yyyy-MM-dd}";
-                if (events.Any()) {
+                if (events.Any())
+                {
                     this.calendarStorage.Store(events, fileName);
                     Console.WriteLine($"Stored in {fileName}");
                     Thread.Sleep(100);

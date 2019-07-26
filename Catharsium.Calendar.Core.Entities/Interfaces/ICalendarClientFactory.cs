@@ -4,6 +4,10 @@ namespace Catharsium.Calendar.Core.Entities.Interfaces
 {
     public interface ICalendarClientFactory
     {
-        CalendarService CreateClient();
+        string UserName { get; set; }
+
+        string[] GetUserNames();
+
+        CalendarService Get();
     }
 }

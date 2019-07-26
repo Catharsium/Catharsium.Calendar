@@ -13,20 +13,21 @@ namespace Catharsium.Calendar.Google.Client.Services
     [ExcludeFromCodeCoverage]
     public class GoogleEventService : IEventService
     {
-        private readonly CalendarService calendarService;
+        private readonly ICalendarClientFactory calendarClientFactory;
         private readonly IMapper mapper;
 
 
-        public GoogleEventService(ICalendarClientFactory clientFactory, IMapper mapper)
+        public GoogleEventService(ICalendarClientFactory calendarClientFactory, IMapper mapper)
         {
-            this.calendarService = clientFactory.CreateClient();
+            this.calendarClientFactory = calendarClientFactory;
             this.mapper = mapper;
         }
 
 
         public IEnumerable<Event> GetList(string calendarId, DateTime from, DateTime to)
         {
-            var request = this.calendarService.Events.List(calendarId);
+            var calendarService = this.calendarClientFactory.Get();
+            var request = calendarService.Events.List(calendarId);
             request.TimeMin = from;
             request.TimeMax = to;
             request.ShowDeleted = false;
@@ -34,36 +35,49 @@ namespace Catharsium.Calendar.Google.Client.Services
             request.MaxResults = 2500;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
             var result = request.Execute();
-            return result.Items.Select(e => this.mapper.Map<Event>(e));
+            return result.Items.Select(e =>
+            {
+                var @event = this.mapper.Map<Event>(e);
+                @event.CalendarId = calendarId;
+                return @event;
+            });
         }
 
 
         public Event GetEvent(string calendarId, string eventId)
         {
-            var request = this.calendarService.Events.Get(calendarId, eventId);
-            return this.mapper.Map<Event>(request.Execute());
+            var calendarService = this.calendarClientFactory.Get();
+            var request = calendarService.Events.Get(calendarId, eventId);
+            var result = this.mapper.Map<Event>(request.Execute());
+            result.CalendarId = calendarId;
+            return result;
         }
 
 
         public Event CreateEvent(string calendarId, Event eventData)
         {
+            var calendarService = this.calendarClientFactory.Get();
             var googleEvent = this.mapper.Map<GoogleEvent>(eventData);
-            var request = this.calendarService.Events.Insert(googleEvent, calendarId);
-            return this.mapper.Map<Event>(request.Execute());
+            var request = calendarService.Events.Insert(googleEvent, calendarId);
+            var result = this.mapper.Map<Event>(request.Execute());
+            result.CalendarId = calendarId;
+            return result;
         }
 
 
         public void UpdateEvent(string calendarId, Event eventData)
         {
+            var calendarService = this.calendarClientFactory.Get();
             var googleEvent = this.mapper.Map<GoogleEvent>(eventData);
-            var request = this.calendarService.Events.Update(googleEvent, calendarId, eventData.Id);
+            var request = calendarService.Events.Update(googleEvent, calendarId, eventData.Id);
             request.Execute();
         }
 
 
         public void DeleteEvent(string calendarId, string eventId)
         {
-            var request = this.calendarService.Events.Delete(calendarId, eventId);
+            var calendarService = this.calendarClientFactory.Get();
+            var request = calendarService.Events.Delete(calendarId, eventId);
             request.Execute();
         }
     }

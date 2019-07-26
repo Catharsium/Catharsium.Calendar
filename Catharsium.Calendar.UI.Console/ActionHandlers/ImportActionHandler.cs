@@ -7,10 +7,10 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
     public class ImportActionHandler : IImportActionHandler
     {
         private readonly ICalendarImporter calendarImporter;
-        private readonly IChooseACalendarStepHandler chooseACalendarStepHandler;
+        private readonly IChooseCalendarStepHandler chooseACalendarStepHandler;
 
 
-        public ImportActionHandler(ICalendarImporter calendarImporter, IChooseACalendarStepHandler chooseACalendarStepHandler)
+        public ImportActionHandler(ICalendarImporter calendarImporter, IChooseCalendarStepHandler chooseACalendarStepHandler)
         {
             this.calendarImporter = calendarImporter;
             this.chooseACalendarStepHandler = chooseACalendarStepHandler;

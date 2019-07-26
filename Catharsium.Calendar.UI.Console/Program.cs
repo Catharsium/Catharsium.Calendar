@@ -1,4 +1,5 @@
-﻿using Catharsium.Calendar.UI.Console._Configuration;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.UI.Console._Configuration;
 using Catharsium.Calendar.UI.Console.Enums;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.Enums;
@@ -27,6 +28,9 @@ namespace Catharsium.Calendar.UI.Console
             var importActionHandler = serviceProvider.GetService<IImportActionHandler>();
             var loadActionHandler = serviceProvider.GetService<ILoadActionHandler>();
             var searchActionHandler = serviceProvider.GetService<ISearchActionHandler>();
+            var moveEventActionHandler = serviceProvider.GetService<IMoveEventActionHandler>();
+            var calendarClientFactory = serviceProvider.GetService<ICalendarClientFactory>();
+            var chooseAccountStepHandler = serviceProvider.GetService<IChooseAccountStepHandler>();
 
             while (true) {
                 System.Console.WriteLine("Choose an action:");
@@ -47,6 +51,8 @@ namespace Catharsium.Calendar.UI.Console
                     break;
                 }
 
+                calendarClientFactory.UserName = chooseAccountStepHandler.Run();
+
                 switch (requestedAction) {
                     case UserActions.Import:
                         importActionHandler.Run();
@@ -58,6 +64,9 @@ namespace Catharsium.Calendar.UI.Console
                         searchActionHandler.Run();
                         break;
                     case UserActions.Quit:
+                        break;
+                    case UserActions.Move:
+                        moveEventActionHandler.Run();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

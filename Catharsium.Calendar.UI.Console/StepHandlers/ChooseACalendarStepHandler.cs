@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace Catharsium.Calendar.UI.Console.StepHandlers
 {
-    public class ChooseACalendarStepHandler : IChooseACalendarStepHandler
+    public class ChooseCalendarStepHandler : IChooseCalendarStepHandler
     {
         private readonly ICalendarService calendarService;
 
 
-        public ChooseACalendarStepHandler(ICalendarService calendarService)
+        public ChooseCalendarStepHandler(ICalendarService calendarService)
         {
             this.calendarService = calendarService;
         }

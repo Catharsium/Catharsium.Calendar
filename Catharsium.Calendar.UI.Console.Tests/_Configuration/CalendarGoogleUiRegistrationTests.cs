@@ -24,8 +24,12 @@ namespace Catharsium.Calendar.UI.Console.Tests._Configuration
             serviceCollection.ReceivedRegistration<IImportActionHandler, ImportActionHandler>();
             serviceCollection.ReceivedRegistration<ILoadActionHandler, LoadActionHandler>();
             serviceCollection.ReceivedRegistration<ISearchActionHandler, SearchActionHandler>();
+            serviceCollection.ReceivedRegistration<IMoveEventActionHandler, MoveEventActionHandler>();
+
             serviceCollection.ReceivedRegistration<IShowEventsStepHandler, ShowEventsStepHandler>();
-            serviceCollection.ReceivedRegistration<IChooseACalendarStepHandler, ChooseACalendarStepHandler>();
+            serviceCollection.ReceivedRegistration<IChooseCalendarStepHandler, ChooseCalendarStepHandler>();
+            serviceCollection.ReceivedRegistration<IChooseEventStepHandler, ChooseEventStepHandler>();
+            serviceCollection.ReceivedRegistration<IChooseAccountStepHandler, ChooseAccountStepHandler>();
         }
 
 

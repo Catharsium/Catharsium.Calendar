@@ -8,6 +8,7 @@ namespace Catharsium.Calendar.Core.Entities.Models
     public class Event
     {
         public virtual string Id { get; set; }
+        public virtual string CalendarId { get; set; }
         public virtual string ICalUID { get; set; }
         public virtual string RecurringEventId { get; set; }
         public virtual string ETag { get; set; }

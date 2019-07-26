@@ -5,6 +5,7 @@
         Quit,
         Import,
         Load,
-        Search
+        Search,
+        Move
     }
 }
