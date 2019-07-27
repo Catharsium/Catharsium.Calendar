@@ -9,7 +9,7 @@ namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.GoogleToLoc
     public class ToLocalOrganizerMappingTests : GoogleToLocalMappingProfileFixture
     {
         [TestMethod]
-        public void Map_CanMapGoogleCalendarOrganizerData_ToPerson()
+        public void Map_CanMapOrganizerData_ToPerson()
         {
             var organizerData = new GoogleOrganizer
             {

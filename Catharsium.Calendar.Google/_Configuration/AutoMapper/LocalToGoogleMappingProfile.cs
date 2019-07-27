@@ -20,12 +20,13 @@ namespace Catharsium.Calendar.Google._Configuration.AutoMapper
         {
             this.CreateMap<Core.Entities.Models.Calendar, GoogleCalendarList>();
 
-            this.CreateMap<Event, GoogleEvent>();
-            //.ForMember(d => d.RemindersList, opt => opt.MapFrom(o => o.Reminders))
+            this.CreateMap<Event, GoogleEvent>()
+            .ForMember(d => d.Reminders, opt => opt.MapFrom(o => o.RemindersList));
             //.ForMember(d => d.CalendarId, opt => opt.Ignore());
 
-            this.CreateMap<Date, GoogleDateTime>();
-             //   .ForMember(d => d.Value, opt => opt.MapFrom<DateMapper>());
+            this.CreateMap<Date, GoogleDateTime>()
+                .ForMember(d => d.DateTime, opt => opt.MapFrom(o => o.Value))
+                .ForMember(d => d.DateTimeRaw, opt => opt.MapFrom(o => o.Value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")));
 
             this.CreateMap<RemindersList, GoogleRemindersList>();
             this.CreateMap<Reminder, GoogleReminder>();

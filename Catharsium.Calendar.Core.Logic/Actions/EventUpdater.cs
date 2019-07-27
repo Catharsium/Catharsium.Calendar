@@ -16,13 +16,9 @@ namespace Catharsium.Calendar.Core.Logic.Actions
 
         public Event Move(Event @event, string oldCalendarId, string newCalendarId)
         {
-            var newEvent = this.eventService.CreateEvent(newCalendarId, @event);
-            if (newEvent == null) {
-                return null;
-            }
-
             this.eventService.DeleteEvent(oldCalendarId, @event.Id);
-            return newEvent;
+            var newEvent = this.eventService.CreateEvent(newCalendarId, @event);
+            return newEvent ?? null;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Catharsium.Calendar.Google._Configuration
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new GoogleToLocalMappingProfile());
+                mc.AddProfile(new LocalToGoogleMappingProfile());
             });
 
             var mapper = mappingConfig.CreateMapper();

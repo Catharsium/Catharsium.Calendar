@@ -13,7 +13,7 @@ namespace Catharsium.Calendar.Google.Tests._Configuration.AutoMapper.GoogleToLoc
     public class ToLocalEventMappingTests : GoogleToLocalMappingProfileFixture
     {
         [TestMethod]
-        public void Map_CanMapGoogleEvent_ToEvent()
+        public void Map_CanMapEvent_ToEvent()
         {
             var calendar = new GoogleEvent
             {

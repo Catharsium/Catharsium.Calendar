@@ -49,7 +49,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Actions.EventUpdaterTests
 
             var actual = this.Target.Move(this.Event, oldCalendarId, newCalendarId);
             Assert.IsNull(actual);
-            this.GetDependency<IEventService>().DidNotReceive().DeleteEvent(Arg.Any<string>(), Arg.Any<string>());
+            this.GetDependency<IEventService>().Received().DeleteEvent(oldCalendarId, this.Event.Id);
         }
     }
 }
