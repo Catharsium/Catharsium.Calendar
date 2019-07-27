@@ -23,7 +23,7 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
 
             System.Console.WriteLine("Choose an event:");
             var input = System.Console.ReadLine();
-            return int.TryParse(input, out var index) ? eventsList[index] : null;
+            return int.TryParse(input, out var index) ? eventsList[index - 1] : null;
         }
     }
 }
