@@ -92,6 +92,12 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
                 case "bn1j5jeikkv53v8mg687fk1324@group.calendar.google.com":
                     System.Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
+                case "t.w.brachthuizer@gmail.com":
+                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case "9ssl6im7hpe1c97rebr4csgstg@group.calendar.google.com":
+                    System.Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    break;
                 default:
                     System.Console.ForegroundColor = ConsoleColor.White;
                     break;

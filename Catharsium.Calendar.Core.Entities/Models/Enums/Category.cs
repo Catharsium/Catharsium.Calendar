@@ -13,6 +13,7 @@ namespace Catharsium.Calendar.Core.Entities.Models.Enums
         [Alias("9")]
         PersonalAppointment,
 
+        [Alias("4")] //2
         ProfessionalOption,
 
         [Alias("6")]
@@ -21,9 +22,10 @@ namespace Catharsium.Calendar.Core.Entities.Models.Enums
         [Alias("11")]
         ProfessionalAppointment,
 
-        [Alias("9")]
+        [Alias("3")]
         PartnerCommitment,
 
+        [Alias("5")]
         Birthday,
 
         Meal,
