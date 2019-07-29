@@ -24,7 +24,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
                 return;
             }
 
-            this.calendarImporter.Import(calendar.Id, new DateTime(2001, 1, 1), DateTime.Now);
+            this.calendarImporter.Import(calendar.Id, new DateTime(2001, 1, 1), DateTime.Now.AddYears(1));
         }
     }
 }
