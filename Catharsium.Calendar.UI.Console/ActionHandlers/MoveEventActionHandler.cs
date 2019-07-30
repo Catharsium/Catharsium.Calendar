@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Catharsium.Calendar.Core.Entities.Interfaces;
 using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
+using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
@@ -16,7 +16,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         private readonly IEqualityComparer<Event> eventComparer;
         private readonly IChooseCalendarStepHandler chooseACalendarStepHandler;
         private readonly IChooseEventStepHandler chooseAnEventStepHandler;
-        private readonly IEventUpdater eventUpdater;
+        private readonly IEventUpdateService eventUpdater;
 
 
         public MoveEventActionHandler(ICalendarStorage calendarStorage,
@@ -24,7 +24,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
             IEqualityComparer<Event> eventComparer,
             IChooseCalendarStepHandler chooseACalendarStepHandler,
             IChooseEventStepHandler chooseAnEventStepHandler,
-            IEventUpdater eventUpdater)
+            IEventUpdateService eventUpdater)
         {
             this.calendarStorage = calendarStorage;
             this.textFilter = textFilter;

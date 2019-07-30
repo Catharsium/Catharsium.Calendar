@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Catharsium.Calendar.Core.Entities.Interfaces
+namespace Catharsium.Calendar.Core.Entities.Interfaces.Services
 {
     public interface ICalendarService
     {

@@ -7,6 +7,7 @@
         Load,
         Search,
         Create,
+        Delete,
         Move
     }
 }

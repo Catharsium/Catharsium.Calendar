@@ -1,14 +1,14 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.Core.Logic.Actions;
+using Catharsium.Calendar.Google.Client.Services;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace Catharsium.Calendar.Core.Logic.Tests.Actions.EventUpdaterTests
+namespace Catharsium.Calendar.Google.Tests.Client.Services.GoogleEventUpdateServiceTests
 {
     [TestClass]
-    public class MoveTests : TestFixture<EventUpdater>
+    public class MoveTests : TestFixture<GoogleEventUpdateService>
     {
         #region Fixture
 
@@ -32,11 +32,11 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Actions.EventUpdaterTests
             var oldCalendarId = "My old calendar id";
             var newCalendarId = "My new calendar id";
             var expected = new Event();
-            this.GetDependency<IEventService>().CreateEvent(newCalendarId, this.Event).Returns(expected);
+            this.GetDependency<IEventManagementService>().CreateEvent(newCalendarId, this.Event).Returns(expected);
 
             var actual = this.Target.Move(this.Event, oldCalendarId, newCalendarId);
             Assert.AreEqual(expected, actual);
-            this.GetDependency<IEventService>().Received().DeleteEvent(oldCalendarId, this.Event.Id);
+            this.GetDependency<IEventManagementService>().Received().DeleteEvent(oldCalendarId, this.Event.Id);
         }
 
 
@@ -45,11 +45,11 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Actions.EventUpdaterTests
         {
             var oldCalendarId = "My old calendar id";
             var newCalendarId = "My new calendar id";
-            this.GetDependency<IEventService>().CreateEvent(newCalendarId, this.Event).Returns(null as Event);
+            this.GetDependency<IEventManagementService>().CreateEvent(newCalendarId, this.Event).Returns(null as Event);
 
             var actual = this.Target.Move(this.Event, oldCalendarId, newCalendarId);
             Assert.IsNull(actual);
-            this.GetDependency<IEventService>().Received().DeleteEvent(oldCalendarId, this.Event.Id);
+            this.GetDependency<IEventManagementService>().Received().DeleteEvent(oldCalendarId, this.Event.Id);
         }
     }
 }

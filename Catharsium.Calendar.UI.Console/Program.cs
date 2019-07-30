@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Google.Interfaces;
 using Catharsium.Calendar.UI.Console._Configuration;
 using Catharsium.Calendar.UI.Console.Enums;
 using Catharsium.Calendar.UI.Console.Interfaces;
@@ -29,6 +29,7 @@ namespace Catharsium.Calendar.UI.Console
             var loadActionHandler = serviceProvider.GetService<ILoadActionHandler>();
             var searchActionHandler = serviceProvider.GetService<ISearchActionHandler>();
             var createEventActionHandler = serviceProvider.GetService<ICreateEventActionHandler>();
+            var deleteEventActionHandler = serviceProvider.GetService<IDeleteEventActionHandler>();
             var moveEventActionHandler = serviceProvider.GetService<IMoveEventActionHandler>();
             var calendarClientFactory = serviceProvider.GetService<ICalendarClientFactory>();
             var chooseAccountStepHandler = serviceProvider.GetService<IChooseAccountStepHandler>();
@@ -98,6 +99,9 @@ namespace Catharsium.Calendar.UI.Console
                         break;
                     case UserActions.Create:
                         createEventActionHandler.Run();
+                        break;
+                    case UserActions.Delete:
+                        deleteEventActionHandler.Run();
                         break;
                     case UserActions.Move:
                         moveEventActionHandler.Run();

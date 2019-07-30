@@ -1,14 +1,14 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
 
-namespace Catharsium.Calendar.Core.Logic.Actions
+namespace Catharsium.Calendar.Google.Client.Services
 {
-    public class EventUpdater : IEventUpdater
+    public class GoogleEventUpdateService : IEventUpdateService
     {
-        private readonly IEventService eventService;
+        private readonly IEventManagementService eventService;
 
 
-        public EventUpdater(IEventService eventService)
+        public GoogleEventUpdateService(IEventManagementService eventService)
         {
             this.eventService = eventService;
         }

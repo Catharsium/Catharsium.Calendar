@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using System;
 using System.Linq;
@@ -9,11 +9,11 @@ namespace Catharsium.Calendar.Core.Logic.Storage
     public class CalendarImporter : ICalendarImporter
     {
         private readonly ICalendarService calendarService;
-        private readonly IEventService eventService;
+        private readonly IEventManagementService eventService;
         private readonly ICalendarStorage calendarStorage;
 
 
-        public CalendarImporter(ICalendarService calendarService, IEventService eventService, ICalendarStorage calendarStorage)
+        public CalendarImporter(ICalendarService calendarService, IEventManagementService eventService, ICalendarStorage calendarStorage)
         {
             this.calendarService = calendarService;
             this.eventService = eventService;

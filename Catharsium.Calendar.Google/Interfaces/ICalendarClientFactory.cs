@@ -1,6 +1,6 @@
 ﻿using Google.Apis.Calendar.v3;
 
-namespace Catharsium.Calendar.Core.Entities.Interfaces
+namespace Catharsium.Calendar.Google.Interfaces
 {
     public interface ICalendarClientFactory
     {

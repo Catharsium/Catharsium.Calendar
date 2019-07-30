@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using System.Linq;
 

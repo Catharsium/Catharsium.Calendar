@@ -1,4 +1,5 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
+using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using System;
 using System.Globalization;
@@ -8,13 +9,13 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
     public class CreateEventActionHandler : ICreateEventActionHandler
     {
         private readonly IChooseCalendarStepHandler chooseCalendarStepHandler;
-        private readonly IEventCreator eventCreator;
+        private readonly IEventManagementService eventService;
 
 
-        public CreateEventActionHandler(IChooseCalendarStepHandler chooseCalendarStepHandler, IEventCreator eventCreator)
+        public CreateEventActionHandler(IChooseCalendarStepHandler chooseCalendarStepHandler, IEventManagementService eventService)
         {
             this.chooseCalendarStepHandler = chooseCalendarStepHandler;
-            this.eventCreator = eventCreator;
+            this.eventService = eventService;
         }
 
 
@@ -47,7 +48,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
 
             var newCalendar = this.chooseCalendarStepHandler.ChooseACalendar();
             if (newEvent != null && newCalendar != null) {
-                this.eventCreator.Create(newEvent, newCalendar.Id);
+                this.eventService.CreateEvent(newCalendar.Id, newEvent);
             }
         }
     }

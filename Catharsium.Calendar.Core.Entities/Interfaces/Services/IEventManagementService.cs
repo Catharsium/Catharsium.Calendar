@@ -1,10 +1,10 @@
-﻿using System;
-using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Calendar.Core.Entities.Models;
+using System;
 using System.Collections.Generic;
 
-namespace Catharsium.Calendar.Core.Entities.Interfaces
+namespace Catharsium.Calendar.Core.Entities.Interfaces.Services
 {
-    public interface IEventService
+    public interface IEventManagementService
     {
         IEnumerable<Event> GetList(string calendarId, DateTime from, DateTime to);
         Event GetEvent(string calendarId, string eventId);

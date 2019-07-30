@@ -29,8 +29,8 @@ namespace Catharsium.Calendar.Core.Entities.Tests.Models.Comparers.EventEquality
         [TestMethod]
         public void Equals_EventWithDifferentId_ReturnsFalse()
         {
-            var eventData = new Event {Id = "My id"};
-            var otherEvent = new Event {Id = eventData.Id + "Other"};
+            var eventData = new Event { Id = "My id" };
+            var otherEvent = new Event { Id = eventData.Id + "Other" };
             var actual = this.Target.Equals(eventData, otherEvent);
             Assert.IsFalse(actual);
         }
@@ -39,8 +39,8 @@ namespace Catharsium.Calendar.Core.Entities.Tests.Models.Comparers.EventEquality
         [TestMethod]
         public void Equals_EventWithSameId_ReturnsTrue()
         {
-            var eventData = new Event {Id = "My id"};
-            var otherEvent = new Event {Id = eventData.Id};
+            var eventData = new Event { Id = "My id" };
+            var otherEvent = new Event { Id = eventData.Id };
             var actual = this.Target.Equals(eventData, otherEvent);
             Assert.IsTrue(actual);
         }

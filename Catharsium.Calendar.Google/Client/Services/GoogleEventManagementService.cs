@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
+using Catharsium.Calendar.Google.Interfaces;
 using Google.Apis.Calendar.v3;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ using GoogleEvent = Google.Apis.Calendar.v3.Data.Event;
 namespace Catharsium.Calendar.Google.Client.Services
 {
     [ExcludeFromCodeCoverage]
-    public class GoogleEventService : IEventService
+    public class GoogleEventManagementService : IEventManagementService
     {
         private readonly ICalendarClientFactory calendarClientFactory;
         private readonly IMapper mapper;
 
 
-        public GoogleEventService(ICalendarClientFactory calendarClientFactory, IMapper mapper)
+        public GoogleEventManagementService(ICalendarClientFactory calendarClientFactory, IMapper mapper)
         {
             this.calendarClientFactory = calendarClientFactory;
             this.mapper = mapper;
@@ -35,8 +36,7 @@ namespace Catharsium.Calendar.Google.Client.Services
             request.MaxResults = 2500;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
             var result = request.Execute();
-            return result.Items.Select(e =>
-            {
+            return result.Items.Select(e => {
                 var @event = this.mapper.Map<Event>(e);
                 @event.CalendarId = calendarId;
                 return @event;

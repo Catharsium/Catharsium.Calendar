@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Interfaces.Services;
+using Catharsium.Calendar.Google.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;

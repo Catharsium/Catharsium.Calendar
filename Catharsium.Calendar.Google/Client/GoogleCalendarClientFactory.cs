@@ -1,5 +1,5 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces;
-using Catharsium.Calendar.Google._Configuration;
+﻿using Catharsium.Calendar.Google._Configuration;
+using Catharsium.Calendar.Google.Interfaces;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Services;
