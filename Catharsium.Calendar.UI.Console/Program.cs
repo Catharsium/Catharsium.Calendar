@@ -28,9 +28,42 @@ namespace Catharsium.Calendar.UI.Console
             var importActionHandler = serviceProvider.GetService<IImportActionHandler>();
             var loadActionHandler = serviceProvider.GetService<ILoadActionHandler>();
             var searchActionHandler = serviceProvider.GetService<ISearchActionHandler>();
+            var createEventActionHandler = serviceProvider.GetService<ICreateEventActionHandler>();
             var moveEventActionHandler = serviceProvider.GetService<IMoveEventActionHandler>();
             var calendarClientFactory = serviceProvider.GetService<ICalendarClientFactory>();
             var chooseAccountStepHandler = serviceProvider.GetService<IChooseAccountStepHandler>();
+
+            //var x = serviceProvider.GetService<IEventService>();
+            //calendarClientFactory.UserName = "t.w.brachthuizer@gmail.com";
+            //x.UpdateEvent("t.w.brachthuizer@gmail.com", new Core.Entities.Models.Event {
+            //    Id = "7p7316d2cn5iu3lf64h6uurmob",
+            //    CalendarId = "t.w.brachthuizer@gmail.com",
+            //    ICalUID = "7p7316d2cn5iu3lf64h6uurmob@google.com",
+            //    ETag = "\"3128761098970000\"",
+            //    HtmlLink = "https://www.google.com/calendar/event?eid=N3A3MzE2ZDJjbjVpdTNsZjY0aDZ1dXJtb2IgdC53LmJyYWNodGh1aXplckBt",
+            //    Start = new Core.Entities.Models.Date {
+            //        HasTime = true,
+            //        Value = DateTime.Now
+            //    },
+            //    End = new Core.Entities.Models.Date {
+            //        HasTime = true,
+            //        Value = DateTime.Now.AddHours(2)
+            //    },
+            //    Summary = "Test thierry",
+            //    Organizer = new Core.Entities.Models.Person {
+            //        Email = "t.w.brachthuizer@gmail.com",
+            //    },
+            //    Creator = new Core.Entities.Models.Person {
+            //        Email = "t.w.brachthuizer@gmail.com",
+            //    },
+            //    Created = DateTime.Parse("2019-07-29T08:09:07+02:00"),
+            //    Updated = DateTime.Parse("2019-07-29T08:09:09.485+02:00"),
+            //    Sequence = 0,
+            //    Status = "confirmed",
+            //    Kind = "calendar#event",
+            //    ColorId = "5",
+            //    Location = null
+            //});
 
             while (true) {
                 System.Console.WriteLine("Choose an action:");
@@ -63,10 +96,13 @@ namespace Catharsium.Calendar.UI.Console
                     case UserActions.Search:
                         searchActionHandler.Run();
                         break;
-                    case UserActions.Quit:
+                    case UserActions.Create:
+                        createEventActionHandler.Run();
                         break;
                     case UserActions.Move:
                         moveEventActionHandler.Run();
+                        break;
+                    case UserActions.Quit:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

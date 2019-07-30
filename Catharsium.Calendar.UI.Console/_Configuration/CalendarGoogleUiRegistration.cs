@@ -21,6 +21,7 @@ namespace Catharsium.Calendar.UI.Console._Configuration
             services.AddScoped<IImportActionHandler, ImportActionHandler>();
             services.AddScoped<ILoadActionHandler, LoadActionHandler>();
             services.AddScoped<ISearchActionHandler, SearchActionHandler>();
+            services.AddScoped<ICreateEventActionHandler, CreateEventActionHandler>();
             services.AddScoped<IMoveEventActionHandler, MoveEventActionHandler>();
 
             services.AddScoped<IShowEventsStepHandler, ShowEventsStepHandler>();

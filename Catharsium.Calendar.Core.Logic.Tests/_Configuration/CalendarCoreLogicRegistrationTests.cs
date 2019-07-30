@@ -7,6 +7,7 @@ using Catharsium.Calendar.Core.Logic.Actions;
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Storage;
+using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Util.IO.Interfaces;
 using Catharsium.Util.Testing.Extensions;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
 
             serviceCollection.AddCalendarCoreLogic(configuration);
             serviceCollection.ReceivedRegistration<ICalendarImporter, CalendarImporter>();
+            serviceCollection.ReceivedRegistration<IEventCreator, EventCreator>();
             serviceCollection.ReceivedRegistration<IEventUpdater, EventUpdater>();
             serviceCollection.ReceivedRegistration<ICalendarStorage>();
             serviceCollection.ReceivedRegistration<ITextEventFilter, TextEventFilter>();
