@@ -1,5 +1,6 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Util.IO.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,11 +8,13 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
 {
     public class ChooseEventStepHandler : IChooseEventStepHandler
     {
+        private readonly IConsole console;
         private readonly IShowEventsStepHandler showEventsStepHandler;
 
 
-        public ChooseEventStepHandler(IShowEventsStepHandler showEventsStepHandler)
+        public ChooseEventStepHandler(IConsole console, IShowEventsStepHandler showEventsStepHandler)
         {
+            this.console = console;
             this.showEventsStepHandler = showEventsStepHandler;
         }
 
@@ -21,8 +24,8 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
             var eventsList = events.ToList();
             this.showEventsStepHandler.ShowEvents(eventsList);
 
-            System.Console.WriteLine("Choose an event:");
-            var input = System.Console.ReadLine();
+            this.console.WriteLine("Choose an event:");
+            var input = this.console.ReadLine();
             return int.TryParse(input, out var index) ? eventsList[index - 1] : null;
         }
     }

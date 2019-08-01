@@ -6,11 +6,13 @@ using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
+using Catharsium.Util.IO.Interfaces;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {
     public class MoveEventActionHandler : IMoveEventActionHandler
     {
+        private readonly IConsole console;
         private readonly ICalendarStorage calendarStorage;
         private readonly ITextEventFilter textFilter;
         private readonly IEqualityComparer<Event> eventComparer;
@@ -19,13 +21,16 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         private readonly IEventUpdateService eventUpdater;
 
 
-        public MoveEventActionHandler(ICalendarStorage calendarStorage,
+        public MoveEventActionHandler(
+            IConsole console,
+            ICalendarStorage calendarStorage,
             ITextEventFilter textFilter,
             IEqualityComparer<Event> eventComparer,
             IChooseCalendarStepHandler chooseACalendarStepHandler,
             IChooseEventStepHandler chooseAnEventStepHandler,
             IEventUpdateService eventUpdater)
         {
+            this.console = console;
             this.calendarStorage = calendarStorage;
             this.textFilter = textFilter;
             this.eventComparer = eventComparer;
@@ -37,11 +42,9 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
 
         public void Run()
         {
-            System.Console.WriteLine("Enter the query:");
-            var query = System.Console.ReadLine();
-
-            System.Console.WriteLine();
-            System.Console.WriteLine("Matching events:");
+            var query = this.console.AskForText("Enter the query:");
+            this.console.WriteLine();
+            this.console.WriteLine("Matching events:");
             var events = this.calendarStorage.LoadAll().ToList();
             var filteredEvents = this.textFilter.ApplyToSummary(events, query).ToList();
             filteredEvents.AddRange(this.textFilter.ApplyToDescription(events, query));
@@ -63,7 +66,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
                 }
             }
             else {
-                System.Console.WriteLine($"No events found for query '{query}'.");
+                this.console.WriteLine($"No events found for query '{query}'.");
             }
         }
     }

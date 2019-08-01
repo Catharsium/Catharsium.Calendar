@@ -3,6 +3,7 @@ using Catharsium.Calendar.UI.Console._Configuration;
 using Catharsium.Calendar.UI.Console.Enums;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.Enums;
+using Catharsium.Util.IO.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,6 +26,7 @@ namespace Catharsium.Calendar.UI.Console
                 .AddGoogleCalendarConsoleUi(configuration)
                 .BuildServiceProvider();
 
+            var console = serviceProvider.GetService<IConsole>();
             var importActionHandler = serviceProvider.GetService<IImportActionHandler>();
             var loadActionHandler = serviceProvider.GetService<ILoadActionHandler>();
             var searchActionHandler = serviceProvider.GetService<ISearchActionHandler>();
@@ -67,14 +69,14 @@ namespace Catharsium.Calendar.UI.Console
             //});
 
             while (true) {
-                System.Console.WriteLine("Choose an action:");
+                console.WriteLine("Choose an action:");
 
                 var actions = Enum.GetValues(typeof(UserActions));
                 foreach (int action in actions) {
-                    System.Console.WriteLine($"[{action}] {Enum.GetName(typeof(UserActions), action)}");
+                    console.WriteLine($"[{action}] {Enum.GetName(typeof(UserActions), action)}");
                 }
 
-                var requestedIndex = System.Console.ReadLine();
+                var requestedIndex = console.AskForText();
 
                 if (requestedIndex == null || requestedIndex.ToLower() == "q") {
                     break;

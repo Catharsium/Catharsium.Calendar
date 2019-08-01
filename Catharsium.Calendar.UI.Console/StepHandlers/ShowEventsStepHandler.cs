@@ -2,6 +2,7 @@
 using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Entities.Models.Enums;
 using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Util.IO.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,13 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
 {
     public class ShowEventsStepHandler : IShowEventsStepHandler
     {
+        private readonly IConsole console;
         private readonly ICalendarService calendarService;
 
 
-        public ShowEventsStepHandler(ICalendarService calendarService)
+        public ShowEventsStepHandler(IConsole console, ICalendarService calendarService)
         {
+            this.console = console;
             this.calendarService = calendarService;
         }
 
@@ -31,46 +34,46 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
                 var calendars = this.calendarService.GetList();
                 var calendar = calendars.FirstOrDefault(c => c.Id == @event.CalendarId);
                 var calendarName = calendar != null ? calendar.Summary : "";
-                SetColor(@event.Category);
-                System.Console.Write($"[{index + 1}]");
-                SetColor(@event.CalendarId);
-                System.Console.WriteLine($" ({calendarName})");
-                System.Console.ResetColor();
-                System.Console.WriteLine($"{@event.Summary} ({when})");
+                this.SetColor(@event.Category);
+                this.console.Write($"[{index + 1}]");
+                this.SetColor(@event.CalendarId);
+                this.console.WriteLine($" ({calendarName})");
+                this.console.ResetColor();
+                this.console.WriteLine($"{@event.Summary} ({when})");
                 index++;
             }
         }
 
 
-        private static void SetColor(Category category)
+        private void SetColor(Category category)
         {
             switch (category) {
                 case Category.PersonalOption:
-                    System.Console.ForegroundColor = ConsoleColor.Cyan;
+                    this.console.ForegroundColor = ConsoleColor.Cyan;
                     break;
                 case Category.PersonalAppointment:
-                    System.Console.ForegroundColor = ConsoleColor.Blue;
+                    this.console.ForegroundColor = ConsoleColor.Blue;
                     break;
                 case Category.PersonalCommitment:
-                    System.Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    this.console.ForegroundColor = ConsoleColor.DarkBlue;
                     break;
                 case Category.ProfessionalOption:
-                    System.Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    this.console.ForegroundColor = ConsoleColor.DarkYellow;
                     break;
                 case Category.ProfessionalAppointment:
-                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    this.console.ForegroundColor = ConsoleColor.Red;
                     break;
                 case Category.ProfessionalCommitment:
-                    System.Console.ForegroundColor = ConsoleColor.DarkRed;
+                    this.console.ForegroundColor = ConsoleColor.DarkRed;
                     break;
                 case Category.Traveling:
-                    System.Console.ForegroundColor = ConsoleColor.DarkGray;
+                    this.console.ForegroundColor = ConsoleColor.DarkGray;
                     break;
                 case Category.Free:
-                    System.Console.ForegroundColor = ConsoleColor.Green;
+                    this.console.ForegroundColor = ConsoleColor.Green;
                     break;
                 case Category.PartnerCommitment:
-                    System.Console.ForegroundColor = ConsoleColor.Magenta;
+                    this.console.ForegroundColor = ConsoleColor.Magenta;
                     break;
                 case Category.Birthday:
                     break;
@@ -86,23 +89,23 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
         }
 
 
-        private static void SetColor(string calendarId)
+        private void SetColor(string calendarId)
         {
             switch (calendarId) {
                 case "bn1j5jeikkv53v8mg687fk1324@group.calendar.google.com":
-                    System.Console.ForegroundColor = ConsoleColor.Yellow;
+                    this.console.ForegroundColor = ConsoleColor.Yellow;
                     break;
                 case "t.w.brachthuizer@gmail.com":
-                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    this.console.ForegroundColor = ConsoleColor.Red;
                     break;
                 case "9ssl6im7hpe1c97rebr4csgstg@group.calendar.google.com":
-                    System.Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    this.console.ForegroundColor = ConsoleColor.DarkGreen;
                     break;
                 case "brachthuizer@gmail.com":
-                    System.Console.ForegroundColor = ConsoleColor.Green;
+                    this.console.ForegroundColor = ConsoleColor.Green;
                     break;
                 default:
-                    System.Console.ForegroundColor = ConsoleColor.White;
+                    this.console.ForegroundColor = ConsoleColor.White;
                     break;
             }
         }

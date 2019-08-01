@@ -3,6 +3,7 @@ using Catharsium.Calendar.UI.Console._Configuration;
 using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
+using Catharsium.Util.IO.Interfaces;
 using Catharsium.Util.Testing.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,6 +44,7 @@ namespace Catharsium.Calendar.UI.Console.Tests._Configuration
             serviceCollection.AddGoogleCalendarConsoleUi(configuration);
             serviceCollection.ReceivedRegistration<ICalendarStorage>();
             serviceCollection.ReceivedRegistration<ICalendarImporter>();
+            serviceCollection.ReceivedRegistration<IConsole>();
         }
     }
 }

@@ -1,19 +1,20 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using System;
-using System.Globalization;
+using Catharsium.Util.IO.Interfaces;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {
     public class CreateEventActionHandler : ICreateEventActionHandler
     {
+        private readonly IConsole console;
         private readonly IChooseCalendarStepHandler chooseCalendarStepHandler;
         private readonly IEventManagementService eventService;
 
 
-        public CreateEventActionHandler(IChooseCalendarStepHandler chooseCalendarStepHandler, IEventManagementService eventService)
+        public CreateEventActionHandler(IConsole console, IChooseCalendarStepHandler chooseCalendarStepHandler, IEventManagementService eventService)
         {
+            this.console = console;
             this.chooseCalendarStepHandler = chooseCalendarStepHandler;
             this.eventService = eventService;
         }
@@ -21,34 +22,22 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
 
         public void Run()
         {
-            System.Console.WriteLine("Enter the summary:");
-            var summary = System.Console.ReadLine();
+            var summary = this.console.AskForText("Enter the summary:");
 
-            System.Console.WriteLine("Enter the start date (yyyy MM dd:");
-            var startDateInput = System.Console.ReadLine();
-            System.Console.WriteLine("Enter the start time (HH mm:");
-            var startTimeInput = System.Console.ReadLine();
-            startTimeInput = startTimeInput.Replace("-", "").Replace(" ", "");
-            startDateInput = startDateInput.Replace("-", "").Replace(" ", "") + startTimeInput;
-            var startDate = DateTime.ParseExact(startDateInput, "yyyyMMddHHmm", CultureInfo.CurrentCulture);
+            var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd HH mm:");
+            var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd HH mm:");
 
-            System.Console.WriteLine("Enter the end date (yyyy MM dd:");
-            var endDateInput = System.Console.ReadLine();
-            System.Console.WriteLine("Enter the end time (HH mm:");
-            var endTimeInput = System.Console.ReadLine();
-            endTimeInput = endTimeInput.Replace("-", "").Replace(" ", "");
-            endDateInput = endDateInput.Replace("-", "").Replace(" ", "") + endTimeInput;
-            var endDate = DateTime.ParseExact(endDateInput, "yyyyMMddHHmm", CultureInfo.CurrentCulture);
+            if (startDate.HasValue && endDate.HasValue) {
+                var newEvent = new Event {
+                    Summary = summary,
+                    Start = new Date { Value = startDate.Value },
+                    End = new Date { Value = endDate.Value }
+                };
 
-            var newEvent = new Event {
-                Summary = summary,
-                Start = new Date { Value = startDate },
-                End = new Date { Value = endDate }
-            };
-
-            var newCalendar = this.chooseCalendarStepHandler.ChooseACalendar();
-            if (newEvent != null && newCalendar != null) {
-                this.eventService.CreateEvent(newCalendar.Id, newEvent);
+                var newCalendar = this.chooseCalendarStepHandler.ChooseACalendar();
+                if (newEvent != null && newCalendar != null) {
+                    this.eventService.CreateEvent(newCalendar.Id, newEvent);
+                }
             }
         }
     }

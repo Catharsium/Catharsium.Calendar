@@ -1,16 +1,19 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Util.IO.Interfaces;
 using System.Linq;
 
 namespace Catharsium.Calendar.UI.Console.StepHandlers
 {
     public class ChooseCalendarStepHandler : IChooseCalendarStepHandler
     {
+        private readonly IConsole console;
         private readonly ICalendarService calendarService;
 
 
-        public ChooseCalendarStepHandler(ICalendarService calendarService)
-        {
+        public ChooseCalendarStepHandler(IConsole console, ICalendarService calendarService)
+        { 
+            this.console = console;
             this.calendarService = calendarService;
         }
 
@@ -18,17 +21,17 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
         public Core.Entities.Models.Calendar ChooseACalendar()
         {
             var calendars = this.calendarService.GetList().ToList();
-            System.Console.WriteLine("Choose a calendar:");
+            this.console.WriteLine("Choose a calendar:");
             for (var i = 0; i < calendars.Count; i++) {
-                System.Console.WriteLine($"[{i + 1}] {calendars[i].Summary}");
+                this.console.WriteLine($"[{i + 1}] {calendars[i].Summary}");
             }
 
-            var requestedIndex = System.Console.ReadLine();
-            if (int.TryParse(requestedIndex, out var calendarIndex)) {
-                return calendars[calendarIndex - 1];
+            var calendarIndex = this.console.AskForInt();
+            if (calendarIndex.HasValue) {
+                return calendars[calendarIndex.Value - 1];
             }
 
-            System.Console.WriteLine("No valid calendar chosen.");
+            this.console.WriteLine("No valid calendar chosen.");
 
             return null;
         }
