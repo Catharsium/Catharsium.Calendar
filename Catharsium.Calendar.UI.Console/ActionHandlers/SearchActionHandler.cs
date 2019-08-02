@@ -42,7 +42,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
             filteredEvents.AddRange(this.textFilter.ApplyToDescription(events, query));
             filteredEvents.AddRange(this.textFilter.ApplyToLocation(events, query));
             filteredEvents = filteredEvents
-                .Distinct(eventComparer)
+                .Distinct(this.eventComparer)
                 .OrderBy(e => e.End.Value)
                 .ToList();
             var duration = TotalTimeCalculator.CalculateTotalTime(filteredEvents);
