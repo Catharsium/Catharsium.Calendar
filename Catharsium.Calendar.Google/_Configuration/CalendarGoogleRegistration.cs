@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
-using Catharsium.Calendar.Core.Entities.Interfaces;
+using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Google._Configuration.AutoMapper;
 using Catharsium.Calendar.Google.Client;
 using Catharsium.Calendar.Google.Client.Services;
+using Catharsium.Calendar.Google.Interfaces;
 using Catharsium.Util.Configuration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,12 +16,14 @@ namespace Catharsium.Calendar.Google._Configuration
         {
             var configuration = config.Load<CalendarGoogleConfiguration>();
 
-            services.AddScoped<ICalendarClientFactory>(s => new GoogleCalendarClientFactory(configuration.CredentialsPath, configuration.ApplicationName, configuration.UserName));
+            services.AddScoped<ICalendarClientFactory>(s => new GoogleCalendarClientFactory(configuration.Credentials));
             services.AddScoped<ICalendarService, GoogleCalendarService>();
-            services.AddScoped<IEventService, GoogleEventService>();
+            services.AddScoped<IEventManagementService, GoogleEventManagementService>();
+            services.AddScoped<IEventUpdateService, GoogleEventUpdateService>();
 
             var mappingConfig = new MapperConfiguration(mc => {
-                mc.AddProfile(new MappingProfile());
+                mc.AddProfile(new GoogleToLocalMappingProfile());
+                mc.AddProfile(new LocalToGoogleMappingProfile());
             });
 
             var mapper = mappingConfig.CreateMapper();

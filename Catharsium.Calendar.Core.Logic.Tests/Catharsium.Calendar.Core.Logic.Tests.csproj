@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Catharsium.Util.Testing" Version="1.2.4" />
+    <PackageReference Include="Catharsium.Util.Testing" Version="1.2.12" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
@@ -15,10 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Catharsium.Calendar.Core.Logic\Catharsium.Calendar.Core.Logic.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Storage\JsonEventRepositoryTests\" />
   </ItemGroup>
 
 </Project>
