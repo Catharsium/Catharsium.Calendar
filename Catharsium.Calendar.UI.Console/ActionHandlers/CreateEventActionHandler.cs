@@ -27,17 +27,19 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
             var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd HH mm:");
             var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd HH mm:");
 
-            if (startDate.HasValue && endDate.HasValue) {
-                var newEvent = new Event {
-                    Summary = summary,
-                    Start = new Date { Value = startDate.Value },
-                    End = new Date { Value = endDate.Value }
-                };
+            if (!startDate.HasValue || !endDate.HasValue) {
+                return;
+            }
 
-                var newCalendar = this.chooseCalendarStepHandler.ChooseACalendar();
-                if (newEvent != null && newCalendar != null) {
-                    this.eventService.CreateEvent(newCalendar.Id, newEvent);
-                }
+            var newEvent = new Event {
+                Summary = summary,
+                Start = new Date {Value = startDate.Value},
+                End = new Date {Value = endDate.Value}
+            };
+
+            var newCalendar = this.chooseCalendarStepHandler.Run();
+            if (newCalendar != null) {
+                this.eventService.CreateEvent(newCalendar.Id, newEvent);
             }
         }
     }

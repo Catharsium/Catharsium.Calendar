@@ -60,7 +60,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
                     return;
                 }
 
-                var newCalendar = this.chooseACalendarStepHandler.ChooseACalendar();
+                var newCalendar = this.chooseACalendarStepHandler.Run();
                 if (newCalendar != null) {
                     this.eventUpdater.Move(@event, @event.CalendarId, newCalendar.Id);
                 }

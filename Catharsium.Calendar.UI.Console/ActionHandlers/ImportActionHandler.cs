@@ -19,7 +19,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
 
         public void Run()
         {
-            var calendar = this.chooseACalendarStepHandler.ChooseACalendar();
+            var calendar = this.chooseACalendarStepHandler.Run();
             if (calendar == null) {
                 return;
             }
