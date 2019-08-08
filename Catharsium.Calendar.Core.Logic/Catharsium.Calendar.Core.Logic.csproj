@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Catharsium.Util.Configuration" Version="1.2.12" />
     <PackageReference Include="Catharsium.Util.IO" Version="1.2.12" />
-    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.40.2.1643" />
+    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.40.3.1669" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
