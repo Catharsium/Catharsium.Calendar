@@ -108,6 +108,9 @@ namespace Catharsium.Calendar.UI.Console
                     case UserActions.Move:
                         moveEventActionHandler.Run();
                         break;
+                    case UserActions.TemplatedCreate:
+                        //new TemplatedEventGenerator().Run();
+                        break;
                     case UserActions.Quit:
                         break;
                     default:
