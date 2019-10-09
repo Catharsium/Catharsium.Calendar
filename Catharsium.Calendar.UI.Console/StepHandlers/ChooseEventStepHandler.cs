@@ -25,8 +25,8 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
             this.showEventsStepHandler.ShowEvents(eventsList);
 
             this.console.WriteLine("Choose an event:");
-            var input = this.console.ReadLine();
-            return int.TryParse(input, out var index) ? eventsList[index - 1] : null;
+            var input = this.console.AskForInt();
+            return input.HasValue ? eventsList[input.Value - 1] : null;
         }
     }
 }

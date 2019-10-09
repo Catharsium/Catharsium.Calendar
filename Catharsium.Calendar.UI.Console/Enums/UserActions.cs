@@ -8,6 +8,7 @@
         Search,
         Create,
         Delete,
-        Move
+        Move,
+        TemplatedCreate
     }
 }

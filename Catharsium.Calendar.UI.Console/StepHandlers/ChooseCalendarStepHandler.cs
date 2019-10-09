@@ -18,7 +18,7 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
         }
 
 
-        public Core.Entities.Models.Calendar ChooseACalendar()
+        public Core.Entities.Models.Calendar Run()
         {
             var calendars = this.calendarService.GetList().ToList();
             this.console.WriteLine("Choose a calendar:");

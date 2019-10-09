@@ -2,6 +2,6 @@
 {
     public interface IChooseCalendarStepHandler
     {
-        Core.Entities.Models.Calendar ChooseACalendar();
+        Core.Entities.Models.Calendar Run();
     }
 }
