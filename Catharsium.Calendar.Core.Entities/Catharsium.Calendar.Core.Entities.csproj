@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Catharsium.Util" Version="1.2.12" />
-    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.40.3.1669" />
+    <PackageReference Include="Catharsium.Util" Version="2.1.1" />
+    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.42.0.1795" />
   </ItemGroup>
 
 </Project>

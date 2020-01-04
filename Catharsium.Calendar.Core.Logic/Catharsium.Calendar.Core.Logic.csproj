@@ -6,13 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Catharsium.Util.Configuration" Version="1.2.12" />
-    <PackageReference Include="Catharsium.Util.IO" Version="1.2.12" />
-    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.40.3.1669" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Catharsium.Util.Configuration" Version="2.1.1" />
+    <PackageReference Include="Catharsium.Util.IO" Version="2.1.1" />
+    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.42.0.1795" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
