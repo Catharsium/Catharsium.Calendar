@@ -8,10 +8,10 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Catharsium.Util" Version="2.1.1" />
-    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.42.0.1795" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.0" />
+    <PackageReference Include="Catharsium.Util" Version="2.1.5.1" />
+    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.43.0.1837" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
