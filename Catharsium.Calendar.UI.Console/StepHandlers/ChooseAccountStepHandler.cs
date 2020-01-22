@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Google.Interfaces;
+﻿using Catharsium.Calendar.Data.Google.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.IO.Interfaces;
 
@@ -25,7 +25,7 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
             }
 
             var accountIndex = this.console.AskForInt();
-            if (accountIndex.HasValue && accountIndex  > 0 && accountIndex <= this.userNames.Length) {
+            if (accountIndex.HasValue && accountIndex > 0 && accountIndex <= this.userNames.Length) {
                 return this.userNames[accountIndex.Value - 1];
             }
 

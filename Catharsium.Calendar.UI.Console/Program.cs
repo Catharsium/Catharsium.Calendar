@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Google.Interfaces;
+﻿using Catharsium.Calendar.Data.Google.Interfaces;
 using Catharsium.Calendar.UI.Console._Configuration;
 using Catharsium.Calendar.UI.Console.Enums;
 using Catharsium.Calendar.UI.Console.Interfaces;

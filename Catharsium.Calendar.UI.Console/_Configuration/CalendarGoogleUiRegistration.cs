@@ -1,5 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Logic._Configuration;
-using Catharsium.Calendar.Google._Configuration;
+using Catharsium.Calendar.Data.Google._Configuration;
 using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;

@@ -1,17 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2016
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Google", "Catharsium.Calendar.Google\Catharsium.Calendar.Google.csproj", "{563F6B8C-74E2-489F-9219-F1D1EC70005D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Google.Tests", "Catharsium.Calendar.Google.Tests\Catharsium.Calendar.Google.Tests.csproj", "{6D21E93D-C696-4B50-8BDF-D34CA15AFCD9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.UI.Console", "Catharsium.Calendar.UI.Console\Catharsium.Calendar.UI.Console.csproj", "{4313F93E-D769-4F55-BC55-C7F432848965}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Core.Entities", "Catharsium.Calendar.Core.Entities\Catharsium.Calendar.Core.Entities.csproj", "{7CFEC0AD-8AE1-4E97-8FE8-6AFC02074CA1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Google", "Google", "{430535B7-7A0C-4699-ACBF-249EE3B81386}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{430535B7-7A0C-4699-ACBF-249EE3B81386}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7AA41329-54B0-41BE-8BA1-6B082B4239E8}"
 EndProject
@@ -25,20 +21,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Core.Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Core.Logic.Tests", "Catharsium.Calendar.Core.Logic.Tests\Catharsium.Calendar.Core.Logic.Tests.csproj", "{45F9AB5F-F463-442A-A6A7-FBA29ABEF5F7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Data.Google", "Catharsium.Calendar.Data.Google\Catharsium.Calendar.Data.Google.csproj", "{E4592DD6-3AF4-4E7B-86C7-12099E25B33E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Data.Google.Tests", "Catharsium.Calendar.Data.Google.Tests\Catharsium.Calendar.Data.Google.Tests.csproj", "{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{563F6B8C-74E2-489F-9219-F1D1EC70005D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{563F6B8C-74E2-489F-9219-F1D1EC70005D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{563F6B8C-74E2-489F-9219-F1D1EC70005D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{563F6B8C-74E2-489F-9219-F1D1EC70005D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D21E93D-C696-4B50-8BDF-D34CA15AFCD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D21E93D-C696-4B50-8BDF-D34CA15AFCD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D21E93D-C696-4B50-8BDF-D34CA15AFCD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D21E93D-C696-4B50-8BDF-D34CA15AFCD9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4313F93E-D769-4F55-BC55-C7F432848965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4313F93E-D769-4F55-BC55-C7F432848965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4313F93E-D769-4F55-BC55-C7F432848965}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,19 +55,27 @@ Global
 		{45F9AB5F-F463-442A-A6A7-FBA29ABEF5F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45F9AB5F-F463-442A-A6A7-FBA29ABEF5F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45F9AB5F-F463-442A-A6A7-FBA29ABEF5F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4592DD6-3AF4-4E7B-86C7-12099E25B33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4592DD6-3AF4-4E7B-86C7-12099E25B33E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4592DD6-3AF4-4E7B-86C7-12099E25B33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4592DD6-3AF4-4E7B-86C7-12099E25B33E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{563F6B8C-74E2-489F-9219-F1D1EC70005D} = {430535B7-7A0C-4699-ACBF-249EE3B81386}
-		{6D21E93D-C696-4B50-8BDF-D34CA15AFCD9} = {430535B7-7A0C-4699-ACBF-249EE3B81386}
 		{4313F93E-D769-4F55-BC55-C7F432848965} = {EC8BD8AD-F022-4870-8498-93817304D40C}
 		{7CFEC0AD-8AE1-4E97-8FE8-6AFC02074CA1} = {7AA41329-54B0-41BE-8BA1-6B082B4239E8}
 		{C0644963-D272-4241-BEAB-A10F5DD8CC51} = {7AA41329-54B0-41BE-8BA1-6B082B4239E8}
 		{28545929-15FE-42E6-B374-AED3281FDF78} = {EC8BD8AD-F022-4870-8498-93817304D40C}
 		{98A3312F-4086-4BC0-8040-C687053C255C} = {7AA41329-54B0-41BE-8BA1-6B082B4239E8}
 		{45F9AB5F-F463-442A-A6A7-FBA29ABEF5F7} = {7AA41329-54B0-41BE-8BA1-6B082B4239E8}
+		{E4592DD6-3AF4-4E7B-86C7-12099E25B33E} = {430535B7-7A0C-4699-ACBF-249EE3B81386}
+		{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1} = {430535B7-7A0C-4699-ACBF-249EE3B81386}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63765E0D-6C23-4897-9F07-742C7D01AE80}

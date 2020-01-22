@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Google.Interfaces;
+﻿using Catharsium.Calendar.Data.Google.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
 using Catharsium.Util.IO.Interfaces;
 using Catharsium.Util.Testing;
