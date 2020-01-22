@@ -6,21 +6,14 @@ namespace Catharsium.Calendar.Core.Logic.Filters
 {
     public class EndDateEventFilter : IFilter<Event>
     {
-        private readonly DateTime from;
-        private readonly DateTime to;
-
-
-        public EndDateEventFilter(DateTime from, DateTime to)
-        {
-            this.from = from;
-            this.to = to;
-        }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
 
 
         public bool Includes(Event item)
         {
-            var fromDate = this.from;
-            var untilDate = this.to;
+            var fromDate = this.From;
+            var untilDate = this.To;
 
             if (item.End.HasTime) {
                 return item.End.Value >= fromDate && item.End.Value <= untilDate;

@@ -27,10 +27,10 @@ namespace Catharsium.Calendar.Core.Logic.Storage
         {
             var directory = this.fileFactory.CreateDirectory($@"{this.options.SerializationFolder}");
             var result = new List<Event>();
-            foreach (var file in directory.GetFiles())
-            {
+            foreach (var file in directory.GetFiles()) {
                 result.AddRange(this.Load(file));
             }
+
             return result;
         }
 
@@ -44,21 +44,17 @@ namespace Catharsium.Calendar.Core.Logic.Storage
 
         private IEnumerable<Event> Load(IFile file)
         {
-            using (var textReader = new JsonTextReader(file.OpenText()))
-            {
-                return (IEnumerable<Event>)this.jsonSerializer.Deserialize(textReader, typeof(IEnumerable<Event>));
-            }
+            using var textReader = new JsonTextReader(file.OpenText());
+            return (IEnumerable<Event>)this.jsonSerializer.Deserialize(textReader, typeof(IEnumerable<Event>));
         }
 
 
         public void Store(IEnumerable<Event> events, string fileName)
         {
             var file = this.fileFactory.CreateFile($@"{this.options.SerializationFolder}\{fileName}.json");
-            using (var streamWriter = new StreamWriter(file.OpenWrite()))
-            using (var textWriter = new JsonTextWriter(streamWriter))
-            {
-                this.jsonSerializer.Serialize(textWriter, events);
-            }
+            using var streamWriter = new StreamWriter(file.OpenWrite());
+            using var textWriter = new JsonTextWriter(streamWriter);
+            this.jsonSerializer.Serialize(textWriter, events);
         }
     }
 }

@@ -33,6 +33,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
             services.AddScoped<IFilter<Event>, DescriptionEventFilter>();
             services.AddScoped<IFilter<Event>, LocationEventFilter>();
             services.AddScoped<IFilter<Event>, SummaryEventFilter>();
+            services.AddScoped<IEventFilterFactory, EventFilterFactory>();
 
             services.AddScoped<IEqualityComparer<Event>, EventEqualityComparer>();
 

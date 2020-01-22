@@ -27,11 +27,13 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
             serviceCollection.AddCalendarCoreLogic(configuration);
             serviceCollection.ReceivedRegistration<ICalendarImporter, CalendarImporter>();
             serviceCollection.ReceivedRegistration<ICalendarStorage>();
+
             serviceCollection.ReceivedRegistration<IFilter<Event>, StartDateEventFilter>();
             serviceCollection.ReceivedRegistration<IFilter<Event>, EndDateEventFilter>();
             serviceCollection.ReceivedRegistration<IFilter<Event>, DescriptionEventFilter>();
             serviceCollection.ReceivedRegistration<IFilter<Event>, LocationEventFilter>();
             serviceCollection.ReceivedRegistration<IFilter<Event>, SummaryEventFilter>();
+            serviceCollection.ReceivedRegistration<IEventFilterFactory, EventFilterFactory>();
 
             serviceCollection.ReceivedRegistration<IEqualityComparer<Event>, EventEqualityComparer>();
         }

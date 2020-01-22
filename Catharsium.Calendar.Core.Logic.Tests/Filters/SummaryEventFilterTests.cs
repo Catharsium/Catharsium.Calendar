@@ -16,7 +16,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         [TestInitialize]
         public void SetupProperties()
         {
-            this.SetDependency(this.Query, "query");
+            this.Target.Query = this.Query;
         }
 
         #endregion
@@ -24,7 +24,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         [TestMethod]
         public void Includes_SummaryContainsQuery_ReturnsTrue()
         {
-            this.SetDependency(true, "ignoreCase");
+            this.Target.IgnoreCase = true;
             var @event = new Event {
                 Summary = "My summary " + this.Query.ToLower()
             };
@@ -37,7 +37,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         [TestMethod]
         public void Includes_SummaryWithoutQuery_ReturnsFalse()
         {
-            this.SetDependency(true, "ignoreCase");
+            this.Target.IgnoreCase = true;
             var @event = new Event {
                 Summary = this.Query.Substring(1)
             };
@@ -50,7 +50,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         [TestMethod]
         public void Includes_IgnoreCase_SummaryContainsQuery_ReturnsTrue()
         {
-            this.SetDependency(false, "ignoreCase");
+            this.Target.IgnoreCase = false;
             var @event = new Event {
                 Summary = "My summary " + this.Query
             };
@@ -63,7 +63,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         [TestMethod]
         public void Includes_IgnoreCase_SummaryWithUpperCaseQuery_ReturnsFalse()
         {
-            this.SetDependency(false, "ignoreCase");
+            this.Target.IgnoreCase = false;
             var @event = new Event {
                 Summary = "My summary " + this.Query.ToUpper()
             };
@@ -76,7 +76,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         [TestMethod]
         public void Includes_IgnoreCase_SummaryWithoutQuery_ReturnsFalse()
         {
-            this.SetDependency(false, "ignoreCase");
+            this.Target.IgnoreCase = false;
             var @event = new Event {
                 Summary = this.Query.ToLower().Substring(1)
             };

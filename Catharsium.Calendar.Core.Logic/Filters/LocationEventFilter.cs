@@ -5,24 +5,17 @@ namespace Catharsium.Calendar.Core.Logic.Filters
 {
     public class LocationEventFilter : IFilter<Event>
     {
-        private readonly string query;
-        private readonly bool ignoreCase;
-
-
-        public LocationEventFilter(string query, bool ignoreCase = true)
-        {
-            this.query = query;
-            this.ignoreCase = ignoreCase;
-        }
+        public string Query { get; set; }
+        public bool IgnoreCase { get; set; }
 
 
         public bool Includes(Event item)
         {
-            if (this.ignoreCase) {
-                return item.Location != null && item.Location.ToLower().Contains(this.query.ToLower());
+            if (this.IgnoreCase) {
+                return item.Location != null && item.Location.ToLower().Contains(this.Query.ToLower());
             }
 
-            return item.Location != null && item.Location.Contains(this.query);
+            return item.Location != null && item.Location.Contains(this.Query);
         }
     }
 }

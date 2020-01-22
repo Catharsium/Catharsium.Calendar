@@ -20,8 +20,8 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         {
             this.FromDate = DateTime.Now.AddDays(-1);
             this.ToDate = DateTime.Now.AddDays(1);
-            this.SetDependency(this.FromDate, "from");
-            this.SetDependency(this.ToDate, "to");
+            this.Target.From = this.FromDate;
+            this.Target.To = this.ToDate;
         }
 
         #endregion
