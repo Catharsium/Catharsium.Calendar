@@ -2,7 +2,7 @@
 using Catharsium.Util.Filters;
 using System;
 
-namespace Catharsium.Calendar.Core.Logic.Filters
+namespace Catharsium.Calendar.Core.Logic.Interfaces
 {
     public interface IEventFilterFactory
     {

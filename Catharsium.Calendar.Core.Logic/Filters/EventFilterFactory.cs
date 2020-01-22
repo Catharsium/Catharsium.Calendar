@@ -1,4 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
+using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Util.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using System;
