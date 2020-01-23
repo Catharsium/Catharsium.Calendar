@@ -1,6 +1,7 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Entities.Models.Enums;
+using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.IO.Interfaces;
 using System;
@@ -13,12 +14,14 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
     {
         private readonly IConsole console;
         private readonly ICalendarService calendarService;
+        private readonly IConsoleColorFactory consoleColorFactory;
 
 
-        public ShowEventsStepHandler(IConsole console, ICalendarService calendarService)
+        public ShowEventsStepHandler(IConsole console, ICalendarService calendarService, IConsoleColorFactory consoleColorFactory)
         {
             this.console = console;
             this.calendarService = calendarService;
+            this.consoleColorFactory = consoleColorFactory;
         }
 
 
@@ -34,7 +37,7 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
                 var calendars = this.calendarService.GetList();
                 var calendar = calendars.FirstOrDefault(c => c.Id == @event.CalendarId);
                 var calendarName = calendar != null ? calendar.Summary : "";
-                this.SetColor(@event.Category);
+                this.console.ForegroundColor = this.consoleColorFactory.GetById(@event.CalendarId, @event.ColorId);
                 this.console.Write($"[{index + 1}]");
                 this.SetColor(@event.CalendarId);
                 this.console.WriteLine($" ({calendarName})");

@@ -3,6 +3,7 @@ using Catharsium.Calendar.Data.Google._Configuration;
 using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
+using Catharsium.Util._Configuration;
 using Catharsium.Util.Configuration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,8 @@ namespace Catharsium.Calendar.UI.Console._Configuration
         public static IServiceCollection AddGoogleCalendarConsoleUi(this IServiceCollection services, IConfiguration config)
         {
             var configuration = config.Load<CalendarGoogleUiConfiguration>();
+
+            services.AddCatharsiumUtilities(config);
 
             services.AddGoogleCalendar(config);
             services.AddCalendarCoreLogic(config);

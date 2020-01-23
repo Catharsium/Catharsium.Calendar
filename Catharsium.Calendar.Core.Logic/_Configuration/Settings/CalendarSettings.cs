@@ -2,7 +2,7 @@
 {
     public class CalendarSettings
     {
-        public string Key { get; set; }
+        public string CalendarId { get; set; }
         public CalendarColor[] CalendarColors { get; set; }
     }
 }

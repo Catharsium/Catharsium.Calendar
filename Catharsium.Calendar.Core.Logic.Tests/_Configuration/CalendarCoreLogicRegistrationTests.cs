@@ -3,6 +3,7 @@ using Catharsium.Calendar.Core.Entities.Models.Comparers;
 using Catharsium.Calendar.Core.Logic._Configuration;
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Calendar.Core.Logic.Interfaces;
+using Catharsium.Calendar.Core.Logic.Presentation;
 using Catharsium.Calendar.Core.Logic.Storage;
 using Catharsium.Util.Filters;
 using Catharsium.Util.IO.Interfaces;
@@ -25,8 +26,9 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
             var configuration = Substitute.For<IConfiguration>();
 
             serviceCollection.AddCalendarCoreLogic(configuration);
-            serviceCollection.ReceivedRegistration<ICalendarImporter, CalendarImporter>();
             serviceCollection.ReceivedRegistration<ICalendarStorage>();
+            serviceCollection.ReceivedRegistration<ICalendarImporter, CalendarImporter>();
+            serviceCollection.ReceivedRegistration<IConsoleColorFactory, ConsoleColorFactory>();
 
             serviceCollection.ReceivedRegistration<IFilter<Event>, StartDateEventFilter>();
             serviceCollection.ReceivedRegistration<IFilter<Event>, EndDateEventFilter>();

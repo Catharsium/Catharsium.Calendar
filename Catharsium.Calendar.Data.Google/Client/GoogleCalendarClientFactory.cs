@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Data.Google._Configuration;
+﻿using Catharsium.Calendar.Data.Google._Configuration.Settings;
 using Catharsium.Calendar.Data.Google.Interfaces;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Catharsium.Calendar.Data.Google._Configuration.Settings;
 
 namespace Catharsium.Calendar.Data.Google.Client
 {
