@@ -1,5 +1,4 @@
-﻿using Catharsium.Calendar.Data.Google.Interfaces;
-using Catharsium.Calendar.UI.Console._Configuration;
+﻿using Catharsium.Calendar.UI.Console._Configuration;
 using Catharsium.Calendar.UI.Console.Enums;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.Enums;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using Catharsium.Calendar.Data.Google.Interfaces;
 
 namespace Catharsium.Calendar.UI.Console
 {

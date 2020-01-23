@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Catharsium.Calendar.Core.Entities.Interfaces.Filters;
-using Catharsium.Calendar.Core.Entities.Interfaces.Services;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Calendar.UI.Console.StepHandlers;
+using Catharsium.Util.Filters;
 using Catharsium.Util.IO.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {
@@ -14,7 +13,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
     {
         private readonly IConsole console;
         private readonly ICalendarStorage calendarStorage;
-        private readonly ITextEventFilter textFilter;
+        private readonly IEventFilterFactory eventFilterFactory;
         private readonly IEqualityComparer<Event> eventComparer;
         private readonly IChooseCalendarStepHandler chooseACalendarStepHandler;
         private readonly IChooseEventStepHandler chooseAnEventStepHandler;
@@ -24,7 +23,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         public MoveEventActionHandler(
             IConsole console,
             ICalendarStorage calendarStorage,
-            ITextEventFilter textFilter,
+            IEventFilterFactory eventFilterFactory,
             IEqualityComparer<Event> eventComparer,
             IChooseCalendarStepHandler chooseACalendarStepHandler,
             IChooseEventStepHandler chooseAnEventStepHandler,
@@ -32,7 +31,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         {
             this.console = console;
             this.calendarStorage = calendarStorage;
-            this.textFilter = textFilter;
+            this.eventFilterFactory = eventFilterFactory;
             this.eventComparer = eventComparer;
             this.chooseACalendarStepHandler = chooseACalendarStepHandler;
             this.chooseAnEventStepHandler = chooseAnEventStepHandler;
@@ -46,9 +45,11 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
             this.console.WriteLine();
             this.console.WriteLine("Matching events:");
             var events = this.calendarStorage.LoadAll().ToList();
-            var filteredEvents = this.textFilter.ApplyToSummary(events, query).ToList();
-            filteredEvents.AddRange(this.textFilter.ApplyToDescription(events, query));
-            filteredEvents.AddRange(this.textFilter.ApplyToLocation(events, query));
+            var summaryFilter = this.eventFilterFactory.CreateSummaryFilter(query);
+            var locationFilter = this.eventFilterFactory.CreateLocationFilter(query);
+            var descriptionFilter = this.eventFilterFactory.CreateDescriptionFilter(query);
+            var orFilter = this.eventFilterFactory.CreateOrFilter(summaryFilter, locationFilter, descriptionFilter);
+            var filteredEvents = events.Include(orFilter).ToList();
             filteredEvents = filteredEvents
                 .Distinct(this.eventComparer)
                 .OrderBy(e => e.End.Value)
