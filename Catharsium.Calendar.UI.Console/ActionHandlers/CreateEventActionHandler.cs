@@ -23,12 +23,15 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         public void Run()
         {
             var summary = this.console.AskForText("Enter the summary:");
-
             var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd HH mm:");
             var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd HH mm:");
 
-            if (!startDate.HasValue || !endDate.HasValue) {
+            if (!startDate.HasValue) {
                 return;
+            }
+
+            if (!endDate.HasValue) {
+                endDate = startDate.Value.AddMinutes(30);
             }
 
             var newEvent = new Event {

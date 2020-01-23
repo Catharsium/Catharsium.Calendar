@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Catharsium.Calendar.Data.Google._Configuration.Settings;
 
 namespace Catharsium.Calendar.Data.Google.Client
 {

@@ -23,7 +23,6 @@ namespace Catharsium.Calendar.UI.Console.Tests.ActionHandlers
         [TestInitialize]
         public void SetupProperties()
         {
-            ;
             this.Summary = "My summary";
             this.StartDate = DateTime.Now;
             this.EndDate = DateTime.Now.AddHours(1);
@@ -65,7 +64,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.ActionHandlers
 
 
         [TestMethod]
-        public void Run_InvalidEndDate_DoesNotCreateEvent()
+        public void Run_InvalidEndDate_UsesStartDatePlus30Minutes()
         {
             this.GetDependency<IConsole>().AskForText(Arg.Any<string>()).Returns(this.Summary);
             this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("start date"))).Returns(this.StartDate);
@@ -73,8 +72,12 @@ namespace Catharsium.Calendar.UI.Console.Tests.ActionHandlers
             var calendar = new Core.Entities.Models.Calendar {Id = "My calendar id"};
             this.GetDependency<IChooseCalendarStepHandler>().Run().Returns(calendar);
 
-            this.Target.Run();
-            this.GetDependency<IEventManagementService>().DidNotReceive().CreateEvent(Arg.Any<string>(), Arg.Any<Event>());
+            this.Target.Run(); 
+            this.GetDependency<IEventManagementService>().Received().CreateEvent(
+                calendar.Id,
+                Arg.Is<Event>(e => e.Summary == this.Summary &&
+                                   e.Start.Value == this.StartDate &&
+                                   e.End.Value == this.StartDate.AddMinutes(30)));
         }
 
 

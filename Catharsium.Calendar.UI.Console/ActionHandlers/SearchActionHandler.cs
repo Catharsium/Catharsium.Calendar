@@ -1,11 +1,10 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Util.Filters;
 using Catharsium.Util.IO.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using Catharsium.Calendar.Core.Logic.Filters;
-using Catharsium.Util.Filters;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {

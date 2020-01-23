@@ -1,4 +1,4 @@
-﻿namespace Catharsium.Calendar.Data.Google._Configuration
+﻿namespace Catharsium.Calendar.Data.Google._Configuration.Settings
 {
     public class Credentials
     {
