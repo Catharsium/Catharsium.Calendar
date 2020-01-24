@@ -22,15 +22,10 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Presentation
         public void GetById_ValidId_ReturnsColorFromConfiguration()
         {
             var configuration = new CalendarCoreLogicConfiguration {
-                CalendarSettings = new[] {
-                    new CalendarSettings {
-                        CalendarId = CalendarKey,
-                        CalendarColors = new[] {
-                            new CalendarColor {
-                                Id = ColorId,
-                                ConsoleColor = Color.ToString()
-                            }
-                        }
+                CalendarColors = new[] {
+                    new CalendarColor {
+                        Id = ColorId,
+                        ConsoleColor = Color.ToString()
                     }
                 }
             };
@@ -42,41 +37,13 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Presentation
 
 
         [TestMethod]
-        public void GetById_InvalidCalendarKey_ReturnsDefaultColor()
-        {
-            var configuration = new CalendarCoreLogicConfiguration {
-                CalendarSettings = new[] {
-                    new CalendarSettings {
-                        CalendarId = CalendarKey + "Other",
-                        CalendarColors = new[] {
-                            new CalendarColor {
-                                Id = ColorId,
-                                ConsoleColor = Color.ToString()
-                            }
-                        }
-                    }
-                }
-            };
-            this.SetDependency(configuration);
-
-            var actual = this.Target.GetById(CalendarKey, ColorId);
-            Assert.AreEqual(ConsoleColor.White, actual);
-        }
-
-
-        [TestMethod]
         public void GetById_InvalidColorId_ReturnsDefaultColor()
         {
             var configuration = new CalendarCoreLogicConfiguration {
-                CalendarSettings = new[] {
-                    new CalendarSettings {
-                        CalendarId = CalendarKey,
-                        CalendarColors = new[] {
-                            new CalendarColor {
-                                Id = ColorId + 1,
-                                ConsoleColor = Color.ToString()
-                            }
-                        }
+                CalendarColors = new[] {
+                    new CalendarColor {
+                        Id = ColorId + 1,
+                        ConsoleColor = Color.ToString()
                     }
                 }
             };

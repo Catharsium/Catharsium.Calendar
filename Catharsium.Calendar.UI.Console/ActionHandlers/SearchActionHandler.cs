@@ -42,7 +42,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
             var locationFilter = this.eventFilterFactory.CreateLocationFilter(query);
             var summaryFilter = this.eventFilterFactory.CreateSummaryFilter(query);
             var orFilter = this.eventFilterFactory.CreateOrFilter(descriptionFilter, locationFilter, summaryFilter);
-            var filteredEvents = events.ToList();//.Include(orFilter).ToList();
+            var filteredEvents = events.Include(orFilter).ToList();
             filteredEvents = filteredEvents
                 .Distinct(this.eventComparer)
                 .OrderBy(e => e.End.Value)

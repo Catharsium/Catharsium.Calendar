@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Catharsium.Calendar.Core.Logic.Filters
 {
-    public class OrFilter : IFilter<Event>
+    public class OrEventFilter : IFilter<Event>
     {
         public List<IFilter<Event>> Filters { get; set; }
 

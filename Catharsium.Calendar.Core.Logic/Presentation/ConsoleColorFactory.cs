@@ -19,8 +19,7 @@ namespace Catharsium.Calendar.Core.Logic.Presentation
 
         public ConsoleColor GetById(string calendarId, string colorId)
         {
-            var calendarSettings = this.configuration.CalendarSettings.FirstOrDefault(c => c.CalendarId == calendarId);
-            var calendarColor = calendarSettings?.CalendarColors.FirstOrDefault(c => c.Id == colorId);
+            var calendarColor = this.configuration.CalendarColors.FirstOrDefault(c => c.Id == colorId);
             return calendarColor?.ConsoleColor.ParseEnum<ConsoleColor>() ?? ConsoleColor.White;
         }
     }

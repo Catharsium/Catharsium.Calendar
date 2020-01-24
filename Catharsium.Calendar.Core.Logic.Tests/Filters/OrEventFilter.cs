@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Catharsium.Calendar.Core.Logic.Tests.Filters
 {
     [TestClass]
-    public class OrFilterTests : TestFixture<OrFilter>
+    public class OrFilterTests : TestFixture<OrEventFilter>
     {
         #region Fixture
 

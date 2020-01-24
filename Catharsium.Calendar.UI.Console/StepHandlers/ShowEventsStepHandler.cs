@@ -1,6 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.Core.Entities.Models.Enums;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.IO.Interfaces;
@@ -44,50 +43,6 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
                 this.console.ResetColor();
                 this.console.WriteLine($"{@event.Summary} ({when})");
                 index++;
-            }
-        }
-
-
-        private void SetColor(Category category)
-        {
-            switch (category) {
-                case Category.PersonalOption:
-                    this.console.ForegroundColor = ConsoleColor.Cyan;
-                    break;
-                case Category.PersonalAppointment:
-                    this.console.ForegroundColor = ConsoleColor.Blue;
-                    break;
-                case Category.PersonalCommitment:
-                    this.console.ForegroundColor = ConsoleColor.DarkBlue;
-                    break;
-                case Category.ProfessionalOption:
-                    this.console.ForegroundColor = ConsoleColor.DarkYellow;
-                    break;
-                case Category.ProfessionalAppointment:
-                    this.console.ForegroundColor = ConsoleColor.Red;
-                    break;
-                case Category.ProfessionalCommitment:
-                    this.console.ForegroundColor = ConsoleColor.DarkRed;
-                    break;
-                case Category.Traveling:
-                    this.console.ForegroundColor = ConsoleColor.DarkGray;
-                    break;
-                case Category.Free:
-                    this.console.ForegroundColor = ConsoleColor.Green;
-                    break;
-                case Category.PartnerCommitment:
-                    this.console.ForegroundColor = ConsoleColor.Magenta;
-                    break;
-                case Category.Birthday:
-                    break;
-                case Category.Meal:
-                    break;
-                case Category.Special:
-                    break;
-                case Category.Unknown:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 

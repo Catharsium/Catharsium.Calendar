@@ -26,7 +26,7 @@ namespace Catharsium.Calendar.Core.Logic.Filters
 
         public IFilter<Event> CreateOrFilter(params IFilter<Event>[] filters)
         {
-            if (!(this.CreateFilter<OrFilter>() is OrFilter result)) {
+            if (!(this.CreateFilter<OrEventFilter>() is OrEventFilter result)) {
                 return null;
             }
 

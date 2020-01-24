@@ -5,7 +5,6 @@ using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Presentation;
 using Catharsium.Calendar.Core.Logic.Storage;
 using Catharsium.Util.Configuration.Extensions;
-using Catharsium.Util.Filters;
 using Catharsium.Util.IO._Configuration;
 using Catharsium.Util.IO.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -32,12 +31,12 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
             services.AddScoped<ICalendarImporter, CalendarImporter>();
             services.AddScoped<IConsoleColorFactory, ConsoleColorFactory>();
 
-            services.AddTransient<IFilter<Event>, StartDateEventFilter>();
-            services.AddTransient<IFilter<Event>, EndDateEventFilter>();
-            services.AddTransient<IFilter<Event>, DescriptionEventFilter>();
-            services.AddTransient<IFilter<Event>, LocationEventFilter>();
-            services.AddTransient<IFilter<Event>, SummaryEventFilter>();
-            services.AddTransient<IFilter<Event>, OrFilter>();
+            services.AddTransient<StartDateEventFilter, StartDateEventFilter>();
+            services.AddTransient<EndDateEventFilter, EndDateEventFilter>();
+            services.AddTransient<DescriptionEventFilter, DescriptionEventFilter>();
+            services.AddTransient<LocationEventFilter, LocationEventFilter>();
+            services.AddTransient<SummaryEventFilter, SummaryEventFilter>();
+            services.AddTransient<OrEventFilter, OrEventFilter>();
             services.AddTransient<IEventFilterFactory, EventFilterFactory>();
 
             services.AddScoped<IEqualityComparer<Event>, EventEqualityComparer>();
