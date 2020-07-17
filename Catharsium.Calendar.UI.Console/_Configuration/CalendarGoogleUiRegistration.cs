@@ -15,6 +15,7 @@ namespace Catharsium.Calendar.UI.Console._Configuration
         public static IServiceCollection AddGoogleCalendarConsoleUi(this IServiceCollection services, IConfiguration config)
         {
             var configuration = config.Load<CalendarGoogleUiConfiguration>();
+            services.AddSingleton<CalendarGoogleUiConfiguration, CalendarGoogleUiConfiguration>(provider => configuration);
 
             services.AddCatharsiumUtilities(config);
 
@@ -26,6 +27,7 @@ namespace Catharsium.Calendar.UI.Console._Configuration
             services.AddScoped<ISearchActionHandler, SearchActionHandler>();
             services.AddScoped<ICreateEventActionHandler, CreateEventActionHandler>();
             services.AddScoped<IMoveEventActionHandler, MoveEventActionHandler>();
+            services.AddScoped<IScheduleActionHandler, ScheduleActionHandler>();
 
             services.AddScoped<IShowEventsStepHandler, ShowEventsStepHandler>();
             services.AddScoped<IChooseCalendarStepHandler, ChooseCalendarStepHandler>();

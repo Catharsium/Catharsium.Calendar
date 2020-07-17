@@ -35,6 +35,7 @@ namespace Catharsium.Calendar.UI.Console
             var moveEventActionHandler = serviceProvider.GetService<IMoveEventActionHandler>();
             var calendarClientFactory = serviceProvider.GetService<ICalendarClientFactory>();
             var chooseAccountStepHandler = serviceProvider.GetService<IChooseAccountStepHandler>();
+            var scheduleActionHandler = serviceProvider.GetService<IScheduleActionHandler>();
 
             //var x = serviceProvider.GetService<IEventService>();
             //calendarClientFactory.UserName = "t.w.brachthuizer@gmail.com";
@@ -108,8 +109,8 @@ namespace Catharsium.Calendar.UI.Console
                     case UserActions.Move:
                         moveEventActionHandler.Run();
                         break;
-                    case UserActions.TemplatedCreate:
-                        //new TemplatedEventGenerator().Run();
+                    case UserActions.Schedule:
+                        scheduleActionHandler.Run();
                         break;
                     case UserActions.Quit:
                         break;

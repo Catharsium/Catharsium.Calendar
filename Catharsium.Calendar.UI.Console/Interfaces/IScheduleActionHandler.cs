@@ -1,6 +1,6 @@
 ﻿namespace Catharsium.Calendar.UI.Console.Interfaces
 {
-    public interface ITemplatedCreateActionHandler
+    public interface IScheduleActionHandler
     {
         void Run();
     }

@@ -4,6 +4,7 @@ using Catharsium.Calendar.Core.Logic._Configuration;
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Presentation;
+using Catharsium.Calendar.Core.Logic.Scheduler;
 using Catharsium.Calendar.Core.Logic.Storage;
 using Catharsium.Util.IO.Interfaces;
 using Catharsium.Util.Testing.Extensions;
@@ -38,6 +39,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
             serviceCollection.ReceivedRegistration<IEventFilterFactory, EventFilterFactory>();
 
             serviceCollection.ReceivedRegistration<IEqualityComparer<Event>, EventEqualityComparer>();
+            serviceCollection.ReceivedRegistration<IAppointmentScheduler, AppointmentScheduler>();
         }
 
 
