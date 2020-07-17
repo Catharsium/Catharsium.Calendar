@@ -9,6 +9,6 @@
         Create,
         Delete,
         Move,
-        TemplatedCreate
+        Schedule
     }
 }

@@ -3,6 +3,7 @@ using Catharsium.Calendar.Core.Entities.Models.Comparers;
 using Catharsium.Calendar.Core.Logic.Filters;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Presentation;
+using Catharsium.Calendar.Core.Logic.Scheduler;
 using Catharsium.Calendar.Core.Logic.Storage;
 using Catharsium.Util.Configuration.Extensions;
 using Catharsium.Util.IO._Configuration;
@@ -40,6 +41,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
             services.AddTransient<IEventFilterFactory, EventFilterFactory>();
 
             services.AddScoped<IEqualityComparer<Event>, EventEqualityComparer>();
+            services.AddScoped<IAppointmentScheduler, AppointmentScheduler>();
 
             return services;
         }

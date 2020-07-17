@@ -27,6 +27,7 @@ namespace Catharsium.Calendar.UI.Console.Tests._Configuration
             serviceCollection.ReceivedRegistration<ISearchActionHandler, SearchActionHandler>();
             serviceCollection.ReceivedRegistration<ICreateEventActionHandler, CreateEventActionHandler>();
             serviceCollection.ReceivedRegistration<IMoveEventActionHandler, MoveEventActionHandler>();
+            serviceCollection.ReceivedRegistration<IScheduleActionHandler, ScheduleActionHandler>();
 
             serviceCollection.ReceivedRegistration<IShowEventsStepHandler, ShowEventsStepHandler>();
             serviceCollection.ReceivedRegistration<IChooseCalendarStepHandler, ChooseCalendarStepHandler>();
