@@ -1,9 +1,9 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
+using Catharsium.Calendar.Core.Entities.Models.Scheduler;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using System;
 using System.Collections.Generic;
-using Catharsium.Calendar.Core.Entities.Models.Scheduler;
 
 namespace Catharsium.Calendar.Core.Logic.Scheduler
 {
