@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Catharsium.Calendar.Core.Entities.Models.Enums;
+﻿using Catharsium.Calendar.Core.Entities.Models.Enums;
 using Catharsium.Util.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace Catharsium.Calendar.Core.Entities.Models
 {

@@ -1,6 +1,6 @@
 ﻿using Catharsium.Calendar.Data.Google.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
@@ -14,12 +14,12 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
         public void Run_WritesStoredUserNames()
         {
             var index = 1;
-            var userNames = new[] { "My first user name", "My second user name", "My third user name" };
+            var userNames = new[] {"My first user name", "My second user name", "My third user name"};
             var calendarClientFactory = Substitute.For<ICalendarClientFactory>();
             calendarClientFactory.GetUserNames().Returns(userNames);
             this.SetDependency(calendarClientFactory);
             this.GetDependency<IConsole>().AskForInt().Returns(index);
-            
+
             this.Target.Run();
             foreach (var userName in userNames) {
                 this.GetDependency<IConsole>().Received().WriteLine(Arg.Is<string>(s => s.Contains(userName)));
@@ -31,7 +31,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
         public void Run_ValidUserIndex_ReturnsUserName()
         {
             var index = 1;
-            var userNames = new[] { "My user name" };
+            var userNames = new[] {"My user name"};
             var calendarClientFactory = Substitute.For<ICalendarClientFactory>();
             calendarClientFactory.GetUserNames().Returns(userNames);
             this.SetDependency(calendarClientFactory);
@@ -45,7 +45,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
         [TestMethod]
         public void Run_NoUserIndex_ReturnsNull()
         {
-            var userNames = new[] { "My user name" };
+            var userNames = new[] {"My user name"};
             var calendarClientFactory = Substitute.For<ICalendarClientFactory>();
             calendarClientFactory.GetUserNames().Returns(userNames);
             this.SetDependency(calendarClientFactory);

@@ -4,6 +4,7 @@ using Catharsium.Calendar.Data.Google.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.Data.Google.Client.Services
 {
@@ -21,20 +22,20 @@ namespace Catharsium.Calendar.Data.Google.Client.Services
         }
 
 
-        public IEnumerable<Core.Entities.Models.Calendar> GetList()
+        public async Task<IEnumerable<Core.Entities.Models.Calendar>> GetList()
         {
             var calendarService = this.clientFactory.Get();
             var request = calendarService.CalendarList.List();
-            var result = request.Execute();
+            var result = await Task.Run(() => request.Execute());
             return result.Items.Select(c => this.mapper.Map<Core.Entities.Models.Calendar>(c));
         }
 
 
-        public Core.Entities.Models.Calendar Get(string calendarId)
+        public async Task<Core.Entities.Models.Calendar> Get(string calendarId)
         {
             var calendarService = this.clientFactory.Get();
             var request = calendarService.CalendarList.Get(calendarId);
-            var result = request.Execute();
+            var result = await Task.Run(() => request.Execute());
             return this.mapper.Map<Core.Entities.Models.Calendar>(result);
         }
     }

@@ -2,19 +2,23 @@
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.Filters;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {
-    public class SearchActionHandler : ISearchActionHandler
+    public class SearchActionHandler : IActionHandler
     {
         private readonly IConsole console;
         private readonly ICalendarStorage calendarStorage;
         private readonly IEventFilterFactory eventFilterFactory;
         private readonly IEqualityComparer<Event> eventComparer;
         private readonly IShowEventsStepHandler showEventsStepHandler;
+
+
+        public string FriendlyName => "Search";
 
 
         public SearchActionHandler(
@@ -32,12 +36,12 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         }
 
 
-        public void Run()
+        public async Task Run()
         {
             var query = this.console.AskForText("Enter the query:");
             this.console.WriteLine();
             this.console.WriteLine("Matching events:");
-            var events = this.calendarStorage.LoadAll().ToList();
+            var events = (await this.calendarStorage.LoadAll()).ToList();
             var descriptionFilter = this.eventFilterFactory.CreateDescriptionFilter(query);
             var locationFilter = this.eventFilterFactory.CreateLocationFilter(query);
             var summaryFilter = this.eventFilterFactory.CreateSummaryFilter(query);

@@ -2,10 +2,11 @@
 using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.UI.Console.StepHandlers
 {
@@ -24,7 +25,7 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
         }
 
 
-        public void ShowEvents(IEnumerable<Event> events)
+        public async Task ShowEvents(IEnumerable<Event> events)
         {
             var index = 0;
             foreach (var @event in events) {
@@ -33,7 +34,7 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
                     when += @event.Start.Value.ToString(" (HH:mm - ") + @event.End.Value.ToString("HH:mm)");
                 }
 
-                var calendars = this.calendarService.GetList();
+                var calendars = await this.calendarService.GetList();
                 var calendar = calendars.FirstOrDefault(c => c.Id == @event.CalendarId);
                 var calendarName = calendar != null ? calendar.Summary : "";
                 this.console.ForegroundColor = this.consoleColorFactory.GetById(@event.CalendarId, @event.ColorId);

@@ -1,11 +1,15 @@
-﻿using Catharsium.Calendar.UI.Console.Interfaces;
+﻿using Catharsium.Util.IO.Console.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {
-    public class DeleteEventActionHandler : IDeleteEventActionHandler
+    public class DeleteEventActionHandler : IActionHandler
     {
-        public void Run()
+        public string FriendlyName => "Delete event";
+
+
+        Task IActionHandler.Run()
         {
             throw new NotImplementedException();
         }

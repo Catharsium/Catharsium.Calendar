@@ -1,6 +1,6 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 

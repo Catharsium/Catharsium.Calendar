@@ -1,7 +1,9 @@
-﻿namespace Catharsium.Calendar.UI.Console.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace Catharsium.Calendar.UI.Console.Interfaces
 {
     public interface IChooseCalendarStepHandler
     {
-        Core.Entities.Models.Calendar Run();
+        Task<Core.Entities.Models.Calendar> Run();
     }
 }

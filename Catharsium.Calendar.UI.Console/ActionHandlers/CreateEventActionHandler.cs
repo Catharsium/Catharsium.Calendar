@@ -1,15 +1,19 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {
-    public class CreateEventActionHandler : ICreateEventActionHandler
+    public class CreateEventActionHandler : IActionHandler
     {
         private readonly IConsole console;
         private readonly IChooseCalendarStepHandler chooseCalendarStepHandler;
         private readonly IEventManagementService eventService;
+
+
+        public string FriendlyName => "Create event";
 
 
         public CreateEventActionHandler(IConsole console, IChooseCalendarStepHandler chooseCalendarStepHandler, IEventManagementService eventService)
@@ -20,7 +24,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         }
 
 
-        public void Run()
+        public async Task Run()
         {
             var summary = this.console.AskForText("Enter the summary:");
             var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd HH mm:");
@@ -40,9 +44,9 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
                 End = new Date {Value = endDate.Value}
             };
 
-            var newCalendar = this.chooseCalendarStepHandler.Run();
+            var newCalendar = await this.chooseCalendarStepHandler.Run();
             if (newCalendar != null) {
-                this.eventService.CreateEvent(newCalendar.Id, newEvent);
+                await this.eventService.CreateEvent(newCalendar.Id, newEvent);
             }
         }
     }

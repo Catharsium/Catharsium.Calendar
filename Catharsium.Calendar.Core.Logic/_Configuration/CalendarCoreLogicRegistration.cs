@@ -7,10 +7,8 @@ using Catharsium.Calendar.Core.Logic.Scheduler;
 using Catharsium.Calendar.Core.Logic.Storage;
 using Catharsium.Util.Configuration.Extensions;
 using Catharsium.Util.IO._Configuration;
-using Catharsium.Util.IO.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Catharsium.Calendar.Core.Logic._Configuration
@@ -24,11 +22,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
 
             services.AddIoUtilities(config);
 
-            services.AddScoped<ICalendarStorage>(s =>
-                new JsonCalendarStorage(s.GetService<IFileFactory>(),
-                    new JsonSerializer {Formatting = Formatting.Indented},
-                    configuration)
-            );
+            services.AddScoped<ICalendarStorage, JsonCalendarStorage>();
             services.AddScoped<ICalendarImporter, CalendarImporter>();
             services.AddScoped<IConsoleColorFactory, ConsoleColorFactory>();
 

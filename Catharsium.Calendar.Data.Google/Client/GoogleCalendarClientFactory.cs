@@ -25,7 +25,7 @@ namespace Catharsium.Calendar.Data.Google.Client
             this.credentialsList = credentialsList;
             this.CalendarServices = new Dictionary<Credentials, CalendarService>();
             foreach (var credentials in this.credentialsList) {
-                this.CalendarServices[credentials] = this.CreateFor(credentials);
+                this.CalendarServices[credentials] = CreateFor(credentials);
             }
         }
 
@@ -42,7 +42,7 @@ namespace Catharsium.Calendar.Data.Google.Client
         }
 
 
-        private CalendarService CreateFor(Credentials credentials)
+        private static CalendarService CreateFor(Credentials credentials)
         {
             if (credentials == null) {
                 return null;

@@ -1,9 +1,10 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.UI.Console.StepHandlers;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
 {
@@ -11,7 +12,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
     public class ChooseCalendarStepHandlerTests : TestFixture<ChooseCalendarStepHandler>
     {
         [TestMethod]
-        public void Run_WritesCalendars()
+        public async Task Run_WritesCalendars()
         {
             var index = 1;
             this.GetDependency<IConsole>().AskForInt().Returns(index);
@@ -21,7 +22,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
             };
             this.GetDependency<ICalendarService>().GetList().Returns(calendars);
 
-            this.Target.Run();
+            await this.Target.Run();
             foreach (var calendar in calendars) {
                 this.GetDependency<IConsole>().Received().WriteLine(Arg.Is<string>(s => s.Contains(calendar.Summary)));
             }
@@ -29,7 +30,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
 
 
         [TestMethod]
-        public void Run_ValidCalendarIndex_ReturnsCalendar()
+        public async Task Run_ValidCalendarIndex_ReturnsCalendar()
         {
             var index = 1;
             this.GetDependency<IConsole>().AskForInt().Returns(index);
@@ -39,13 +40,13 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
             };
             this.GetDependency<ICalendarService>().GetList().Returns(calendars);
 
-            var actual = this.Target.Run();
+            var actual = await this.Target.Run();
             Assert.AreEqual(calendars[index - 1], actual);
         }
 
 
         [TestMethod]
-        public void Run_NoCalendarIndex_ReturnsCalendar()
+        public async Task Run_NoCalendarIndex_ReturnsCalendar()
         {
             this.GetDependency<IConsole>().AskForInt().Returns(null as int?);
             var calendars = new[] {
@@ -54,7 +55,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers
             };
             this.GetDependency<ICalendarService>().GetList().Returns(calendars);
 
-            var actual = this.Target.Run();
+            var actual = await this.Target.Run();
             Assert.IsNull(actual);
         }
     }

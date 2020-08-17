@@ -5,6 +5,8 @@ using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
 using Catharsium.Util._Configuration;
 using Catharsium.Util.Configuration.Extensions;
+using Catharsium.Util.IO.Console._Configuration;
+using Catharsium.Util.IO.Console.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,16 +20,18 @@ namespace Catharsium.Calendar.UI.Console._Configuration
             services.AddSingleton<CalendarGoogleUiConfiguration, CalendarGoogleUiConfiguration>(provider => configuration);
 
             services.AddCatharsiumUtilities(config);
+            services.AddConsoleIoUtilities(config);
 
             services.AddGoogleCalendar(config);
             services.AddCalendarCoreLogic(config);
 
-            services.AddScoped<IImportActionHandler, ImportActionHandler>();
-            services.AddScoped<ILoadActionHandler, LoadActionHandler>();
-            services.AddScoped<ISearchActionHandler, SearchActionHandler>();
-            services.AddScoped<ICreateEventActionHandler, CreateEventActionHandler>();
-            services.AddScoped<IMoveEventActionHandler, MoveEventActionHandler>();
-            services.AddScoped<IScheduleActionHandler, ScheduleActionHandler>();
+            services.AddScoped<IActionHandler, ImportActionHandler>();
+            services.AddScoped<IActionHandler, LoadActionHandler>();
+            services.AddScoped<IActionHandler, SearchActionHandler>();
+            services.AddScoped<IActionHandler, DeleteEventActionHandler>();
+            services.AddScoped<IActionHandler, CreateEventActionHandler>();
+            services.AddScoped<IActionHandler, MoveEventActionHandler>();
+            services.AddScoped<IActionHandler, ScheduleActionHandler>();
 
             services.AddScoped<IShowEventsStepHandler, ShowEventsStepHandler>();
             services.AddScoped<IChooseCalendarStepHandler, ChooseCalendarStepHandler>();

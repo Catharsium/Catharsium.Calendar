@@ -1,16 +1,19 @@
-﻿using System;
-using Catharsium.Calendar.Core.Logic.Interfaces;
+﻿using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console._Configuration;
-using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {
-    public class ScheduleActionHandler : IScheduleActionHandler
+    public class ScheduleActionHandler : IActionHandler
     {
         private readonly IAppointmentScheduler appointmentScheduler;
         private readonly IConsole console;
         private readonly CalendarGoogleUiConfiguration configuration;
+
+
+        public string FriendlyName => "Schedule action";
 
 
         public ScheduleActionHandler(IAppointmentScheduler appointmentScheduler, IConsole console, CalendarGoogleUiConfiguration configuration)
@@ -21,7 +24,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         }
 
 
-        public void Run()
+        public async Task Run()
         {
             var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd");
             var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd");

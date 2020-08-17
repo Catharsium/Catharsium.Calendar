@@ -1,9 +1,10 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Logic.Interfaces;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
 using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.Core.Logic.Storage
 {
@@ -17,7 +18,7 @@ namespace Catharsium.Calendar.Core.Logic.Storage
 
         public CalendarImporter(
             ICalendarService calendarService,
-            IEventManagementService eventService, 
+            IEventManagementService eventService,
             ICalendarStorage calendarStorage,
             IConsole console)
         {
@@ -28,18 +29,18 @@ namespace Catharsium.Calendar.Core.Logic.Storage
         }
 
 
-        public void Import(string calendarId, DateTime startDate, DateTime endDate)
+        public async Task Import(string calendarId, DateTime startDate, DateTime endDate)
         {
-            var calendar = this.calendarService.Get(calendarId);
+            var calendar = await this.calendarService.Get(calendarId);
             while (startDate < endDate) {
                 var queryEndDate = startDate.AddMonths(1);
                 this.console.WriteLine($"Period: {startDate:yyyy-MM-dd} - {queryEndDate:yyyy-MM-dd}");
-                var events = this.eventService.GetList(calendar.Id, startDate, queryEndDate).ToList();
+                var events = (await this.eventService.GetList(calendar.Id, startDate, queryEndDate)).ToList();
                 this.console.WriteLine($"Found {events.Count} events in {calendar.Summary}");
 
                 var fileName = $"{calendar.Summary}, {startDate:yyyy-MM-dd} {queryEndDate:yyyy-MM-dd}";
                 if (events.Any()) {
-                    this.calendarStorage.Store(events, fileName);
+                    await this.calendarStorage.Store(events, fileName);
                     this.console.WriteLine($"Stored in {fileName}");
                     Thread.Sleep(100);
                 }

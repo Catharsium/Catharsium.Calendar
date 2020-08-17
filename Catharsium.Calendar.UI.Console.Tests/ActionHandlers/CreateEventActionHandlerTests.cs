@@ -1,12 +1,12 @@
-﻿using System;
-using Catharsium.Calendar.Core.Entities.Interfaces.Services;
+﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
 using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System;
 
 namespace Catharsium.Calendar.UI.Console.Tests.ActionHandlers
 {
@@ -72,7 +72,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.ActionHandlers
             var calendar = new Core.Entities.Models.Calendar {Id = "My calendar id"};
             this.GetDependency<IChooseCalendarStepHandler>().Run().Returns(calendar);
 
-            this.Target.Run(); 
+            this.Target.Run();
             this.GetDependency<IEventManagementService>().Received().CreateEvent(
                 calendar.Id,
                 Arg.Is<Event>(e => e.Summary == this.Summary &&

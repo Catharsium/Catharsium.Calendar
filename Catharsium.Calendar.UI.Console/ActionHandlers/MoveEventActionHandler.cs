@@ -3,13 +3,14 @@ using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.Filters;
-using Catharsium.Util.IO.Interfaces;
+using Catharsium.Util.IO.Console.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.UI.Console.ActionHandlers
 {
-    public class MoveEventActionHandler : IMoveEventActionHandler
+    public class MoveEventActionHandler : IActionHandler
     {
         private readonly IConsole console;
         private readonly ICalendarStorage calendarStorage;
@@ -18,6 +19,9 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         private readonly IChooseCalendarStepHandler chooseACalendarStepHandler;
         private readonly IChooseEventStepHandler chooseAnEventStepHandler;
         private readonly IEventUpdateService eventUpdater;
+
+
+        public string FriendlyName => "Move event";
 
 
         public MoveEventActionHandler(
@@ -39,12 +43,12 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
         }
 
 
-        public void Run()
+        public async Task Run()
         {
             var query = this.console.AskForText("Enter the query:");
             this.console.WriteLine();
             this.console.WriteLine("Matching events:");
-            var events = this.calendarStorage.LoadAll().ToList();
+            var events = (await this.calendarStorage.LoadAll()).ToList();
             var summaryFilter = this.eventFilterFactory.CreateSummaryFilter(query);
             var locationFilter = this.eventFilterFactory.CreateLocationFilter(query);
             var descriptionFilter = this.eventFilterFactory.CreateDescriptionFilter(query);
@@ -61,9 +65,9 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
                     return;
                 }
 
-                var newCalendar = this.chooseACalendarStepHandler.Run();
+                var newCalendar = await this.chooseACalendarStepHandler.Run();
                 if (newCalendar != null) {
-                    this.eventUpdater.Move(@event, @event.CalendarId, newCalendar.Id);
+                    await this.eventUpdater.Move(@event, @event.CalendarId, newCalendar.Id);
                 }
             }
             else {

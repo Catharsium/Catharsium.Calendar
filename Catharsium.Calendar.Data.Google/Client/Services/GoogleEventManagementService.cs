@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 using GoogleEvent = Google.Apis.Calendar.v3.Data.Event;
 
 namespace Catharsium.Calendar.Data.Google.Client.Services
@@ -25,7 +26,7 @@ namespace Catharsium.Calendar.Data.Google.Client.Services
         }
 
 
-        public IEnumerable<Event> GetList(string calendarId, DateTime from, DateTime to)
+        public Task<IEnumerable<Event>> GetList(string calendarId, DateTime from, DateTime to)
         {
             var calendarService = this.calendarClientFactory.Get();
             var request = calendarService.Events.List(calendarId);
@@ -35,50 +36,57 @@ namespace Catharsium.Calendar.Data.Google.Client.Services
             request.SingleEvents = true;
             request.MaxResults = 2500;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
-            var result = request.Execute();
-            return result.Items.Select(e => {
-                var @event = this.mapper.Map<Event>(e);
-                @event.CalendarId = calendarId;
-                return @event;
+            return Task.Run(() => {
+                var result = request.Execute();
+                return result.Items.Select(e => {
+                    var @event = this.mapper.Map<Event>(e);
+                    @event.CalendarId = calendarId;
+                    return @event;
+                });
             });
         }
 
 
-        public Event GetEvent(string calendarId, string eventId)
+        public Task<Event> GetEvent(string calendarId, string eventId)
         {
-            var calendarService = this.calendarClientFactory.Get();
-            var request = calendarService.Events.Get(calendarId, eventId);
-            var result = this.mapper.Map<Event>(request.Execute());
-            result.CalendarId = calendarId;
-            return result;
+            return Task.Run(() => {
+                    var calendarService = this.calendarClientFactory.Get();
+                    var request = calendarService.Events.Get(calendarId, eventId);
+                    var result = this.mapper.Map<Event>(request.Execute());
+                    result.CalendarId = calendarId;
+                    return result;
+                }
+            );
         }
 
 
-        public Event CreateEvent(string calendarId, Event eventData)
+        public Task<Event> CreateEvent(string calendarId, Event eventData)
         {
             var calendarService = this.calendarClientFactory.Get();
             var googleEvent = this.mapper.Map<GoogleEvent>(eventData);
             var request = calendarService.Events.Insert(googleEvent, calendarId);
-            var result = this.mapper.Map<Event>(request.Execute());
-            result.CalendarId = calendarId;
-            return result;
+            return Task.Run(() => {
+                var result = this.mapper.Map<Event>(request.Execute());
+                result.CalendarId = calendarId;
+                return result;
+            });
         }
 
 
-        public void UpdateEvent(string calendarId, Event eventData)
+        public Task UpdateEvent(string calendarId, Event eventData)
         {
             var calendarService = this.calendarClientFactory.Get();
             var googleEvent = this.mapper.Map<GoogleEvent>(eventData);
             var request = calendarService.Events.Update(googleEvent, calendarId, eventData.Id);
-            request.Execute();
+            return Task.Run(() => request.Execute());
         }
 
 
-        public void DeleteEvent(string calendarId, string eventId)
+        public Task DeleteEvent(string calendarId, string eventId)
         {
             var calendarService = this.calendarClientFactory.Get();
             var request = calendarService.Events.Delete(calendarId, eventId);
-            request.Execute();
+            return Task.Run(() => request.Execute());
         }
     }
 }
