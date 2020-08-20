@@ -3,7 +3,6 @@ using Catharsium.Calendar.Data.Google._Configuration;
 using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
-using Catharsium.Util._Configuration;
 using Catharsium.Util.Configuration.Extensions;
 using Catharsium.Util.IO.Console._Configuration;
 using Catharsium.Util.IO.Console.Interfaces;
@@ -19,7 +18,6 @@ namespace Catharsium.Calendar.UI.Console._Configuration
             var configuration = config.Load<CalendarGoogleUiConfiguration>();
             services.AddSingleton<CalendarGoogleUiConfiguration, CalendarGoogleUiConfiguration>(provider => configuration);
 
-            services.AddCatharsiumUtilities(config);
             services.AddConsoleIoUtilities(config);
 
             services.AddGoogleCalendar(config);
