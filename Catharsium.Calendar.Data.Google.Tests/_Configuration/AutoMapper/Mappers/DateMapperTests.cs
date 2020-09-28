@@ -1,29 +1,20 @@
-﻿using AutoMapper;
-using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Data.Google._Configuration.AutoMapper.Mappers;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSubstitute;
 using System;
 using GoogleEventDateTime = Google.Apis.Calendar.v3.Data.EventDateTime;
 
 namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Mappers
 {
     [TestClass]
-    [Ignore]
     public class DateMapperTests : TestFixture<DateMapper>
     {
         #region Fixture
-
-        private IRuntimeMapper Mapper { get; set; }
-        private ResolutionContext Context { get; set; }
-
-
+        
         [TestInitialize]
         public void SetupDependencies()
         {
-            this.Mapper = Substitute.For<IRuntimeMapper>();
-            //this.Context = new ResolutionContext(null, this.Mapper);
         }
 
         #endregion
@@ -35,7 +26,7 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Mapper
             var input = new GoogleEventDateTime {Date = expected.ToString("yyyy-MM-dd")};
             var output = new Date {HasTime = true};
 
-            var actual = this.Target.Resolve(input, output, DateTime.MaxValue, this.Context);
+            var actual = this.Target.Resolve(input, output, DateTime.MaxValue, null);
             Assert.IsFalse(output.HasTime);
             Assert.AreEqual(expected, output.Value);
             Assert.AreEqual(expected, actual);
@@ -49,7 +40,7 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Mapper
             var input = new GoogleEventDateTime {DateTime = expected};
             var output = new Date {HasTime = false};
 
-            var actual = this.Target.Resolve(input, output, DateTime.MaxValue, this.Context);
+            var actual = this.Target.Resolve(input, output, DateTime.MaxValue, null);
             Assert.IsTrue(output.HasTime);
             Assert.AreEqual(expected.Date, output.Value.Date);
             Assert.AreEqual(expected.Hour, output.Value.Hour);
@@ -69,7 +60,7 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Mapper
             };
             var output = new Date {HasTime = true};
 
-            var actual = this.Target.Resolve(input, output, DateTime.MaxValue, this.Context);
+            var actual = this.Target.Resolve(input, output, DateTime.MaxValue, null);
             Assert.IsTrue(output.HasTime);
             Assert.AreEqual(expected.Date, output.Value.Date);
             Assert.AreEqual(expected.Hour, output.Value.Hour);

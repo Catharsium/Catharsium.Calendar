@@ -4,6 +4,7 @@ using Catharsium.Calendar.Core.Entities.Models.Scheduler;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Catharsium.Calendar.Core.Logic.Scheduler
@@ -11,11 +12,13 @@ namespace Catharsium.Calendar.Core.Logic.Scheduler
     public class AppointmentScheduler : IAppointmentScheduler
     {
         private readonly IEventManagementService eventManagementService;
+        private readonly IEnumerable<IAppointmentGenerator> appointmentGenerators;
 
 
-        public AppointmentScheduler(IEventManagementService eventManagementService)
+        public AppointmentScheduler(IEventManagementService eventManagementService, IEnumerable<IAppointmentGenerator> appointmentGenerators)
         {
             this.eventManagementService = eventManagementService;
+            this.appointmentGenerators = appointmentGenerators;
         }
 
 
@@ -23,30 +26,13 @@ namespace Catharsium.Calendar.Core.Logic.Scheduler
         {
             var result = new List<Event>();
             foreach (var appointment in settings.Appointments) {
-                result.AddRange(await this.GenerateFor(fromDate, toDate, appointment));
+                var generator = this.appointmentGenerators.FirstOrDefault(g => g.Interval == appointment.Recurrence.Interval);
+                if (generator != null) {
+                    result.AddRange(await generator.GenerateFor(fromDate, toDate, appointment));
+                }
             }
 
             return await Task.Run(() => result.ToArray());
-        }
-
-
-        public async Task<Event[]> GenerateFor(DateTime fromDate, DateTime toDate, Appointment appointment)
-        {
-            var result = new List<Event>();
-            var date = fromDate.Date + appointment.StartTime;
-
-            while (date <= toDate) {
-                result.Add(await this.eventManagementService.CreateEvent(appointment.CalendarId, new Event {
-                    Summary = appointment.Summary,
-                    Location = appointment.Location,
-                    Start = new Date {Value = date, HasTime = true},
-                    End = new Date {Value = date.AddMinutes(appointment.DurationInMinutes), HasTime = true},
-                    //  ColorId = appointment.Category
-                }));
-                date = date.AddDays(1);
-            }
-
-            return result.ToArray();
         }
     }
 }

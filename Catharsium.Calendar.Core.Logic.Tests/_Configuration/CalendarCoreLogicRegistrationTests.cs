@@ -30,6 +30,9 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
             serviceCollection.ReceivedRegistration<ICalendarImporter, CalendarImporter>();
             serviceCollection.ReceivedRegistration<IConsoleColorFactory, ConsoleColorFactory>();
 
+            serviceCollection.ReceivedRegistration<IAppointmentGenerator, DailyAppointmentGenerator>();
+            serviceCollection.ReceivedRegistration<IAppointmentGenerator, MonthlyAppointmentGenerator>();
+
             serviceCollection.ReceivedRegistration<StartDateEventFilter, StartDateEventFilter>();
             serviceCollection.ReceivedRegistration<EndDateEventFilter, EndDateEventFilter>();
             serviceCollection.ReceivedRegistration<DescriptionEventFilter, DescriptionEventFilter>();

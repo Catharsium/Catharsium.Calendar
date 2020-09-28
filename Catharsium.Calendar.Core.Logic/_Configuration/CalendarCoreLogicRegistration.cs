@@ -26,6 +26,9 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
             services.AddScoped<ICalendarImporter, CalendarImporter>();
             services.AddScoped<IConsoleColorFactory, ConsoleColorFactory>();
 
+            services.AddScoped<IAppointmentGenerator, DailyAppointmentGenerator>();
+            services.AddScoped<IAppointmentGenerator, MonthlyAppointmentGenerator>();
+
             services.AddTransient<StartDateEventFilter, StartDateEventFilter>();
             services.AddTransient<EndDateEventFilter, EndDateEventFilter>();
             services.AddTransient<DescriptionEventFilter, DescriptionEventFilter>();
