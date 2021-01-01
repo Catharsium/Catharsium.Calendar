@@ -44,7 +44,6 @@ namespace Catharsium.Calendar.UI.Console.Tests._Configuration
             var configuration = Substitute.For<IConfiguration>();
 
             serviceCollection.AddGoogleCalendarConsoleUi(configuration);
-            serviceCollection.ReceivedRegistration<ICalendarStorage>();
             serviceCollection.ReceivedRegistration<ICalendarImporter>();
             serviceCollection.ReceivedRegistration<IConsole>();
         }

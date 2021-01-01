@@ -26,21 +26,18 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
 
         public async Task Run()
         {
-            var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd");
-            var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd");
+            var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd)");
+            var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd)");
 
             if (!startDate.HasValue) {
                 startDate = DateTime.Today;
-                var delta = DayOfWeek.Monday - startDate.Value.DayOfWeek;
-                var monday = startDate.Value.AddDays(delta + 7);
-                startDate = monday;
             }
 
             if (!endDate.HasValue) {
                 endDate = startDate.Value.AddDays(7);
             }
 
-            this.appointmentScheduler.GenerateFor(startDate.Value, endDate.Value, this.configuration.SchedulerSettings);
+            await this.appointmentScheduler.GenerateFor(startDate.Value, endDate.Value, this.configuration.SchedulerSettings);
         }
     }
 }

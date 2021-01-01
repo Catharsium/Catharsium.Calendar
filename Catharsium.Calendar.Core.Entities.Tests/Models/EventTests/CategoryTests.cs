@@ -1,7 +1,7 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Entities.Models.Enums;
-using Catharsium.Util.Attributes;
-using Catharsium.Util.Attributes.Extensions;
+using Catharsium.Util.Reflection.Attributes;
+using Catharsium.Util.Reflection.Attributes.Extensions;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

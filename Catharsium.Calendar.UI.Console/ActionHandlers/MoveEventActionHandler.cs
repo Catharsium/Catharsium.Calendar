@@ -4,6 +4,7 @@ using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Util.Filters;
 using Catharsium.Util.IO.Console.Interfaces;
+using Catharsium.Util.IO.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
     public class MoveEventActionHandler : IActionHandler
     {
         private readonly IConsole console;
-        private readonly ICalendarStorage calendarStorage;
+        private readonly IJsonFileRepository<Event> jsonFileRepository;
         private readonly IEventFilterFactory eventFilterFactory;
         private readonly IEqualityComparer<Event> eventComparer;
         private readonly IChooseCalendarStepHandler chooseACalendarStepHandler;
@@ -26,7 +27,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
 
         public MoveEventActionHandler(
             IConsole console,
-            ICalendarStorage calendarStorage,
+            IJsonFileRepository<Event> jsonFileRepository,
             IEventFilterFactory eventFilterFactory,
             IEqualityComparer<Event> eventComparer,
             IChooseCalendarStepHandler chooseACalendarStepHandler,
@@ -34,7 +35,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
             IEventUpdateService eventUpdater)
         {
             this.console = console;
-            this.calendarStorage = calendarStorage;
+            this.jsonFileRepository = jsonFileRepository;
             this.eventFilterFactory = eventFilterFactory;
             this.eventComparer = eventComparer;
             this.chooseACalendarStepHandler = chooseACalendarStepHandler;
@@ -48,7 +49,7 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
             var query = this.console.AskForText("Enter the query:");
             this.console.WriteLine();
             this.console.WriteLine("Matching events:");
-            var events = (await this.calendarStorage.LoadAll()).ToList();
+            var events = (await this.jsonFileRepository.LoadAll()).ToList();
             var summaryFilter = this.eventFilterFactory.CreateSummaryFilter(query);
             var locationFilter = this.eventFilterFactory.CreateLocationFilter(query);
             var descriptionFilter = this.eventFilterFactory.CreateDescriptionFilter(query);
