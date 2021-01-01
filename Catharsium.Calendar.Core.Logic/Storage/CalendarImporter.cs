@@ -1,6 +1,8 @@
 ﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
+using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Util.IO.Console.Interfaces;
+using Catharsium.Util.IO.Interfaces;
 using System;
 using System.Linq;
 using System.Threading;
@@ -12,19 +14,19 @@ namespace Catharsium.Calendar.Core.Logic.Storage
     {
         private readonly ICalendarService calendarService;
         private readonly IEventManagementService eventService;
-        private readonly ICalendarStorage calendarStorage;
+        private readonly IJsonFileRepository<Event> jsonFileRepository;
         private readonly IConsole console;
 
 
         public CalendarImporter(
             ICalendarService calendarService,
             IEventManagementService eventService,
-            ICalendarStorage calendarStorage,
+            IJsonFileRepository<Event> jsonFileRepository,
             IConsole console)
         {
             this.calendarService = calendarService;
             this.eventService = eventService;
-            this.calendarStorage = calendarStorage;
+            this.jsonFileRepository = jsonFileRepository;
             this.console = console;
         }
 
@@ -40,7 +42,7 @@ namespace Catharsium.Calendar.Core.Logic.Storage
 
                 var fileName = $"{calendar.Summary}, {startDate:yyyy-MM-dd} {queryEndDate:yyyy-MM-dd}";
                 if (events.Any()) {
-                    await this.calendarStorage.Store(events, fileName);
+                    await this.jsonFileRepository.Store(events, fileName);
                     this.console.WriteLine($"Stored in {fileName}");
                     Thread.Sleep(100);
                 }
