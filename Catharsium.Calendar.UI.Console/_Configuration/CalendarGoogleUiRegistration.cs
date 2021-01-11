@@ -15,7 +15,7 @@ namespace Catharsium.Calendar.UI.Console._Configuration
     {
         public static IServiceCollection AddGoogleCalendarConsoleUi(this IServiceCollection services, IConfiguration config)
         {
-            var configuration = config.Load<CalendarGoogleUiConfiguration>();
+            var configuration = config.Load<CalendarGoogleUiConfiguration>("Catharsium.Calendar.UI.Console");
             services.AddSingleton<CalendarGoogleUiConfiguration, CalendarGoogleUiConfiguration>(provider => configuration);
 
             services.AddConsoleIoUtilities(config);
