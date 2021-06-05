@@ -44,11 +44,11 @@ namespace Catharsium.Calendar.Core.Logic.Storage
                 if (events.Any()) {
                     await this.jsonFileRepository.Store(events, fileName);
                     this.console.WriteLine($"Stored in {fileName}");
-                    Thread.Sleep(100);
                 }
 
                 this.console.WriteLine();
                 startDate = queryEndDate;
+                Thread.Sleep(1000);
             }
         }
     }

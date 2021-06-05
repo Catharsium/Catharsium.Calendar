@@ -24,8 +24,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
 
             services.AddIoUtilities(config);
 
-            services.AddScoped<IJsonFileRepository<Event>>(s =>
-            {
+            services.AddScoped<IJsonFileRepository<Event>>(s => {
                 return new JsonFileRepository<Event>(
                     s.GetService<IFileFactory>(),
                     s.GetService<IJsonFileReader>(),
@@ -35,6 +34,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
             services.AddScoped<ICalendarImporter, CalendarImporter>();
             services.AddScoped<IConsoleColorFactory, ConsoleColorFactory>();
 
+            services.AddScoped<IAppointmentGenerator, SingleAppointmentGenerator>();
             services.AddScoped<IAppointmentGenerator, DailyAppointmentGenerator>();
             services.AddScoped<IAppointmentGenerator, MonthlyAppointmentGenerator>();
 
@@ -48,6 +48,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration
 
             services.AddScoped<IEqualityComparer<Event>, EventEqualityComparer>();
             services.AddScoped<IAppointmentScheduler, AppointmentScheduler>();
+            services.AddScoped<ITemplateScheduler, TemplateScheduler>();
 
             return services;
         }

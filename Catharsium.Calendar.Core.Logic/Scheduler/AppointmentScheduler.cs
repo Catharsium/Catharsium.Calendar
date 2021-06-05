@@ -1,5 +1,4 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
-using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Calendar.Core.Entities.Models.Scheduler;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using System;
@@ -11,13 +10,11 @@ namespace Catharsium.Calendar.Core.Logic.Scheduler
 {
     public class AppointmentScheduler : IAppointmentScheduler
     {
-        private readonly IEventManagementService eventManagementService;
         private readonly IEnumerable<IAppointmentGenerator> appointmentGenerators;
 
 
-        public AppointmentScheduler(IEventManagementService eventManagementService, IEnumerable<IAppointmentGenerator> appointmentGenerators)
+        public AppointmentScheduler(IEnumerable<IAppointmentGenerator> appointmentGenerators)
         {
-            this.eventManagementService = eventManagementService;
             this.appointmentGenerators = appointmentGenerators;
         }
 

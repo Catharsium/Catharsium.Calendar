@@ -50,7 +50,7 @@
       },
       {
         "CalendarId": "t.w.brachthuizer@gmail.com",
-        "Summary": "Painting at Relinde",
+        "Summary": "Visiting (Relinde)",
         "Location": "Kempenaar 31 14, 8231 DG Lelystad, Netherlands",
         "StartDate": "2020-09-28 19:00:00",
         "EndDate": "2020-09-28 23:30:00",
@@ -60,6 +60,18 @@
           "Frequency": 7
         }
       },
+      {
+        "CalendarId": "t.w.brachthuizer@gmail.com",
+        "Summary": "Painting",
+        "Location": "Kempenaar 31 14, 8231 DG Lelystad, Netherlands",
+        "StartDate": "2020-09-28 19:15:00",
+        "EndDate": "2020-09-28 23:15:00",
+        "Category": "",
+        "Recurrence": {
+          "Interval": "Daily",
+          "Frequency": 7
+        }
+      }
       {
         "CalendarId": "t.w.brachthuizer@gmail.com",
         "Summary": "Cycling",
@@ -73,50 +85,16 @@
       },
       {
         "CalendarId": "t.w.brachthuizer@gmail.com",
-        "Summary": "Cycling",
-        "StartDate": "2020-10-14 16:30:00",
-        "EndDate": "2020-10-14 17:00:00",
-        "Category": "",
-        "Recurrence": {
-          "Interval": "Daily",
-          "Frequency": 14
-        }
-      },
-      {
-        "CalendarId": "t.w.brachthuizer@gmail.com",
-        "Summary": "Visiting Sanne",
-        "Location": "Rietweg 84, C103, 8219 PV Lelystad, Netherlands",
-        "StartDate": "2020-10-14 17:00:00",
-        "EndDate": "2020-10-14 23:00:00",
-        "Category": "",
-        "Recurrence": {
-          "Interval": "Daily",
-          "Frequency": 14
-        }
-      },
-      {
-        "CalendarId": "t.w.brachthuizer@gmail.com",
-        "Summary": "Sanne visiting",
+        "Summary": "Housekeeping (Marina)",
         "Location": "Home",
-        "StartDate": "2020-10-07 17:00:00",
-        "EndDate": "2020-10-07 22:00:00",
+        "StartDate": "2020-10-14 09:00:00",
+        "EndDate": "2020-10-14 11:00:00",
         "Category": "",
         "Recurrence": {
           "Interval": "Daily",
           "Frequency": 14
         }
       },
-      {
-        "CalendarId": "t.w.brachthuizer@gmail.com",
-        "Summary": "Cycling",
-        "StartDate": "2020-10-14 23:00:00",
-        "EndDate": "2020-10-15 00:00:00",
-        "Category": "",
-        "Recurrence": {
-          "Interval": "Daily",
-          "Frequency": 14
-        }
-      }
     ]
   }
 }

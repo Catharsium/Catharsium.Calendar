@@ -7,7 +7,6 @@ using Catharsium.Calendar.Core.Logic.Presentation;
 using Catharsium.Calendar.Core.Logic.Scheduler;
 using Catharsium.Calendar.Core.Logic.Storage;
 using Catharsium.Util.IO.Interfaces;
-using Catharsium.Util.IO.Json;
 using Catharsium.Util.Testing.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +30,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
             serviceCollection.ReceivedRegistration<ICalendarImporter, CalendarImporter>();
             serviceCollection.ReceivedRegistration<IConsoleColorFactory, ConsoleColorFactory>();
 
+            serviceCollection.ReceivedRegistration<IAppointmentGenerator, SingleAppointmentGenerator>();
             serviceCollection.ReceivedRegistration<IAppointmentGenerator, DailyAppointmentGenerator>();
             serviceCollection.ReceivedRegistration<IAppointmentGenerator, MonthlyAppointmentGenerator>();
 
@@ -44,6 +44,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration
 
             serviceCollection.ReceivedRegistration<IEqualityComparer<Event>, EventEqualityComparer>();
             serviceCollection.ReceivedRegistration<IAppointmentScheduler, AppointmentScheduler>();
+            serviceCollection.ReceivedRegistration<ITemplateScheduler, TemplateScheduler>();
         }
 
 

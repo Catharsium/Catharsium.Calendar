@@ -2,6 +2,7 @@
 {
     public enum Interval
     {
+        Single,
         Daily,
         Monthly,
         Annually

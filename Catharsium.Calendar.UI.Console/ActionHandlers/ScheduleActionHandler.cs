@@ -37,7 +37,10 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
                 endDate = startDate.Value.AddDays(7);
             }
 
-            await this.appointmentScheduler.GenerateFor(startDate.Value, endDate.Value, this.configuration.SchedulerSettings);
+            var events = await this.appointmentScheduler.GenerateFor(startDate.Value, endDate.Value, this.configuration.SchedulerSettings);
+            foreach (var @event in events) {
+                this.console.WriteLine($"{@event.Start.Value:yyyy-MM-dd}: \"{@event.Summary}\"");
+            }
         }
     }
 }

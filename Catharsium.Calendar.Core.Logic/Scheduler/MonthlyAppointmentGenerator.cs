@@ -26,13 +26,12 @@ namespace Catharsium.Calendar.Core.Logic.Scheduler
         {
             var result = new List<Event>();
             var date = appointment.StartDate;
-            var duration = appointment.EndDate - appointment.StartDate;
 
             while (date < toDate.AddMonths(1))
             {
                 if (date > fromDate)
                 {
-                    var existingAppointments = await this.eventManagementService.GetList(appointment.CalendarId, date, date + duration);
+                    var existingAppointments = await this.eventManagementService.GetList(appointment.CalendarId, date, date.AddMinutes(appointment.DurationInMinutes));
                     if (!existingAppointments.Any(e =>
                         e.Summary == appointment.Summary &&
                         e.Location == appointment.Location
@@ -43,7 +42,7 @@ namespace Catharsium.Calendar.Core.Logic.Scheduler
                             Summary = appointment.Summary,
                             Location = appointment.Location,
                             Start = new Date { Value = date, HasTime = true },
-                            End = new Date { Value = date + duration, HasTime = true }
+                            End = new Date { Value = date.AddMinutes(appointment.DurationInMinutes), HasTime = true }
                         }));
                     }
                 }

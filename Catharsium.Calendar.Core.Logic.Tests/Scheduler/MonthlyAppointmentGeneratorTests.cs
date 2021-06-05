@@ -22,7 +22,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler
                 Category = "My category",
                 Summary = "My description",
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddMinutes(60),
+                DurationInMinutes = 60,
                 Recurrence = new Recurrence
                 {
                     Interval = Interval.Monthly,
@@ -40,7 +40,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler
                     e.Location == appointment.Location &&
                     e.Start.Value.TimeOfDay == appointment.StartDate.TimeOfDay &&
                     e.Start.HasTime &&
-                    e.End.Value.TimeOfDay == appointment.EndDate.TimeOfDay &&
+                    e.End.Value.TimeOfDay == appointment.StartDate.AddMinutes(appointment.DurationInMinutes).TimeOfDay &&
                     e.End.HasTime
                 )).Returns(newEvent);
 
@@ -58,7 +58,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler
                 Category = "My category",
                 Summary = "My description",
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddMinutes(60),
+                DurationInMinutes = 60,
                 Recurrence = new Recurrence
                 {
                     Interval = Interval.Monthly,
@@ -67,7 +67,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler
             };
             var monthsToSchedule = 13;
             var startDate = DateTime.Today;
-            var toDate = startDate.AddMonths(monthsToSchedule);
+            var toDate = startDate.AddMonths(monthsToSchedule).AddMinutes(appointment.DurationInMinutes);
 
             var actual = await this.Target.GenerateFor(startDate, toDate, appointment);
             Assert.AreEqual(monthsToSchedule / appointment.Recurrence.Frequency + 1, actual.Length);
