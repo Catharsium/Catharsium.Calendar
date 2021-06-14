@@ -1,8 +1,10 @@
-﻿namespace Catharsium.Calendar.Core.Entities.Models.Scheduler
+﻿using System.Collections.Generic;
+
+namespace Catharsium.Calendar.Core.Entities.Models.Scheduler
 {
     public class SchedulerSettings
     {
-        public Appointment[] Appointments { get; set; }
-        public Template[] Templates { get; set; }
+        public List<Appointment> Appointments { get; set; }
+        public List<Template> Templates { get; set; }
     }
 }

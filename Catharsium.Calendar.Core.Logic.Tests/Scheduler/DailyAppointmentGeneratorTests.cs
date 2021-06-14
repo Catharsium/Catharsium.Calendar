@@ -66,7 +66,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler
             var toDate = startDate.AddDays(daysToSchedule).AddMinutes(appointment.DurationInMinutes);
 
             var actual = await this.Target.GenerateFor(startDate, toDate, appointment);
-            Assert.AreEqual(daysToSchedule / appointment.Recurrence.Frequency + 1, actual.Length);
+            Assert.AreEqual((daysToSchedule / appointment.Recurrence.Frequency) + 1, actual.Length);
         }
     }
 }

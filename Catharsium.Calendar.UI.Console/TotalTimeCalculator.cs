@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Calendar.Core.Entities.Models;
 using Catharsium.Util.Time.Extensions;
+using System.Collections.Generic;
 
 namespace Catharsium.Calendar.UI.Console
 {

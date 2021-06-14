@@ -40,8 +40,8 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
 
             var newEvent = new Event {
                 Summary = summary,
-                Start = new Date {Value = startDate.Value},
-                End = new Date {Value = endDate.Value}
+                Start = new Date { Value = startDate.Value },
+                End = new Date { Value = endDate.Value }
             };
 
             var newCalendar = await this.chooseCalendarStepHandler.Run();

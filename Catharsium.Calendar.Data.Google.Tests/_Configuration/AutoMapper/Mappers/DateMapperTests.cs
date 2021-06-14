@@ -11,7 +11,7 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Mapper
     public class DateMapperTests : TestFixture<DateMapper>
     {
         #region Fixture
-        
+
         [TestInitialize]
         public void SetupDependencies()
         {
@@ -23,8 +23,8 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Mapper
         public void Resolve_DateField_SetHasTimeToFalse_ReturnsDate()
         {
             var expected = DateTime.Now.Date;
-            var input = new GoogleEventDateTime {Date = expected.ToString("yyyy-MM-dd")};
-            var output = new Date {HasTime = true};
+            var input = new GoogleEventDateTime { Date = expected.ToString("yyyy-MM-dd") };
+            var output = new Date { HasTime = true };
 
             var actual = this.Target.Resolve(input, output, DateTime.MaxValue, null);
             Assert.IsFalse(output.HasTime);
@@ -37,8 +37,8 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Mapper
         public void Resolve_DateTimeField_SetsHasTimeToTrue_ReturnsDateTime()
         {
             var expected = DateTime.Now;
-            var input = new GoogleEventDateTime {DateTime = expected};
-            var output = new Date {HasTime = false};
+            var input = new GoogleEventDateTime { DateTime = expected };
+            var output = new Date { HasTime = false };
 
             var actual = this.Target.Resolve(input, output, DateTime.MaxValue, null);
             Assert.IsTrue(output.HasTime);
@@ -58,7 +58,7 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Mapper
                 DateTime = expected,
                 Date = DateTime.MinValue.ToString("yyyy-MM-dd")
             };
-            var output = new Date {HasTime = true};
+            var output = new Date { HasTime = true };
 
             var actual = this.Target.Resolve(input, output, DateTime.MaxValue, null);
             Assert.IsTrue(output.HasTime);

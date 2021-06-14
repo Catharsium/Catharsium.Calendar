@@ -1,9 +1,10 @@
 ﻿using Catharsium.Calendar.Data.Google._Configuration.Settings;
+using System.Collections.Generic;
 
 namespace Catharsium.Calendar.Data.Google._Configuration
 {
     public class CalendarGoogleConfiguration
     {
-        public Credentials[] Credentials { get; set; }
+        public List<Credentials> Credentials { get; set; }
     }
 }

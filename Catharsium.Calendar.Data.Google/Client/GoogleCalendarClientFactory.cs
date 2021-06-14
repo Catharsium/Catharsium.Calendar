@@ -13,14 +13,14 @@ namespace Catharsium.Calendar.Data.Google.Client
 {
     public class GoogleCalendarClientFactory : ICalendarClientFactory
     {
-        private static readonly string[] Scopes = {CalendarService.Scope.Calendar};
-        private readonly Credentials[] credentialsList;
+        private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
+        private readonly List<Credentials> credentialsList;
         private Dictionary<Credentials, CalendarService> CalendarServices { get; set; }
 
         public string UserName { get; set; }
 
 
-        public GoogleCalendarClientFactory(Credentials[] credentialsList)
+        public GoogleCalendarClientFactory(List<Credentials> credentialsList)
         {
             this.credentialsList = credentialsList;
             this.CalendarServices = new Dictionary<Credentials, CalendarService>();

@@ -16,15 +16,13 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler
         [TestMethod]
         public async Task GenerateFor_GeneratesAppointments_ReturnsEvents()
         {
-            var appointment = new Appointment
-            {
+            var appointment = new Appointment {
                 CalendarId = "My calendar id",
                 Category = "My category",
                 Summary = "My description",
                 StartDate = DateTime.Now,
                 DurationInMinutes = 60,
-                Recurrence = new Recurrence
-                {
+                Recurrence = new Recurrence {
                     Interval = Interval.Monthly,
                     Frequency = 1
                 }
@@ -52,15 +50,13 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler
         [TestMethod]
         public async Task GenerateFor_Frequency3_GeneratesAppointmentEvery3Months()
         {
-            var appointment = new Appointment
-            {
+            var appointment = new Appointment {
                 CalendarId = "My calendar id",
                 Category = "My category",
                 Summary = "My description",
                 StartDate = DateTime.Now,
                 DurationInMinutes = 60,
-                Recurrence = new Recurrence
-                {
+                Recurrence = new Recurrence {
                     Interval = Interval.Monthly,
                     Frequency = 3
                 }
@@ -70,7 +66,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler
             var toDate = startDate.AddMonths(monthsToSchedule).AddMinutes(appointment.DurationInMinutes);
 
             var actual = await this.Target.GenerateFor(startDate, toDate, appointment);
-            Assert.AreEqual(monthsToSchedule / appointment.Recurrence.Frequency + 1, actual.Length);
+            Assert.AreEqual((monthsToSchedule / appointment.Recurrence.Frequency) + 1, actual.Length);
         }
     }
 }

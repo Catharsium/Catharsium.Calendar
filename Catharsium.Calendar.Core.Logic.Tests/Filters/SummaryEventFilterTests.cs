@@ -39,7 +39,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         {
             this.Target.IgnoreCase = true;
             var @event = new Event {
-                Summary = this.Query.Substring(1)
+                Summary = this.Query[1..]
             };
 
             var actual = this.Target.Includes(@event);
@@ -78,7 +78,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
         {
             this.Target.IgnoreCase = false;
             var @event = new Event {
-                Summary = this.Query.ToLower().Substring(1)
+                Summary = this.Query.ToLower()[1..]
             };
 
             var actual = this.Target.Includes(@event);

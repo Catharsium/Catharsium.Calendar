@@ -29,8 +29,8 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Google
         public void Map_CanMapGoogleEventDateTime_ToDateTime()
         {
             var calendar = new GoogleEvent {
-                Start = new GoogleEventDateTime {DateTime = DateTime.Now,},
-                End = new GoogleEventDateTime {DateTime = DateTime.Now}
+                Start = new GoogleEventDateTime { DateTime = DateTime.Now, },
+                End = new GoogleEventDateTime { DateTime = DateTime.Now }
             };
 
             var actual = this.Mapper.Map<Event>(calendar);
@@ -46,8 +46,8 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Google
         public void Map_CanMapGoogleEventDateOnly_ToDateWithoutTime()
         {
             var calendar = new GoogleEvent {
-                Start = new GoogleEventDateTime {Date = DateTime.Now.ToString("yyyy-MM-dd")},
-                End = new GoogleEventDateTime {Date = DateTime.Now.ToString("yyyy-MM-dd")}
+                Start = new GoogleEventDateTime { Date = DateTime.Now.ToString("yyyy-MM-dd") },
+                End = new GoogleEventDateTime { Date = DateTime.Now.ToString("yyyy-MM-dd") }
             };
 
             var actual = this.Mapper.Map<Event>(calendar);
@@ -63,7 +63,7 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.Google
         public void Map_CanMapGoogleEventWithOriginalStartTime_ToEvent()
         {
             var calendar = new GoogleEvent {
-                OriginalStartTime = new GoogleEventDateTime {DateTime = DateTime.Now}
+                OriginalStartTime = new GoogleEventDateTime { DateTime = DateTime.Now }
             };
 
             var actual = this.Mapper.Map<Event>(calendar);

@@ -4,6 +4,7 @@ using Catharsium.Calendar.Core.Logic.Presentation;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace Catharsium.Calendar.Core.Logic.Tests.Presentation
 {
@@ -22,7 +23,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Presentation
         public void GetById_ValidId_ReturnsColorFromConfiguration()
         {
             var configuration = new CalendarCoreLogicConfiguration {
-                CalendarColors = new[] {
+                CalendarColors = new List<CalendarColor> {
                     new CalendarColor {
                         Id = ColorId,
                         ConsoleColor = Color.ToString()
@@ -40,7 +41,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Presentation
         public void GetById_InvalidColorId_ReturnsDefaultColor()
         {
             var configuration = new CalendarCoreLogicConfiguration {
-                CalendarColors = new[] {
+                CalendarColors = new List<CalendarColor> {
                     new CalendarColor {
                         Id = ColorId + 1,
                         ConsoleColor = Color.ToString()

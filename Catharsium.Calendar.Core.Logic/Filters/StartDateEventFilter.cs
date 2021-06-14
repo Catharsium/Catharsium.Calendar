@@ -8,7 +8,7 @@ namespace Catharsium.Calendar.Core.Logic.Filters
     {
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-        
+
 
         public bool Includes(Event item)
         {

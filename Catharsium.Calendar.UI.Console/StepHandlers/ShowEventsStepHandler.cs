@@ -50,23 +50,13 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
 
         private void SetColor(string calendarId)
         {
-            switch (calendarId) {
-                case "bn1j5jeikkv53v8mg687fk1324@group.calendar.google.com":
-                    this.console.ForegroundColor = ConsoleColor.Yellow;
-                    break;
-                case "t.w.brachthuizer@gmail.com":
-                    this.console.ForegroundColor = ConsoleColor.Red;
-                    break;
-                case "9ssl6im7hpe1c97rebr4csgstg@group.calendar.google.com":
-                    this.console.ForegroundColor = ConsoleColor.DarkGreen;
-                    break;
-                case "brachthuizer@gmail.com":
-                    this.console.ForegroundColor = ConsoleColor.Green;
-                    break;
-                default:
-                    this.console.ForegroundColor = ConsoleColor.White;
-                    break;
-            }
+            this.console.ForegroundColor = calendarId switch {
+                "bn1j5jeikkv53v8mg687fk1324@group.calendar.google.com" => ConsoleColor.Yellow,
+                "t.w.brachthuizer@gmail.com" => ConsoleColor.Red,
+                "9ssl6im7hpe1c97rebr4csgstg@group.calendar.google.com" => ConsoleColor.DarkGreen,
+                "brachthuizer@gmail.com" => ConsoleColor.Green,
+                _ => ConsoleColor.White,
+            };
         }
     }
 }

@@ -57,7 +57,7 @@ namespace Catharsium.Calendar.Data.Google.Tests._Configuration.AutoMapper.LocalT
         public void Map_CanMapEventWithOriginalStartTime_ToEvent()
         {
             var calendar = new Event {
-                OriginalStartTime = new Date {Value = DateTime.Now}
+                OriginalStartTime = new Date { Value = DateTime.Now }
             };
 
             var actual = this.Mapper.Map<GoogleEvent>(calendar);

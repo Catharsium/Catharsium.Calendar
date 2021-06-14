@@ -50,12 +50,12 @@ namespace Catharsium.Calendar.Data.Google.Client.Services
         public Task<Event> GetEvent(string calendarId, string eventId)
         {
             return Task.Run(() => {
-                    var calendarService = this.calendarClientFactory.Get();
-                    var request = calendarService.Events.Get(calendarId, eventId);
-                    var result = this.mapper.Map<Event>(request.Execute());
-                    result.CalendarId = calendarId;
-                    return result;
-                }
+                var calendarService = this.calendarClientFactory.Get();
+                var request = calendarService.Events.Get(calendarId, eventId);
+                var result = this.mapper.Map<Event>(request.Execute());
+                result.CalendarId = calendarId;
+                return result;
+            }
             );
         }
 

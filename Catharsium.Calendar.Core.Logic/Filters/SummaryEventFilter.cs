@@ -11,11 +11,9 @@ namespace Catharsium.Calendar.Core.Logic.Filters
 
         public bool Includes(Event item)
         {
-            if (this.IgnoreCase) {
-                return item.Summary != null && item.Summary.ToLower().Contains(this.Query.ToLower());
-            }
-
-            return item.Summary != null && item.Summary.Contains(this.Query);
+            return this.IgnoreCase
+                ? item.Summary != null && item.Summary.ToLower().Contains(this.Query.ToLower())
+                : item.Summary != null && item.Summary.Contains(this.Query);
         }
     }
 }

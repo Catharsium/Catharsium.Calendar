@@ -27,18 +27,14 @@ namespace Catharsium.Calendar.Core.Logic.Scheduler
             var result = new List<Event>();
             var date = appointment.StartDate;
 
-            while (date < toDate.AddMonths(1))
-            {
-                if (date > fromDate)
-                {
+            while (date < toDate.AddMonths(1)) {
+                if (date > fromDate) {
                     var existingAppointments = await this.eventManagementService.GetList(appointment.CalendarId, date, date.AddMinutes(appointment.DurationInMinutes));
                     if (!existingAppointments.Any(e =>
                         e.Summary == appointment.Summary &&
                         e.Location == appointment.Location
-                    ))
-                    {
-                        result.Add(await this.eventManagementService.CreateEvent(appointment.CalendarId, new Event
-                        {
+                    )) {
+                        result.Add(await this.eventManagementService.CreateEvent(appointment.CalendarId, new Event {
                             Summary = appointment.Summary,
                             Location = appointment.Location,
                             Start = new Date { Value = date, HasTime = true },

@@ -34,7 +34,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
             var @event = new Event();
             this.FirstFilter.Includes(Arg.Any<Event>()).Returns(true);
             this.SecondFilter.Includes(Arg.Any<Event>()).Returns(true);
-            this.Target.Filters = new List<IFilter<Event>> {this.FirstFilter, this.SecondFilter};
+            this.Target.Filters = new List<IFilter<Event>> { this.FirstFilter, this.SecondFilter };
 
             var actual = this.Target.Includes(@event);
             Assert.IsTrue(actual);
@@ -47,7 +47,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
             var @event = new Event();
             this.FirstFilter.Includes(Arg.Any<Event>()).Returns(true);
             this.SecondFilter.Includes(Arg.Any<Event>()).Returns(false);
-            this.Target.Filters = new List<IFilter<Event>> {this.FirstFilter, this.SecondFilter};
+            this.Target.Filters = new List<IFilter<Event>> { this.FirstFilter, this.SecondFilter };
 
             var actual = this.Target.Includes(@event);
             Assert.IsTrue(actual);
@@ -60,7 +60,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Filters
             var @event = new Event();
             this.FirstFilter.Includes(Arg.Any<Event>()).Returns(false);
             this.SecondFilter.Includes(Arg.Any<Event>()).Returns(false);
-            this.Target.Filters = new List<IFilter<Event>> {this.FirstFilter, this.SecondFilter};
+            this.Target.Filters = new List<IFilter<Event>> { this.FirstFilter, this.SecondFilter };
 
             var actual = this.Target.Includes(@event);
             Assert.IsFalse(actual);

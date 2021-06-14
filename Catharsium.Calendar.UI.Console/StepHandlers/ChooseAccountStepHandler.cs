@@ -25,11 +25,9 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
             }
 
             var accountIndex = this.console.AskForInt();
-            if (accountIndex.HasValue && accountIndex > 0 && accountIndex <= this.userNames.Length) {
-                return this.userNames[accountIndex.Value - 1];
-            }
-
-            return null;
+            return accountIndex.HasValue && accountIndex > 0 && accountIndex <= this.userNames.Length
+                ? this.userNames[accountIndex.Value - 1]
+                : null;
         }
     }
 }

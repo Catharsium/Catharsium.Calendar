@@ -54,14 +54,12 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers
                 .ToList();
             var duration = TotalTimeCalculator.CalculateTotalTime(filteredEvents);
 
-            if (filteredEvents.Count > 0)
-            {
+            if (filteredEvents.Count > 0) {
                 await this.showEventsStepHandler.ShowEvents(filteredEvents);
                 this.console.WriteLine($"{filteredEvents.Count} events found for a total of {duration} duration.");
                 this.console.WriteLine();
             }
-            else
-            {
+            else {
                 this.console.WriteLine($"No events found for query '{query}'.");
             }
         }

@@ -6,11 +6,9 @@ namespace Catharsium.Calendar.Core.Entities.Models.Comparers
     {
         public bool Equals(Event x, Event y)
         {
-            if (x == null || y == null) {
-                return false;
-            }
-
-            return x.Id == y.Id;
+            return x != null
+                && y != null
+                && x.Id == y.Id;
         }
 
 

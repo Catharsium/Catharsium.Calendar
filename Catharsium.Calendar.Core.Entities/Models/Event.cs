@@ -47,7 +47,8 @@ namespace Catharsium.Calendar.Core.Entities.Models
         public virtual bool? GuestsCanModify { get; set; }
         public virtual bool? GuestsCanSeeOtherGuests { get; set; }
 
-        public Category Category {
+        public Category Category
+        {
             get {
                 if (this.ColorId == null) { return Category.Unknown; }
 
