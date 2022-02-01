@@ -1,46 +1,41 @@
 ﻿using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console._Configuration;
+using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
 using System;
 using System.Threading.Tasks;
+namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 
-namespace Catharsium.Calendar.UI.Console.ActionHandlers
+public class ScheduleActionHandler : BaseActionHandler
 {
-    public class ScheduleActionHandler : IActionHandler
+    private readonly IAppointmentScheduler appointmentScheduler;
+    private readonly CalendarGoogleUiConfiguration configuration;
+
+
+    public ScheduleActionHandler(IAppointmentScheduler appointmentScheduler, CalendarGoogleUiConfiguration configuration, IConsole console)
+        : base(console, "Schedule period")
     {
-        private readonly IAppointmentScheduler appointmentScheduler;
-        private readonly IConsole console;
-        private readonly CalendarGoogleUiConfiguration configuration;
+        this.appointmentScheduler = appointmentScheduler;
+        this.configuration = configuration;
+    }
 
 
-        public string FriendlyName => "Schedule action";
+    public override async Task Run()
+    {
+        var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd)");
+        var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd)");
 
-
-        public ScheduleActionHandler(IAppointmentScheduler appointmentScheduler, IConsole console, CalendarGoogleUiConfiguration configuration)
-        {
-            this.appointmentScheduler = appointmentScheduler;
-            this.console = console;
-            this.configuration = configuration;
+        if (!startDate.HasValue) {
+            startDate = DateTime.Today;
         }
 
+        if (!endDate.HasValue) {
+            endDate = startDate.Value.AddDays(7);
+        }
 
-        public async Task Run()
-        {
-            var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd)");
-            var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd)");
-
-            if (!startDate.HasValue) {
-                startDate = DateTime.Today;
-            }
-
-            if (!endDate.HasValue) {
-                endDate = startDate.Value.AddDays(7);
-            }
-
-            var events = await this.appointmentScheduler.GenerateFor(startDate.Value, endDate.Value, this.configuration.SchedulerSettings);
-            foreach (var @event in events) {
-                this.console.WriteLine($"{@event.Start.Value:yyyy-MM-dd}: \"{@event.Summary}\"");
-            }
+        var events = await this.appointmentScheduler.GenerateFor(startDate.Value, endDate.Value, this.configuration.SchedulerSettings);
+        foreach (var @event in events) {
+            this.console.WriteLine($"{@event.Start.Value:yyyy-MM-dd}: \"{@event.Summary}\"");
         }
     }
 }

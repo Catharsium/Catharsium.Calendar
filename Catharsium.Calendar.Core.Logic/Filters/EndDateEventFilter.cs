@@ -1,27 +1,25 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Util.Filters;
+using Catharsium.Util.Interfaces;
 using System;
+namespace Catharsium.Calendar.Core.Logic.Filters;
 
-namespace Catharsium.Calendar.Core.Logic.Filters
+public class EndDateEventFilter : IFilter<Event>
 {
-    public class EndDateEventFilter : IFilter<Event>
+    public DateTime From { get; set; }
+    public DateTime To { get; set; }
+
+
+    public bool Includes(Event item)
     {
-        public DateTime From { get; set; }
-        public DateTime To { get; set; }
+        var fromDate = this.From;
+        var untilDate = this.To;
 
-
-        public bool Includes(Event item)
-        {
-            var fromDate = this.From;
-            var untilDate = this.To;
-
-            if (item.End.HasTime) {
-                return item.End.Value >= fromDate && item.End.Value <= untilDate;
-            }
-
-            fromDate = fromDate.Date;
-            untilDate = untilDate.Date;
-            return item.End.Value.Date >= fromDate && item.End.Value.Date <= untilDate;
+        if (item.End.HasTime) {
+            return item.End.Value >= fromDate && item.End.Value <= untilDate;
         }
+
+        fromDate = fromDate.Date;
+        untilDate = untilDate.Date;
+        return item.End.Value.Date >= fromDate && item.End.Value.Date <= untilDate;
     }
 }
