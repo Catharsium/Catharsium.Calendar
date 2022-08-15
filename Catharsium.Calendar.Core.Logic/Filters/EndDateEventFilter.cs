@@ -1,6 +1,7 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.Interfaces;
 using System;
+
 namespace Catharsium.Calendar.Core.Logic.Filters;
 
 public class EndDateEventFilter : IFilter<Event>
@@ -14,7 +15,7 @@ public class EndDateEventFilter : IFilter<Event>
         var fromDate = this.From;
         var untilDate = this.To;
 
-        if (item.End.HasTime) {
+        if(item.End.HasTime) {
             return item.End.Value >= fromDate && item.End.Value <= untilDate;
         }
 

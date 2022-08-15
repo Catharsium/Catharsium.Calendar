@@ -1,8 +1,8 @@
 ﻿using Catharsium.Calendar.Core.Logic._Configuration;
-using Catharsium.Calendar.Data.Google._Configuration;
 using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
+using Catharsium.Clients.GoogleCalendar._Configuration;
 using Catharsium.Util.Configuration.Extensions;
 using Catharsium.Util.IO.Console._Configuration;
 using Catharsium.Util.IO.Console.ActionHandlers.Interfaces;

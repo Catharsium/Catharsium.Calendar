@@ -1,0 +1,15 @@
+﻿using Catharsium.Clients.GoogleCalendar.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Catharsium.Clients.GoogleCalendar.Interfaces;
+
+public interface IEventManagementService
+{
+    Task<IEnumerable<Event>> GetList(string calendarId, DateTime from, DateTime to);
+    Task<Event> GetEvent(string calendarId, string eventId);
+    Task<Event> CreateEvent(string calendarId, Event eventData);
+    Task UpdateEvent(string calendarId, Event eventData);
+    Task DeleteEvent(string calendarId, string eventId);
+}

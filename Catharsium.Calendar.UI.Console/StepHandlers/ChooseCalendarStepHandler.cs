@@ -1,5 +1,5 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
-using Catharsium.Calendar.UI.Console.Interfaces;
+﻿using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Interfaces;
 using Catharsium.Util.IO.Console.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,17 +9,17 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
     public class ChooseCalendarStepHandler : IChooseCalendarStepHandler
     {
         private readonly IConsole console;
-        private readonly ICalendarService calendarService;
+        private readonly IGoogleCalendarService calendarService;
 
 
-        public ChooseCalendarStepHandler(IConsole console, ICalendarService calendarService)
+        public ChooseCalendarStepHandler(IConsole console, IGoogleCalendarService calendarService)
         {
             this.console = console;
             this.calendarService = calendarService;
         }
 
 
-        public async Task<Core.Entities.Models.Calendar> Run()
+        public async Task<Clients.GoogleCalendar.Models.Calendar> Run()
         {
             var calendars = (await this.calendarService.GetList()).ToList();
             this.console.WriteLine("Choose a calendar:");
@@ -34,7 +34,7 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
 
             this.console.WriteLine("No valid calendar chosen.");
 
-            return await Task.FromResult(null as Core.Entities.Models.Calendar);
+            return await Task.FromResult(null as Clients.GoogleCalendar.Models.Calendar);
         }
     }
 }

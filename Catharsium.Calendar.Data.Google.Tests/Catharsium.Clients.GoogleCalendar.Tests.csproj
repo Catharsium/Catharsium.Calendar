@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Catharsium.Calendar.Data.Google\Catharsium.Calendar.Data.Google.csproj" />
+    <ProjectReference Include="..\Catharsium.Calendar.Data.Google\Catharsium.Clients.GoogleCalendar.csproj" />
   </ItemGroup>
 
 </Project>

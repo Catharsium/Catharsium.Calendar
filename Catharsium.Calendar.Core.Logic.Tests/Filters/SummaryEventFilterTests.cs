@@ -1,5 +1,5 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.Core.Logic.Filters;
+﻿using Catharsium.Calendar.Core.Logic.Filters;
+using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

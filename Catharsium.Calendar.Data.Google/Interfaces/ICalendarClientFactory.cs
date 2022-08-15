@@ -1,13 +1,12 @@
 ﻿using Google.Apis.Calendar.v3;
 
-namespace Catharsium.Calendar.Data.Google.Interfaces
+namespace Catharsium.Clients.GoogleCalendar.Interfaces;
+
+public interface ICalendarClientFactory
 {
-    public interface ICalendarClientFactory
-    {
-        string UserName { get; set; }
+    string UserName { get; set; }
 
-        string[] GetUserNames();
+    string[] GetUserNames();
 
-        CalendarService Get();
-    }
+    CalendarService Get();
 }

@@ -35,7 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Catharsium.Calendar.Core.Entities\Catharsium.Calendar.Core.Entities.csproj" />
     <ProjectReference Include="..\Catharsium.Calendar.Core.Logic\Catharsium.Calendar.Core.Logic.csproj" />
-    <ProjectReference Include="..\Catharsium.Calendar.Data.Google\Catharsium.Calendar.Data.Google.csproj" />
+    <ProjectReference Include="..\Catharsium.Calendar.Data.Google\Catharsium.Clients.GoogleCalendar.csproj" />
   </ItemGroup>
 
   <ItemGroup>

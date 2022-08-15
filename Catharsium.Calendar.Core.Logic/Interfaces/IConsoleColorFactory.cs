@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Catharsium.Calendar.Core.Logic.Interfaces
+namespace Catharsium.Calendar.Core.Logic.Interfaces;
+
+public interface IConsoleColorFactory
 {
-    public interface IConsoleColorFactory
-    {
-        ConsoleColor GetById(string calendarId, string colorId);
-    }
+    ConsoleColor GetById(string calendarId, string colorId);
 }

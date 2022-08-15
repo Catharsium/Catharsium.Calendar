@@ -1,7 +1,7 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
-using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.Core.Logic.Interfaces;
+﻿using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.IO.Console.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,11 +13,11 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
     public class ShowEventsStepHandler : IShowEventsStepHandler
     {
         private readonly IConsole console;
-        private readonly ICalendarService calendarService;
+        private readonly IGoogleCalendarService calendarService;
         private readonly IConsoleColorFactory consoleColorFactory;
 
 
-        public ShowEventsStepHandler(IConsole console, ICalendarService calendarService, IConsoleColorFactory consoleColorFactory)
+        public ShowEventsStepHandler(IConsole console, IGoogleCalendarService calendarService, IConsoleColorFactory consoleColorFactory)
         {
             this.console = console;
             this.calendarService = calendarService;

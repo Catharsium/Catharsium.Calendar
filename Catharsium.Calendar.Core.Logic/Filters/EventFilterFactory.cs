@@ -1,9 +1,10 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.Core.Logic.Interfaces;
+﻿using Catharsium.Calendar.Core.Logic.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+
 namespace Catharsium.Calendar.Core.Logic.Filters;
 
 public class EventFilterFactory : IEventFilterFactory
@@ -25,7 +26,7 @@ public class EventFilterFactory : IEventFilterFactory
 
     public IFilter<Event> CreateOrFilter(params IFilter<Event>[] filters)
     {
-        if (this.CreateFilter<OrEventFilter>() is not OrEventFilter result) {
+        if(this.CreateFilter<OrEventFilter>() is not OrEventFilter result) {
             return null;
         }
 
@@ -36,7 +37,7 @@ public class EventFilterFactory : IEventFilterFactory
 
     public IFilter<Event> CreateStartDateFilter(DateTime from, DateTime to)
     {
-        if (this.CreateFilter<StartDateEventFilter>() is not StartDateEventFilter result) {
+        if(this.CreateFilter<StartDateEventFilter>() is not StartDateEventFilter result) {
             return null;
         }
 
@@ -48,7 +49,7 @@ public class EventFilterFactory : IEventFilterFactory
 
     public IFilter<Event> CreateEndDateFilter(DateTime from, DateTime to)
     {
-        if (this.CreateFilter<EndDateEventFilter>() is not EndDateEventFilter result) {
+        if(this.CreateFilter<EndDateEventFilter>() is not EndDateEventFilter result) {
             return null;
         }
 
@@ -60,7 +61,7 @@ public class EventFilterFactory : IEventFilterFactory
 
     public IFilter<Event> CreateDescriptionFilter(string query, bool ignoreCase = true)
     {
-        if (this.CreateFilter<DescriptionEventFilter>() is not DescriptionEventFilter result) {
+        if(this.CreateFilter<DescriptionEventFilter>() is not DescriptionEventFilter result) {
             return null;
         }
 
@@ -72,7 +73,7 @@ public class EventFilterFactory : IEventFilterFactory
 
     public IFilter<Event> CreateLocationFilter(string query, bool ignoreCase = true)
     {
-        if (this.CreateFilter<LocationEventFilter>() is not LocationEventFilter result) {
+        if(this.CreateFilter<LocationEventFilter>() is not LocationEventFilter result) {
             return null;
         }
 
@@ -84,7 +85,7 @@ public class EventFilterFactory : IEventFilterFactory
 
     public IFilter<Event> CreateSummaryFilter(string query, bool ignoreCase = true)
     {
-        if (this.CreateFilter<SummaryEventFilter>() is not SummaryEventFilter result) {
+        if(this.CreateFilter<SummaryEventFilter>() is not SummaryEventFilter result) {
             return null;
         }
 

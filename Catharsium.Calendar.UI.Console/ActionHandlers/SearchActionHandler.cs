@@ -1,6 +1,6 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.Core.Logic.Interfaces;
+﻿using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.Filters;
 using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
@@ -8,6 +8,7 @@ using Catharsium.Util.IO.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 
 public class SearchActionHandler : BaseActionHandler
@@ -53,7 +54,7 @@ public class SearchActionHandler : BaseActionHandler
             .ToList();
         var duration = TotalTimeCalculator.CalculateTotalTime(filteredEvents);
 
-        if (filteredEvents.Count > 0) {
+        if(filteredEvents.Count > 0) {
             await this.showEventsStepHandler.ShowEvents(filteredEvents);
             this.console.WriteLine($"{filteredEvents.Count} events found for a total of {duration} duration.");
             this.console.WriteLine();

@@ -1,5 +1,6 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.Interfaces;
+
 namespace Catharsium.Calendar.Core.Logic.Filters;
 
 public class SummaryEventFilter : IFilter<Event>

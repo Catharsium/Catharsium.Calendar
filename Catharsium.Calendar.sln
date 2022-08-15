@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29709.97
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.UI.Console", "Catharsium.Calendar.UI.Console\Catharsium.Calendar.UI.Console.csproj", "{4313F93E-D769-4F55-BC55-C7F432848965}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Core.Entities", "Catharsium.Calendar.Core.Entities\Catharsium.Calendar.Core.Entities.csproj", "{7CFEC0AD-8AE1-4E97-8FE8-6AFC02074CA1}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{430535B7-7A0C-4699-ACBF-249EE3B81386}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7AA41329-54B0-41BE-8BA1-6B082B4239E8}"
 EndProject
@@ -21,14 +19,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Core.Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Core.Logic.Tests", "Catharsium.Calendar.Core.Logic.Tests\Catharsium.Calendar.Core.Logic.Tests.csproj", "{45F9AB5F-F463-442A-A6A7-FBA29ABEF5F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Data.Google", "Catharsium.Calendar.Data.Google\Catharsium.Calendar.Data.Google.csproj", "{E4592DD6-3AF4-4E7B-86C7-12099E25B33E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Clients.GoogleCalendar", "Catharsium.Calendar.Data.Google\Catharsium.Clients.GoogleCalendar.csproj", "{E4592DD6-3AF4-4E7B-86C7-12099E25B33E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Calendar.Data.Google.Tests", "Catharsium.Calendar.Data.Google.Tests\Catharsium.Calendar.Data.Google.Tests.csproj", "{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catharsium.Clients.GoogleCalendar.Tests", "Catharsium.Calendar.Data.Google.Tests\Catharsium.Clients.GoogleCalendar.Tests.csproj", "{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution items", "_Solution items", "{FDC2553A-0457-426C-849D-605ED6728BBE}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build.yml = .github\workflows\build.yml
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{0D0B17E8-8B4F-4818-844E-6CA1AEB2AF78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,8 +79,8 @@ Global
 		{28545929-15FE-42E6-B374-AED3281FDF78} = {EC8BD8AD-F022-4870-8498-93817304D40C}
 		{98A3312F-4086-4BC0-8040-C687053C255C} = {7AA41329-54B0-41BE-8BA1-6B082B4239E8}
 		{45F9AB5F-F463-442A-A6A7-FBA29ABEF5F7} = {7AA41329-54B0-41BE-8BA1-6B082B4239E8}
-		{E4592DD6-3AF4-4E7B-86C7-12099E25B33E} = {430535B7-7A0C-4699-ACBF-249EE3B81386}
-		{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1} = {430535B7-7A0C-4699-ACBF-249EE3B81386}
+		{E4592DD6-3AF4-4E7B-86C7-12099E25B33E} = {0D0B17E8-8B4F-4818-844E-6CA1AEB2AF78}
+		{7E2E3DA4-65D6-48A5-A84E-3F471E49B6C1} = {0D0B17E8-8B4F-4818-844E-6CA1AEB2AF78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63765E0D-6C23-4897-9F07-742C7D01AE80}

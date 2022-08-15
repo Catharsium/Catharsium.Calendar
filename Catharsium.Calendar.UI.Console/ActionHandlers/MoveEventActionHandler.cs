@@ -1,7 +1,7 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
-using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.Core.Logic.Interfaces;
+﻿using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.Filters;
 using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
@@ -9,6 +9,7 @@ using Catharsium.Util.IO.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 
 public class MoveEventActionHandler : BaseActionHandler
@@ -56,14 +57,14 @@ public class MoveEventActionHandler : BaseActionHandler
             .OrderBy(e => e.End.Value)
             .ToList();
 
-        if (filteredEvents.Count > 0) {
+        if(filteredEvents.Count > 0) {
             var @event = this.chooseAnEventStepHandler.Run(filteredEvents);
-            if (@event == null) {
+            if(@event == null) {
                 return;
             }
 
             var newCalendar = await this.chooseACalendarStepHandler.Run();
-            if (newCalendar != null) {
+            if(newCalendar != null) {
                 await this.eventUpdater.Move(@event, @event.CalendarId, newCalendar.Id);
             }
         }

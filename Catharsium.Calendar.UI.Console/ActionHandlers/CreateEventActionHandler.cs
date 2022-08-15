@@ -1,14 +1,14 @@
-﻿using Catharsium.Calendar.Core.Entities.Interfaces.Services;
-using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.UI.Console.Interfaces;
+﻿using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
 using System.Threading.Tasks;
+
 namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 
 public class CreateEventActionHandler : BaseActionHandler
 {
-    private readonly IConsole console;
     private readonly IChooseCalendarStepHandler chooseCalendarStepHandler;
     private readonly IEventManagementService eventService;
 
@@ -19,7 +19,6 @@ public class CreateEventActionHandler : BaseActionHandler
     public CreateEventActionHandler(IChooseCalendarStepHandler chooseCalendarStepHandler, IEventManagementService eventService, IConsole console)
         : base(console, "Create event")
     {
-        this.console = console;
         this.chooseCalendarStepHandler = chooseCalendarStepHandler;
         this.eventService = eventService;
     }
@@ -31,11 +30,11 @@ public class CreateEventActionHandler : BaseActionHandler
         var startDate = this.console.AskForDate("Enter the start date (yyyy MM dd HH mm:");
         var endDate = this.console.AskForDate("Enter the end date (yyyy MM dd HH mm:");
 
-        if (!startDate.HasValue) {
+        if(!startDate.HasValue) {
             return;
         }
 
-        if (!endDate.HasValue) {
+        if(!endDate.HasValue) {
             endDate = startDate.Value.AddMinutes(30);
         }
 
@@ -46,7 +45,7 @@ public class CreateEventActionHandler : BaseActionHandler
         };
 
         var newCalendar = await this.chooseCalendarStepHandler.Run();
-        if (newCalendar != null) {
+        if(newCalendar != null) {
             await this.eventService.CreateEvent(newCalendar.Id, newEvent);
         }
     }

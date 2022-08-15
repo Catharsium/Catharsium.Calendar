@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Catharsium.Calendar.Core.Logic.Interfaces
+namespace Catharsium.Calendar.Core.Logic.Interfaces;
+
+public interface ICalendarImporter
 {
-    public interface ICalendarImporter
-    {
-        Task Import(string calendarId, DateTime startDate, DateTime endDate);
-    }
+    Task Import(string calendarId, DateTime startDate, DateTime endDate);
 }

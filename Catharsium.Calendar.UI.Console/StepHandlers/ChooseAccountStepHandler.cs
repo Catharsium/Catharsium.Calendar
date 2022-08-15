@@ -1,5 +1,5 @@
-﻿using Catharsium.Calendar.Data.Google.Interfaces;
-using Catharsium.Calendar.UI.Console.Interfaces;
+﻿using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Interfaces;
 using Catharsium.Util.IO.Console.Interfaces;
 
 namespace Catharsium.Calendar.UI.Console.StepHandlers

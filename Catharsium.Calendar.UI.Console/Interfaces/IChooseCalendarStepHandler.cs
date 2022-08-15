@@ -4,6 +4,6 @@ namespace Catharsium.Calendar.UI.Console.Interfaces
 {
     public interface IChooseCalendarStepHandler
     {
-        Task<Core.Entities.Models.Calendar> Run();
+        Task<Clients.GoogleCalendar.Models.Calendar> Run();
     }
 }

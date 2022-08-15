@@ -4,23 +4,22 @@ using Catharsium.Util.Enums;
 using System;
 using System.Linq;
 
-namespace Catharsium.Calendar.Core.Logic.Presentation
+namespace Catharsium.Calendar.Core.Logic.Presentation;
+
+public class ConsoleColorFactory : IConsoleColorFactory
 {
-    public class ConsoleColorFactory : IConsoleColorFactory
+    private readonly CalendarCoreLogicConfiguration configuration;
+
+
+    public ConsoleColorFactory(CalendarCoreLogicConfiguration configuration)
     {
-        private readonly CalendarCoreLogicConfiguration configuration;
+        this.configuration = configuration;
+    }
 
 
-        public ConsoleColorFactory(CalendarCoreLogicConfiguration configuration)
-        {
-            this.configuration = configuration;
-        }
-
-
-        public ConsoleColor GetById(string calendarId, string colorId)
-        {
-            var calendarColor = this.configuration.CalendarColors.FirstOrDefault(c => c.Id == colorId);
-            return calendarColor?.ConsoleColor.ParseEnum<ConsoleColor>() ?? ConsoleColor.White;
-        }
+    public ConsoleColor GetById(string calendarId, string colorId)
+    {
+        var calendarColor = this.configuration.CalendarColors.FirstOrDefault(c => c.Id == colorId);
+        return calendarColor?.ConsoleColor.ParseEnum<ConsoleColor>() ?? ConsoleColor.White;
     }
 }

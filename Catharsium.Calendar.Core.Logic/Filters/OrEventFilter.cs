@@ -1,4 +1,4 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.Interfaces;
 using System.Collections.Generic;
 using System.Linq;

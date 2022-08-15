@@ -1,9 +1,10 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
+﻿using Catharsium.Clients.GoogleCalendar.Models;
 using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
 using Catharsium.Util.IO.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 
 public class LoadActionHandler : BaseActionHandler

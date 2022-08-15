@@ -1,6 +1,6 @@
-﻿using Catharsium.Calendar.Data.Google.Interfaces;
-using Catharsium.Calendar.UI.Console._Configuration;
+﻿using Catharsium.Calendar.UI.Console._Configuration;
 using Catharsium.Calendar.UI.Console.Interfaces;
+using Catharsium.Clients.GoogleCalendar.Interfaces;
 using Catharsium.Util.IO.Console.ActionHandlers.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

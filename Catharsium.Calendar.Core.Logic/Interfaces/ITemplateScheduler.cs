@@ -1,12 +1,11 @@
-﻿using Catharsium.Calendar.Core.Entities.Models;
-using Catharsium.Calendar.Core.Entities.Models.Scheduler;
+﻿using Catharsium.Calendar.Core.Entities.Models.Scheduler;
+using Catharsium.Clients.GoogleCalendar.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace Catharsium.Calendar.Core.Logic.Interfaces
+namespace Catharsium.Calendar.Core.Logic.Interfaces;
+
+public interface ITemplateScheduler
 {
-    public interface ITemplateScheduler
-    {
-        Task<Event[]> Schedule(DateTime date, Template template);
-    }
+    Task<Event[]> Schedule(DateTime date, Template template);
 }

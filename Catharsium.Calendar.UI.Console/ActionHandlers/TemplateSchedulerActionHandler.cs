@@ -4,6 +4,7 @@ using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
 using System;
 using System.Threading.Tasks;
+
 namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 
 public class TemplateSchedulerActionHandler : BaseActionHandler
@@ -33,7 +34,7 @@ public class TemplateSchedulerActionHandler : BaseActionHandler
         var minute = selectedMinute ?? 0;
         date = new DateTime(date.Year, date.Month, date.Day, hour, minute, 0);
         var scheduledAppointments = await this.templateScheduler.Schedule(date, selectedTemplate);
-        foreach (var appointment in scheduledAppointments) {
+        foreach(var appointment in scheduledAppointments) {
             this.console.WriteLine($"{appointment.Summary} ({appointment.Start.Value:yyyy-MM-dd HH:mm})");
         }
     }

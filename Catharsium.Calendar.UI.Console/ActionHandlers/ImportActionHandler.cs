@@ -4,6 +4,7 @@ using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
 using System;
 using System.Threading.Tasks;
+
 namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 
 public class ImportActionHandler : BaseActionHandler
@@ -26,7 +27,7 @@ public class ImportActionHandler : BaseActionHandler
     public override async Task Run()
     {
         var calendar = await this.chooseACalendarStepHandler.Run();
-        if (calendar == null) {
+        if(calendar == null) {
             return;
         }
 
