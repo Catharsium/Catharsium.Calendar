@@ -10,12 +10,12 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 public class TemplateSchedulerActionHandler : BaseActionHandler
 {
     private readonly ITemplateScheduler templateScheduler;
-    private readonly CalendarGoogleUiConfiguration configuration;
+    private readonly CalendarUiConsoleSettings configuration;
 
     public string FriendlyName => "Schedule template";
 
 
-    public TemplateSchedulerActionHandler(ITemplateScheduler templateScheduler, IConsole console, CalendarGoogleUiConfiguration configuration)
+    public TemplateSchedulerActionHandler(ITemplateScheduler templateScheduler, IConsole console, CalendarUiConsoleSettings configuration)
         : base(console, "Schedule template")
     {
         this.templateScheduler = templateScheduler;

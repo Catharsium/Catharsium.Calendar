@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Catharsium.Calendar.Data.Google._Configuration;
 
-public class CalendarGoogleConfiguration
+public class GoogleCalendarClientSettings
 {
     public List<Credentials> Credentials { get; set; }
 }

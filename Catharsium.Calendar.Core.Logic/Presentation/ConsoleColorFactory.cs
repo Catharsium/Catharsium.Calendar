@@ -8,10 +8,10 @@ namespace Catharsium.Calendar.Core.Logic.Presentation;
 
 public class ConsoleColorFactory : IConsoleColorFactory
 {
-    private readonly CalendarCoreLogicConfiguration configuration;
+    private readonly CalendarCoreLogicSettings configuration;
 
 
-    public ConsoleColorFactory(CalendarCoreLogicConfiguration configuration)
+    public ConsoleColorFactory(CalendarCoreLogicSettings configuration)
     {
         this.configuration = configuration;
     }

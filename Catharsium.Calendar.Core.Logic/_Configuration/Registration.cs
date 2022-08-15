@@ -19,8 +19,8 @@ public static class CalendarGoogleRegistration
 {
     public static IServiceCollection AddCalendarCoreLogic(this IServiceCollection services, IConfiguration config)
     {
-        var configuration = config.Load<CalendarCoreLogicConfiguration>();
-        services.AddSingleton<CalendarCoreLogicConfiguration, CalendarCoreLogicConfiguration>(provider => configuration);
+        var configuration = config.Load<CalendarCoreLogicSettings>();
+        services.AddSingleton<CalendarCoreLogicSettings, CalendarCoreLogicSettings>(provider => configuration);
 
         services.AddIoUtilities(config);
 

@@ -2,7 +2,7 @@
 
 namespace Catharsium.Calendar.UI.Console._Configuration
 {
-    public class CalendarGoogleUiConfiguration
+    public class CalendarUiConsoleSettings
     {
         public SchedulerSettings SchedulerSettings { get; set; }
     }

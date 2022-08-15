@@ -22,7 +22,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Presentation
         [TestMethod]
         public void GetById_ValidId_ReturnsColorFromConfiguration()
         {
-            var configuration = new CalendarCoreLogicConfiguration {
+            var configuration = new CalendarCoreLogicSettings {
                 CalendarColors = new List<CalendarColor> {
                     new CalendarColor {
                         Id = ColorId,
@@ -40,7 +40,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Presentation
         [TestMethod]
         public void GetById_InvalidColorId_ReturnsDefaultColor()
         {
-            var configuration = new CalendarCoreLogicConfiguration {
+            var configuration = new CalendarCoreLogicSettings {
                 CalendarColors = new List<CalendarColor> {
                     new CalendarColor {
                         Id = ColorId + 1,

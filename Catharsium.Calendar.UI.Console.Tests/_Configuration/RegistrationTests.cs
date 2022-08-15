@@ -13,7 +13,7 @@ using NSubstitute;
 namespace Catharsium.Calendar.UI.Console.Tests._Configuration;
 
 [TestClass]
-public class CalendarGoogleUiRegistrationTests
+public class RegistrationTests
 {
     [TestMethod]
     public void AddGoogleCalendarConsoleUi_RegistersDependencies()

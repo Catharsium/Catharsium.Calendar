@@ -10,7 +10,7 @@ using NSubstitute;
 namespace Catharsium.Clients.GoogleCalendar.Tests._Configuration;
 
 [TestClass]
-public class CalendarGoogleRegistrationTests
+public class RegistrationTests
 {
     [TestMethod]
     public void AddGoogleCalendar_RegistersDependencies()
@@ -18,7 +18,7 @@ public class CalendarGoogleRegistrationTests
         var services = Substitute.For<IServiceCollection>();
         var configuration = Substitute.For<IConfiguration>();
 
-        services.AddGoogleCalendar(configuration);
+        services.AddGoogleCalendarClient(configuration);
         services.ReceivedRegistration<ICalendarClientFactory>();
         services.ReceivedRegistration<IGoogleCalendarService, GoogleCalendarService>();
         services.ReceivedRegistration<IEventManagementService, GoogleEventManagementService>();

@@ -10,11 +10,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Catharsium.Clients.GoogleCalendar._Configuration;
 
-public static class CalendarGoogleRegistration
+public static class Registration
 {
-    public static IServiceCollection AddGoogleCalendar(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddGoogleCalendarClient(this IServiceCollection services, IConfiguration config)
     {
-        var configuration = config.Load<CalendarGoogleConfiguration>();
+        var configuration = config.Load<GoogleCalendarClientSettings>();
+        services.AddSingleton<GoogleCalendarClientSettings, GoogleCalendarClientSettings>(provider => configuration);
 
         services.AddScoped<ICalendarClientFactory>(s => new GoogleCalendarClientFactory(configuration.Credentials));
         services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();

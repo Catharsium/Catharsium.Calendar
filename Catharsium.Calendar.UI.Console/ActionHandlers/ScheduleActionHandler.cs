@@ -10,10 +10,10 @@ namespace Catharsium.Calendar.UI.Console.ActionHandlers;
 public class ScheduleActionHandler : BaseActionHandler
 {
     private readonly IAppointmentScheduler appointmentScheduler;
-    private readonly CalendarGoogleUiConfiguration configuration;
+    private readonly CalendarUiConsoleSettings configuration;
 
 
-    public ScheduleActionHandler(IAppointmentScheduler appointmentScheduler, CalendarGoogleUiConfiguration configuration, IConsole console)
+    public ScheduleActionHandler(IAppointmentScheduler appointmentScheduler, CalendarUiConsoleSettings configuration, IConsole console)
         : base(console, "Schedule period")
     {
         this.appointmentScheduler = appointmentScheduler;
