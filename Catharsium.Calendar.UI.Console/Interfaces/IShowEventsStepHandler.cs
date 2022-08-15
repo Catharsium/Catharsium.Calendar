@@ -1,11 +1,10 @@
-﻿using Catharsium.Clients.GoogleCalendar.Models;
+﻿using Catharsium.External.GoogleCalendar.Client.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Catharsium.Calendar.UI.Console.Interfaces
+namespace Catharsium.Calendar.UI.Console.Interfaces;
+
+public interface IShowEventsStepHandler
 {
-    public interface IShowEventsStepHandler
-    {
-        Task ShowEvents(IEnumerable<Event> events);
-    }
+    Task ShowEvents(IEnumerable<Event> events);
 }

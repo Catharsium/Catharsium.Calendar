@@ -2,7 +2,7 @@
 using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Calendar.UI.Console.Interfaces;
 using Catharsium.Calendar.UI.Console.StepHandlers;
-using Catharsium.Clients.GoogleCalendar._Configuration;
+using Catharsium.External.GoogleCalendar.Client._Configuration;
 using Catharsium.Util.Configuration.Extensions;
 using Catharsium.Util.IO.Console._Configuration;
 using Catharsium.Util.IO.Console.ActionHandlers.Interfaces;
@@ -13,8 +13,7 @@ namespace Catharsium.Calendar.UI.Console._Configuration;
 
 public static class Registration
 {
-    public static IServiceCollection AddGoogleCalendarConsoleUi(this IServiceCollection services, IConfiguration config)
-    {
+    public static IServiceCollection AddGoogleCalendarConsoleUi(this IServiceCollection services, IConfiguration config) {
         var configuration = config.Load<CalendarUiConsoleSettings>("Catharsium.Calendar.UI.Console");
         services.AddSingleton<CalendarUiConsoleSettings, CalendarUiConsoleSettings>(provider => configuration);
 

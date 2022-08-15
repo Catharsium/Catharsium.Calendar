@@ -1,4 +1,4 @@
-﻿using Catharsium.Clients.GoogleCalendar.Models;
+﻿using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
 using Catharsium.Util.IO.Interfaces;
@@ -13,14 +13,12 @@ public class LoadActionHandler : BaseActionHandler
 
 
     public LoadActionHandler(IJsonFileRepository<Event> jsonFileRepository, IConsole console)
-        : base(console, "Load action")
-    {
+        : base(console, "Load action") {
         this.jsonFileRepository = jsonFileRepository;
     }
 
 
-    public override async Task Run()
-    {
+    public override async Task Run() {
         var events = (await this.jsonFileRepository.LoadAll()).ToList();
         var duration = TotalTimeCalculator.CalculateTotalTime(events);
         this.console.WriteLine($"{events.Count} events found for a total of {duration} duration.");

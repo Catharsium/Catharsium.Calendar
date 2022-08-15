@@ -6,15 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Catharsium.External.GoogleCalendar.Client" Version="2022.8.15.1" />
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.57.0.2759" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Interfaces\Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Catharsium.Calendar.Data.Google\Catharsium.Clients.GoogleCalendar.csproj" />
   </ItemGroup>
 
 </Project>

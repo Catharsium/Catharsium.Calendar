@@ -1,7 +1,7 @@
 ﻿using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Interfaces;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.IO.Console.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,16 +17,14 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
         private readonly IConsoleColorFactory consoleColorFactory;
 
 
-        public ShowEventsStepHandler(IConsole console, IGoogleCalendarService calendarService, IConsoleColorFactory consoleColorFactory)
-        {
+        public ShowEventsStepHandler(IConsole console, IGoogleCalendarService calendarService, IConsoleColorFactory consoleColorFactory) {
             this.console = console;
             this.calendarService = calendarService;
             this.consoleColorFactory = consoleColorFactory;
         }
 
 
-        public async Task ShowEvents(IEnumerable<Event> events)
-        {
+        public async Task ShowEvents(IEnumerable<Event> events) {
             var index = 0;
             foreach (var @event in events) {
                 var when = @event.Start.Value.ToString("yyyy MMMM dd");
@@ -48,8 +46,7 @@ namespace Catharsium.Calendar.UI.Console.StepHandlers
         }
 
 
-        private void SetColor(string calendarId)
-        {
+        private void SetColor(string calendarId) {
             this.console.ForegroundColor = calendarId switch {
                 "bn1j5jeikkv53v8mg687fk1324@group.calendar.google.com" => ConsoleColor.Yellow,
                 "t.w.brachthuizer@gmail.com" => ConsoleColor.Red,

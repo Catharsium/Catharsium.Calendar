@@ -1,7 +1,7 @@
 ﻿using Catharsium.Calendar.UI.Console.ActionHandlers;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Interfaces;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.IO.Console.Interfaces;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -22,8 +22,7 @@ public class CreateEventActionHandlerTests : TestFixture<CreateEventActionHandle
 
 
     [TestInitialize]
-    public void SetupProperties()
-    {
+    public void SetupProperties() {
         this.Summary = "My summary";
         this.StartDate = DateTime.Now;
         this.EndDate = DateTime.Now.AddHours(1);
@@ -33,12 +32,11 @@ public class CreateEventActionHandlerTests : TestFixture<CreateEventActionHandle
     #endregion
 
     [TestMethod]
-    public async Task Run_ValidStartAndEndDate_CreatesEvent()
-    {
+    public async Task Run_ValidStartAndEndDate_CreatesEvent() {
         this.GetDependency<IConsole>().AskForText(Arg.Any<string>()).Returns(this.Summary);
         this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("start date"))).Returns(this.StartDate);
         this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("end date"))).Returns(this.EndDate);
-        var calendar = new Clients.GoogleCalendar.Models.Calendar { Id = "My calendar id" };
+        var calendar = new External.GoogleCalendar.Client.Models.Calendar { Id = "My calendar id" };
         this.GetDependency<IChooseCalendarStepHandler>().Run().Returns(calendar);
 
         await this.Target.Run();
@@ -51,12 +49,11 @@ public class CreateEventActionHandlerTests : TestFixture<CreateEventActionHandle
 
 
     [TestMethod]
-    public async Task Run_InvalidStartDate_DoesNotCreateEvent()
-    {
+    public async Task Run_InvalidStartDate_DoesNotCreateEvent() {
         this.GetDependency<IConsole>().AskForText(Arg.Any<string>()).Returns(this.Summary);
         this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("start date"))).Returns(null as DateTime?);
         this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("end date"))).Returns(this.EndDate);
-        var calendar = new Clients.GoogleCalendar.Models.Calendar { Id = "My calendar id" };
+        var calendar = new External.GoogleCalendar.Client.Models.Calendar { Id = "My calendar id" };
         this.GetDependency<IChooseCalendarStepHandler>().Run().Returns(calendar);
 
         await this.Target.Run();
@@ -65,12 +62,11 @@ public class CreateEventActionHandlerTests : TestFixture<CreateEventActionHandle
 
 
     [TestMethod]
-    public async Task Run_InvalidEndDate_UsesStartDatePlus30Minutes()
-    {
+    public async Task Run_InvalidEndDate_UsesStartDatePlus30Minutes() {
         this.GetDependency<IConsole>().AskForText(Arg.Any<string>()).Returns(this.Summary);
         this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("start date"))).Returns(this.StartDate);
         this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("end date"))).Returns(null as DateTime?);
-        var calendar = new Clients.GoogleCalendar.Models.Calendar { Id = "My calendar id" };
+        var calendar = new External.GoogleCalendar.Client.Models.Calendar { Id = "My calendar id" };
         this.GetDependency<IChooseCalendarStepHandler>().Run().Returns(calendar);
 
         await this.Target.Run();
@@ -83,12 +79,11 @@ public class CreateEventActionHandlerTests : TestFixture<CreateEventActionHandle
 
 
     [TestMethod]
-    public async Task Run_InvalidCalendar_DoesNotCreateEvent()
-    {
+    public async Task Run_InvalidCalendar_DoesNotCreateEvent() {
         this.GetDependency<IConsole>().AskForText(Arg.Any<string>()).Returns(this.Summary);
         this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("start date"))).Returns(this.StartDate);
         this.GetDependency<IConsole>().AskForDate(Arg.Is<string>(s => s.Contains("end date"))).Returns(this.EndDate);
-        this.GetDependency<IChooseCalendarStepHandler>().Run().Returns(null as Clients.GoogleCalendar.Models.Calendar);
+        this.GetDependency<IChooseCalendarStepHandler>().Run().Returns(null as External.GoogleCalendar.Client.Models.Calendar);
 
         await this.Target.Run();
         await this.GetDependency<IEventManagementService>().DidNotReceive().CreateEvent(Arg.Any<string>(), Arg.Any<Event>());

@@ -1,7 +1,7 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models.Scheduler;
 using Catharsium.Calendar.Core.Logic.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Interfaces;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -14,14 +14,12 @@ public class SingleAppointmentGenerator : IAppointmentGenerator
     public Interval Interval => Interval.Single;
 
 
-    public SingleAppointmentGenerator(IEventManagementService eventManagementService)
-    {
+    public SingleAppointmentGenerator(IEventManagementService eventManagementService) {
         this.eventManagementService = eventManagementService;
     }
 
 
-    public async Task<Event[]> GenerateFor(DateTime fromDate, DateTime toDate, Appointment appointment)
-    {
+    public async Task<Event[]> GenerateFor(DateTime fromDate, DateTime toDate, Appointment appointment) {
         return new[] {await this.eventManagementService.CreateEvent(
             appointment.CalendarId,
             new Event {

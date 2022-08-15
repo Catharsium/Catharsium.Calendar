@@ -1,5 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Logic.Filters;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,16 +14,14 @@ public class DescriptionEventFilterTests : TestFixture<DescriptionEventFilter>
 
 
     [TestInitialize]
-    public void SetupProperties()
-    {
+    public void SetupProperties() {
         this.Target.Query = this.Query;
     }
 
     #endregion
 
     [TestMethod]
-    public void Includes_DescriptionContainsQuery_ReturnsTrue()
-    {
+    public void Includes_DescriptionContainsQuery_ReturnsTrue() {
         this.Target.IgnoreCase = true;
         var @event = new Event {
             Description = "My description " + this.Query.ToLower()
@@ -35,8 +33,7 @@ public class DescriptionEventFilterTests : TestFixture<DescriptionEventFilter>
 
 
     [TestMethod]
-    public void Includes_DescriptionWithoutQuery_ReturnsFalse()
-    {
+    public void Includes_DescriptionWithoutQuery_ReturnsFalse() {
         this.Target.IgnoreCase = true;
         var @event = new Event {
             Description = this.Query[1..]
@@ -48,8 +45,7 @@ public class DescriptionEventFilterTests : TestFixture<DescriptionEventFilter>
 
 
     [TestMethod]
-    public void Includes_IgnoreCase_DescriptionContainsQuery_ReturnsTrue()
-    {
+    public void Includes_IgnoreCase_DescriptionContainsQuery_ReturnsTrue() {
         this.Target.IgnoreCase = false;
         var @event = new Event {
             Description = "My description " + this.Query
@@ -61,8 +57,7 @@ public class DescriptionEventFilterTests : TestFixture<DescriptionEventFilter>
 
 
     [TestMethod]
-    public void Includes_IgnoreCase_DescriptionWithUpperCaseQuery_ReturnsFalse()
-    {
+    public void Includes_IgnoreCase_DescriptionWithUpperCaseQuery_ReturnsFalse() {
         this.Target.IgnoreCase = false;
         var @event = new Event {
             Description = "My description " + this.Query.ToUpper()
@@ -74,8 +69,7 @@ public class DescriptionEventFilterTests : TestFixture<DescriptionEventFilter>
 
 
     [TestMethod]
-    public void Includes_IgnoreCase_DescriptionWithoutQuery_ReturnsFalse()
-    {
+    public void Includes_IgnoreCase_DescriptionWithoutQuery_ReturnsFalse() {
         this.Target.IgnoreCase = false;
         var @event = new Event {
             Description = this.Query.ToLower()[1..]

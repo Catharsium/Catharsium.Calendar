@@ -1,5 +1,5 @@
-﻿using Catharsium.Clients.GoogleCalendar.Models;
-using Catharsium.Clients.GoogleCalendar.Models.Enums;
+﻿using Catharsium.External.GoogleCalendar.Client.Models;
+using Catharsium.External.GoogleCalendar.Client.Models.Enums;
 using Catharsium.Util.Reflection.Attributes;
 using Catharsium.Util.Reflection.Attributes.Extensions;
 using Catharsium.Util.Testing;
@@ -11,8 +11,7 @@ namespace Catharsium.Calendar.Core.Entities.Tests.Models.EventTests;
 public class CategoryTests : TestFixture<Event>
 {
     [TestMethod]
-    public void Category_ValidColorId_ReturnsCategory()
-    {
+    public void Category_ValidColorId_ReturnsCategory() {
         var expected = Category.PersonalOption;
         this.Target.ColorId = expected.GetAttribute<AliasAttribute>("PersonalOption").Aliases[0];
         var actual = this.Target.Category;
@@ -21,8 +20,7 @@ public class CategoryTests : TestFixture<Event>
 
 
     [TestMethod]
-    public void Category_NoValidColorId_ReturnsUnknown()
-    {
+    public void Category_NoValidColorId_ReturnsUnknown() {
         this.Target.ColorId = "-1";
         var actual = this.Target.Category;
         Assert.AreEqual(Category.Unknown, actual);
@@ -30,8 +28,7 @@ public class CategoryTests : TestFixture<Event>
 
 
     [TestMethod]
-    public void Category_NullColorId_ReturnsUnknown()
-    {
+    public void Category_NullColorId_ReturnsUnknown() {
         this.Target.ColorId = null;
         var actual = this.Target.Category;
         Assert.AreEqual(Category.Unknown, actual);

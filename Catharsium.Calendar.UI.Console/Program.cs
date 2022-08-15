@@ -1,21 +1,21 @@
 ﻿using Catharsium.Calendar.UI.Console._Configuration;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Interfaces;
+using Catharsium.External.GoogleCalendar.Client.Interfaces;
 using Catharsium.Util.IO.Console.ActionHandlers.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading.Tasks;
+
 namespace Catharsium.Calendar.UI.Console;
 
 public class Program
 {
-    public static async Task Main(string[] args)
-    {
+    public static async Task Main(string[] args) {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", false, false);
+            .AddJsonFile("D:\\Onedrive\\Software\\Catharsium.Calendar\\appsettings.json", false, false);
         var configuration = builder.Build();
 
         var serviceProvider = new ServiceCollection()

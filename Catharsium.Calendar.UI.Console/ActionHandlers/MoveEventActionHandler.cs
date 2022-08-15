@@ -1,7 +1,7 @@
 ﻿using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Interfaces;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Filters;
 using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
@@ -30,8 +30,7 @@ public class MoveEventActionHandler : BaseActionHandler
         IChooseCalendarStepHandler chooseACalendarStepHandler,
         IChooseEventStepHandler chooseAnEventStepHandler,
         IEventUpdateService eventUpdater)
-        : base(console, "Move event")
-    {
+        : base(console, "Move event") {
         this.jsonFileRepository = jsonFileRepository;
         this.eventFilterFactory = eventFilterFactory;
         this.eventComparer = eventComparer;
@@ -41,8 +40,7 @@ public class MoveEventActionHandler : BaseActionHandler
     }
 
 
-    public override async Task Run()
-    {
+    public override async Task Run() {
         var query = this.console.AskForText("Enter the query:");
         this.console.WriteLine();
         this.console.WriteLine("Matching events:");
@@ -57,14 +55,14 @@ public class MoveEventActionHandler : BaseActionHandler
             .OrderBy(e => e.End.Value)
             .ToList();
 
-        if(filteredEvents.Count > 0) {
+        if (filteredEvents.Count > 0) {
             var @event = this.chooseAnEventStepHandler.Run(filteredEvents);
-            if(@event == null) {
+            if (@event == null) {
                 return;
             }
 
             var newCalendar = await this.chooseACalendarStepHandler.Run();
-            if(newCalendar != null) {
+            if (newCalendar != null) {
                 await this.eventUpdater.Move(@event, @event.CalendarId, newCalendar.Id);
             }
         }

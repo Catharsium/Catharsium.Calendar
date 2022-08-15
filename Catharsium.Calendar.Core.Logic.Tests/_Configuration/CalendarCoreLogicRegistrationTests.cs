@@ -5,7 +5,7 @@ using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Presentation;
 using Catharsium.Calendar.Core.Logic.Scheduler;
 using Catharsium.Calendar.Core.Logic.Storage;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.IO.Interfaces;
 using Catharsium.Util.Testing.Extensions;
 using Microsoft.Extensions.Configuration;
@@ -20,8 +20,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests._Configuration;
 public class CalendarCoreLogicRegistrationTests
 {
     [TestMethod]
-    public void AddCalendarCoreLogic_RegistersDependencies()
-    {
+    public void AddCalendarCoreLogic_RegistersDependencies() {
         var serviceCollection = Substitute.For<IServiceCollection>();
         var configuration = Substitute.For<IConfiguration>();
 
@@ -49,8 +48,7 @@ public class CalendarCoreLogicRegistrationTests
 
 
     [TestMethod]
-    public void AddCalendarCoreLogic_RegistersPackages()
-    {
+    public void AddCalendarCoreLogic_RegistersPackages() {
         var serviceCollection = Substitute.For<IServiceCollection>();
         var configuration = Substitute.For<IConfiguration>();
 

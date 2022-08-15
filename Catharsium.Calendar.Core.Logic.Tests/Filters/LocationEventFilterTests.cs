@@ -1,5 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Logic.Filters;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,16 +14,14 @@ public class LocationEventFilterTests : TestFixture<LocationEventFilter>
 
 
     [TestInitialize]
-    public void SetupProperties()
-    {
+    public void SetupProperties() {
         this.Target.Query = this.Query;
     }
 
     #endregion
 
     [TestMethod]
-    public void Includes_LocationContainsQuery_ReturnsTrue()
-    {
+    public void Includes_LocationContainsQuery_ReturnsTrue() {
         this.Target.IgnoreCase = true;
         var @event = new Event {
             Location = "My location " + this.Query.ToLower()
@@ -35,8 +33,7 @@ public class LocationEventFilterTests : TestFixture<LocationEventFilter>
 
 
     [TestMethod]
-    public void Includes_LocationWithoutQuery_ReturnsFalse()
-    {
+    public void Includes_LocationWithoutQuery_ReturnsFalse() {
         this.Target.IgnoreCase = true;
         var @event = new Event {
             Location = this.Query[1..]
@@ -48,8 +45,7 @@ public class LocationEventFilterTests : TestFixture<LocationEventFilter>
 
 
     [TestMethod]
-    public void Includes_IgnoreCase_LocationContainsQuery_ReturnsTrue()
-    {
+    public void Includes_IgnoreCase_LocationContainsQuery_ReturnsTrue() {
         this.Target.IgnoreCase = false;
         var @event = new Event {
             Location = "My location " + this.Query
@@ -61,8 +57,7 @@ public class LocationEventFilterTests : TestFixture<LocationEventFilter>
 
 
     [TestMethod]
-    public void Includes_IgnoreCase_LocationWithUpperCaseQuery_ReturnsFalse()
-    {
+    public void Includes_IgnoreCase_LocationWithUpperCaseQuery_ReturnsFalse() {
         this.Target.IgnoreCase = false;
         var @event = new Event {
             Location = "My location " + this.Query.ToUpper()
@@ -74,8 +69,7 @@ public class LocationEventFilterTests : TestFixture<LocationEventFilter>
 
 
     [TestMethod]
-    public void Includes_IgnoreCase_LocationWithoutQuery_ReturnsFalse()
-    {
+    public void Includes_IgnoreCase_LocationWithoutQuery_ReturnsFalse() {
         this.Target.IgnoreCase = false;
         var @event = new Event {
             Location = this.Query.ToLower()[1..]

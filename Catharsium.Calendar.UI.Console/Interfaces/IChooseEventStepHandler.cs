@@ -1,10 +1,9 @@
-﻿using Catharsium.Clients.GoogleCalendar.Models;
+﻿using Catharsium.External.GoogleCalendar.Client.Models;
 using System.Collections.Generic;
 
-namespace Catharsium.Calendar.UI.Console.Interfaces
+namespace Catharsium.Calendar.UI.Console.Interfaces;
+
+public interface IChooseEventStepHandler
 {
-    public interface IChooseEventStepHandler
-    {
-        Event Run(IEnumerable<Event> events);
-    }
+    Event Run(IEnumerable<Event> events);
 }

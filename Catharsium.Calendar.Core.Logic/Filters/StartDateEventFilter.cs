@@ -1,4 +1,4 @@
-﻿using Catharsium.Clients.GoogleCalendar.Models;
+﻿using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Interfaces;
 using System;
 
@@ -10,12 +10,11 @@ public class StartDateEventFilter : IFilter<Event>
     public DateTime To { get; set; }
 
 
-    public bool Includes(Event item)
-    {
+    public bool Includes(Event item) {
         var fromDate = this.From;
         var untilDate = this.To;
 
-        if(item.Start.HasTime) {
+        if (item.Start.HasTime) {
             return item.Start.Value >= fromDate && item.Start.Value <= untilDate;
         }
 

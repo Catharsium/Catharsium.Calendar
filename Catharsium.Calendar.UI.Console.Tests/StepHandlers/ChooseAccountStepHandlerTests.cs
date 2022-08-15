@@ -1,5 +1,5 @@
 ﻿using Catharsium.Calendar.UI.Console.StepHandlers;
-using Catharsium.Clients.GoogleCalendar.Interfaces;
+using Catharsium.External.GoogleCalendar.Client.Interfaces;
 using Catharsium.Util.IO.Console.Interfaces;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,8 +11,7 @@ namespace Catharsium.Calendar.UI.Console.Tests.StepHandlers;
 public class ChooseAccountStepHandlerTests : TestFixture<ChooseAccountStepHandler>
 {
     [TestMethod]
-    public void Run_WritesStoredUserNames()
-    {
+    public void Run_WritesStoredUserNames() {
         var index = 1;
         var userNames = new[] { "My first user name", "My second user name", "My third user name" };
         var calendarClientFactory = Substitute.For<ICalendarClientFactory>();
@@ -21,15 +20,14 @@ public class ChooseAccountStepHandlerTests : TestFixture<ChooseAccountStepHandle
         this.GetDependency<IConsole>().AskForInt().Returns(index);
 
         this.Target.Run();
-        foreach(var userName in userNames) {
+        foreach (var userName in userNames) {
             this.GetDependency<IConsole>().Received().WriteLine(Arg.Is<string>(s => s.Contains(userName)));
         }
     }
 
 
     [TestMethod]
-    public void Run_ValidUserIndex_ReturnsUserName()
-    {
+    public void Run_ValidUserIndex_ReturnsUserName() {
         var index = 1;
         var userNames = new[] { "My user name" };
         var calendarClientFactory = Substitute.For<ICalendarClientFactory>();
@@ -43,8 +41,7 @@ public class ChooseAccountStepHandlerTests : TestFixture<ChooseAccountStepHandle
 
 
     [TestMethod]
-    public void Run_NoUserIndex_ReturnsNull()
-    {
+    public void Run_NoUserIndex_ReturnsNull() {
         var userNames = new[] { "My user name" };
         var calendarClientFactory = Substitute.For<ICalendarClientFactory>();
         calendarClientFactory.GetUserNames().Returns(userNames);

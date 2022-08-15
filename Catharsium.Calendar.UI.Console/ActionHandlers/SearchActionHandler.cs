@@ -1,6 +1,6 @@
 ﻿using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.UI.Console.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Filters;
 using Catharsium.Util.IO.Console.ActionHandlers.Base;
 using Catharsium.Util.IO.Console.Interfaces;
@@ -28,8 +28,7 @@ public class SearchActionHandler : BaseActionHandler
         IEventFilterFactory eventFilterFactory,
         IEqualityComparer<Event> eventComparer,
         IShowEventsStepHandler showEventsStepHandler)
-        : base(console, "Search")
-    {
+        : base(console, "Search") {
         this.jsonFileRepository = jsonFileRepository;
         this.eventFilterFactory = eventFilterFactory;
         this.eventComparer = eventComparer;
@@ -37,8 +36,7 @@ public class SearchActionHandler : BaseActionHandler
     }
 
 
-    public override async Task Run()
-    {
+    public override async Task Run() {
         var query = this.console.AskForText("Enter the query:");
         this.console.WriteLine();
         this.console.WriteLine("Matching events:");
@@ -54,7 +52,7 @@ public class SearchActionHandler : BaseActionHandler
             .ToList();
         var duration = TotalTimeCalculator.CalculateTotalTime(filteredEvents);
 
-        if(filteredEvents.Count > 0) {
+        if (filteredEvents.Count > 0) {
             await this.showEventsStepHandler.ShowEvents(filteredEvents);
             this.console.WriteLine($"{filteredEvents.Count} events found for a total of {duration} duration.");
             this.console.WriteLine();

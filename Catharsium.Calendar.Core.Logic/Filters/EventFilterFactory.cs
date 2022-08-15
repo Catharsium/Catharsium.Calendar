@@ -1,5 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Logic.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,21 +12,18 @@ public class EventFilterFactory : IEventFilterFactory
     private readonly IServiceProvider serviceProvider;
 
 
-    public EventFilterFactory(IServiceProvider serviceProvider)
-    {
+    public EventFilterFactory(IServiceProvider serviceProvider) {
         this.serviceProvider = serviceProvider;
     }
 
 
-    public IFilter<Event> CreateFilter<TFilter>() where TFilter : IFilter<Event>
-    {
+    public IFilter<Event> CreateFilter<TFilter>() where TFilter : IFilter<Event> {
         return this.serviceProvider.GetService<TFilter>();
     }
 
 
-    public IFilter<Event> CreateOrFilter(params IFilter<Event>[] filters)
-    {
-        if(this.CreateFilter<OrEventFilter>() is not OrEventFilter result) {
+    public IFilter<Event> CreateOrFilter(params IFilter<Event>[] filters) {
+        if (this.CreateFilter<OrEventFilter>() is not OrEventFilter result) {
             return null;
         }
 
@@ -35,9 +32,8 @@ public class EventFilterFactory : IEventFilterFactory
     }
 
 
-    public IFilter<Event> CreateStartDateFilter(DateTime from, DateTime to)
-    {
-        if(this.CreateFilter<StartDateEventFilter>() is not StartDateEventFilter result) {
+    public IFilter<Event> CreateStartDateFilter(DateTime from, DateTime to) {
+        if (this.CreateFilter<StartDateEventFilter>() is not StartDateEventFilter result) {
             return null;
         }
 
@@ -47,9 +43,8 @@ public class EventFilterFactory : IEventFilterFactory
     }
 
 
-    public IFilter<Event> CreateEndDateFilter(DateTime from, DateTime to)
-    {
-        if(this.CreateFilter<EndDateEventFilter>() is not EndDateEventFilter result) {
+    public IFilter<Event> CreateEndDateFilter(DateTime from, DateTime to) {
+        if (this.CreateFilter<EndDateEventFilter>() is not EndDateEventFilter result) {
             return null;
         }
 
@@ -59,9 +54,8 @@ public class EventFilterFactory : IEventFilterFactory
     }
 
 
-    public IFilter<Event> CreateDescriptionFilter(string query, bool ignoreCase = true)
-    {
-        if(this.CreateFilter<DescriptionEventFilter>() is not DescriptionEventFilter result) {
+    public IFilter<Event> CreateDescriptionFilter(string query, bool ignoreCase = true) {
+        if (this.CreateFilter<DescriptionEventFilter>() is not DescriptionEventFilter result) {
             return null;
         }
 
@@ -71,9 +65,8 @@ public class EventFilterFactory : IEventFilterFactory
     }
 
 
-    public IFilter<Event> CreateLocationFilter(string query, bool ignoreCase = true)
-    {
-        if(this.CreateFilter<LocationEventFilter>() is not LocationEventFilter result) {
+    public IFilter<Event> CreateLocationFilter(string query, bool ignoreCase = true) {
+        if (this.CreateFilter<LocationEventFilter>() is not LocationEventFilter result) {
             return null;
         }
 
@@ -83,9 +76,8 @@ public class EventFilterFactory : IEventFilterFactory
     }
 
 
-    public IFilter<Event> CreateSummaryFilter(string query, bool ignoreCase = true)
-    {
-        if(this.CreateFilter<SummaryEventFilter>() is not SummaryEventFilter result) {
+    public IFilter<Event> CreateSummaryFilter(string query, bool ignoreCase = true) {
+        if (this.CreateFilter<SummaryEventFilter>() is not SummaryEventFilter result) {
             return null;
         }
 

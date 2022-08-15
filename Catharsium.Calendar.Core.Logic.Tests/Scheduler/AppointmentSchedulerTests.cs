@@ -1,7 +1,7 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models.Scheduler;
 using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Scheduler;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
@@ -16,8 +16,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler;
 public class AppointmentSchedulerTests : TestFixture<AppointmentScheduler>
 {
     [TestMethod]
-    public async Task GenerateFor_UsesCorrectGeneratorForEachAppointment()
-    {
+    public async Task GenerateFor_UsesCorrectGeneratorForEachAppointment() {
         var fromDate = DateTime.Today;
         var toDate = fromDate.AddDays(1);
 
@@ -44,13 +43,13 @@ public class AppointmentSchedulerTests : TestFixture<AppointmentScheduler>
         annuallyGenerator.GenerateFor(fromDate, toDate, settings.Appointments[2]).Returns(annuallyAppointments);
 
         var actual = await this.Target.GenerateFor(fromDate, toDate, settings);
-        foreach(var appointment in dailyAppointments) {
+        foreach (var appointment in dailyAppointments) {
             Assert.IsTrue(actual.Contains(appointment));
         }
-        foreach(var appointment in monthlyAppointments) {
+        foreach (var appointment in monthlyAppointments) {
             Assert.IsTrue(actual.Contains(appointment));
         }
-        foreach(var appointment in annuallyAppointments) {
+        foreach (var appointment in annuallyAppointments) {
             Assert.IsTrue(actual.Contains(appointment));
         }
     }

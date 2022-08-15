@@ -4,7 +4,7 @@ using Catharsium.Calendar.Core.Logic.Interfaces;
 using Catharsium.Calendar.Core.Logic.Presentation;
 using Catharsium.Calendar.Core.Logic.Scheduler;
 using Catharsium.Calendar.Core.Logic.Storage;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Configuration.Extensions;
 using Catharsium.Util.IO._Configuration;
 using Catharsium.Util.IO.Interfaces;
@@ -17,8 +17,7 @@ namespace Catharsium.Calendar.Core.Logic._Configuration;
 
 public static class CalendarGoogleRegistration
 {
-    public static IServiceCollection AddCalendarCoreLogic(this IServiceCollection services, IConfiguration config)
-    {
+    public static IServiceCollection AddCalendarCoreLogic(this IServiceCollection services, IConfiguration config) {
         var configuration = config.Load<CalendarCoreLogicSettings>();
         services.AddSingleton<CalendarCoreLogicSettings, CalendarCoreLogicSettings>(provider => configuration);
 

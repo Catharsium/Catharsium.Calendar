@@ -1,5 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Logic.Filters;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Interfaces;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,8 +18,7 @@ public class OrFilterTests : TestFixture<OrEventFilter>
 
 
     [TestInitialize]
-    public void SetupDependencies()
-    {
+    public void SetupDependencies() {
         this.FirstFilter = Substitute.For<IFilter<Event>>();
         this.SecondFilter = Substitute.For<IFilter<Event>>();
     }
@@ -29,8 +28,7 @@ public class OrFilterTests : TestFixture<OrEventFilter>
     #region Includes
 
     [TestMethod]
-    public void Includes_AllFiltersSucceed_ReturnsTrue()
-    {
+    public void Includes_AllFiltersSucceed_ReturnsTrue() {
         var @event = new Event();
         this.FirstFilter.Includes(Arg.Any<Event>()).Returns(true);
         this.SecondFilter.Includes(Arg.Any<Event>()).Returns(true);
@@ -42,8 +40,7 @@ public class OrFilterTests : TestFixture<OrEventFilter>
 
 
     [TestMethod]
-    public void Includes_SingleFiltersSucceeds_ReturnsTrue()
-    {
+    public void Includes_SingleFiltersSucceeds_ReturnsTrue() {
         var @event = new Event();
         this.FirstFilter.Includes(Arg.Any<Event>()).Returns(true);
         this.SecondFilter.Includes(Arg.Any<Event>()).Returns(false);
@@ -55,8 +52,7 @@ public class OrFilterTests : TestFixture<OrEventFilter>
 
 
     [TestMethod]
-    public void Includes_AllFiltersFail_ReturnsFalse()
-    {
+    public void Includes_AllFiltersFail_ReturnsFalse() {
         var @event = new Event();
         this.FirstFilter.Includes(Arg.Any<Event>()).Returns(false);
         this.SecondFilter.Includes(Arg.Any<Event>()).Returns(false);

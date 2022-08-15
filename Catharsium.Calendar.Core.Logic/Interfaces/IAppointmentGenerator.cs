@@ -1,5 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models.Scheduler;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using System;
 using System.Threading.Tasks;
 

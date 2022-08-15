@@ -1,7 +1,7 @@
 ﻿using Catharsium.Calendar.Core.Entities.Models.Scheduler;
 using Catharsium.Calendar.Core.Logic.Scheduler;
-using Catharsium.Clients.GoogleCalendar.Interfaces;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Interfaces;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
@@ -14,8 +14,7 @@ namespace Catharsium.Calendar.Core.Logic.Tests.Scheduler;
 public class DailyAppointmentGeneratorTests : TestFixture<DailyAppointmentGenerator>
 {
     [TestMethod]
-    public async Task GenerateFor_GeneratesAppointments_ReturnsEvents()
-    {
+    public async Task GenerateFor_GeneratesAppointments_ReturnsEvents() {
         var appointment = new Appointment {
             CalendarId = "My calendar id",
             Category = "My category",
@@ -48,8 +47,7 @@ public class DailyAppointmentGeneratorTests : TestFixture<DailyAppointmentGenera
 
 
     [TestMethod]
-    public async Task GenerateFor_Frequency7_GeneratesAppointmentEvery7Days()
-    {
+    public async Task GenerateFor_Frequency7_GeneratesAppointmentEvery7Days() {
         var appointment = new Appointment {
             CalendarId = "My calendar id",
             Category = "My category",

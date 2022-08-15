@@ -1,4 +1,4 @@
-﻿using Catharsium.Clients.GoogleCalendar.Models;
+﻿using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Interfaces;
 using System;
 

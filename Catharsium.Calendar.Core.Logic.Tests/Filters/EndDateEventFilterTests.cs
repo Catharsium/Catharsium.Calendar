@@ -1,5 +1,5 @@
 ﻿using Catharsium.Calendar.Core.Logic.Filters;
-using Catharsium.Clients.GoogleCalendar.Models;
+using Catharsium.External.GoogleCalendar.Client.Models;
 using Catharsium.Util.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -16,8 +16,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestInitialize]
-    public void SetupProperties()
-    {
+    public void SetupProperties() {
         this.FromDate = DateTime.Now.AddDays(-1);
         this.ToDate = DateTime.Now.AddDays(1);
         this.Target.From = this.FromDate;
@@ -29,8 +28,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
     #region Includes_WithoutTime
 
     [TestMethod]
-    public void Includes_WithoutTime_EventBeforeFromDate_ReturnsFalse()
-    {
+    public void Includes_WithoutTime_EventBeforeFromDate_ReturnsFalse() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -45,8 +43,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestMethod]
-    public void Includes_WithoutTime_EventOnFromDate_ReturnsTrue()
-    {
+    public void Includes_WithoutTime_EventOnFromDate_ReturnsTrue() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -61,8 +58,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestMethod]
-    public void Includes_WithoutTime_EventBetweenFromAndToDate_ReturnsTrue()
-    {
+    public void Includes_WithoutTime_EventBetweenFromAndToDate_ReturnsTrue() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -77,8 +73,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestMethod]
-    public void Includes_WithoutTime_EventOnToDate_ReturnsTrue()
-    {
+    public void Includes_WithoutTime_EventOnToDate_ReturnsTrue() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -93,8 +88,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestMethod]
-    public void Includes_WithoutTime_EventAfterToDate_ReturnsFalse()
-    {
+    public void Includes_WithoutTime_EventAfterToDate_ReturnsFalse() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -112,8 +106,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
     #region Includes_WithTime
 
     [TestMethod]
-    public void Includes_WithTime_EventBeforeFromDate_ReturnsFalse()
-    {
+    public void Includes_WithTime_EventBeforeFromDate_ReturnsFalse() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -128,8 +121,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestMethod]
-    public void Includes_WithTime_EventOnFromDate_ReturnsTrue()
-    {
+    public void Includes_WithTime_EventOnFromDate_ReturnsTrue() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -144,8 +136,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestMethod]
-    public void Includes_WithTime_EventBetweenFromAndToDate_ReturnsTrue()
-    {
+    public void Includes_WithTime_EventBetweenFromAndToDate_ReturnsTrue() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -160,8 +151,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestMethod]
-    public void Includes_WithTime_EventOnToDate_ReturnsTrue()
-    {
+    public void Includes_WithTime_EventOnToDate_ReturnsTrue() {
         var @event = new Event {
             Id = "My id",
             End = new Date {
@@ -176,8 +166,7 @@ public class EndDateEventFilterTests : TestFixture<EndDateEventFilter>
 
 
     [TestMethod]
-    public void Includes_WithTime_EventAfterToDate_ReturnsFalse()
-    {
+    public void Includes_WithTime_EventAfterToDate_ReturnsFalse() {
         var @event = new Event {
             Id = "My id",
             End = new Date {

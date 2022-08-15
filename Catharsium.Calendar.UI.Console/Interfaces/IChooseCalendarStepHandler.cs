@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Catharsium.Calendar.UI.Console.Interfaces
+namespace Catharsium.Calendar.UI.Console.Interfaces;
+
+public interface IChooseCalendarStepHandler
 {
-    public interface IChooseCalendarStepHandler
-    {
-        Task<Clients.GoogleCalendar.Models.Calendar> Run();
-    }
+    Task<External.GoogleCalendar.Client.Models.Calendar> Run();
 }
